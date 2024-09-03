@@ -92,7 +92,7 @@
                            <!-- <field name="doctor_id"
                                    options="{'no_create': True, 'no_edit': True}"
                                    readonly="state in ('invoice','cancel')"/>-->
-                            <field name="visit_type_id" required="1"/>
+                            <field name="visit_type_id"/>
                             <field name="visit_type" invisible="1"/>
 
                             <field name="test_count" invisible="1"/>
