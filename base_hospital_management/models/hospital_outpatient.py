@@ -108,7 +108,7 @@ class HospitalOutpatient(models.Model):
         required=False)
     
     payment_state = fields.Selection(
-        string='Paiment_state',
+        string='Etat de paiement',
         selection=[('not_paid', 'Non payé'),
                    ('in_payment', 'En paiement'),
                    ('paid', 'Payé'),],
