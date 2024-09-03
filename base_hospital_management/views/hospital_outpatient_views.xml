@@ -84,8 +84,8 @@
                             <field name="has_group_doctor" invisible="1"/>
 
                             <field name="reason" readonly="not has_group_doctor" groups="base_hospital_management.base_hospital_management_group_doctor"/>
-                            <field name="amount" readonly="not has_group_doctor"/>
-                            <field name="amount_paid"/>
+                            <field name="amount" readonly="not has_group_doctor" invisible="state not in ('op')"/>
+                            <field name="amount_paid" invisible="state not in ('op')"/>
                             <field name="payment_state" invisible="1"/>
                         </group>
                         <group>
