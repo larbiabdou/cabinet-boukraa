@@ -66,10 +66,10 @@
                             invisible="state not in ('op')"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
                         />
-                    <button name="consume_medical_care_ids" type="object" string="Consommer les soins"
+                    <!--<button name="consume_medical_care_ids" type="object" string="Consommer les soins"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
                             invisible="state not in ('op') or button_consume_visible"
-                    class="oe_highlight"/>
+                    class="oe_highlight"/>-->
                     <field name="button_consume_visible" invisible="1"/>
                     <field name="payment_state" widget="statusbar" />
                 </header>
@@ -126,7 +126,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page name="Soins" groups="base_hospital_management.base_hospital_management_group_doctor">
+                        <!--<page name="Soins" groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="medical_care_ids" readonly="not has_group_doctor">
                                 <tree editable="bottom">
                                     <field name="product_id"/>
@@ -142,7 +142,7 @@
                                     <field name="product_uom_category_id" invisible="True"/>
                                 </form>
                             </field>
-                        </page>
+                        </page>-->
                         <page string="Demande de Bilan" groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="test_lab_ids" readonly="not has_group_doctor">
                                 <tree editable="bottom">
