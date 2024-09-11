@@ -181,8 +181,6 @@
                         </page>
                         <page name="medicine" string="Medical"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <notebook>
-                                <page string="Medicine" groups="base_hospital_management.base_hospital_management_group_doctor">
                                     <field name="prescription_ids">
                                         <tree editable="bottom" create="0">
                                             <field name="date"/>
@@ -191,16 +189,6 @@
                                             <field name="qsp"/>
                                         </tree>
                                     </field>
-                                </page>
-                                <page string="Suivi obstétrique">
-                                    <field name="obstetric_ids">
-                                        <tree>
-                                            <field name="patient_id"/>
-                                            <field name="ddr"/>
-                                            <field name="dpr"/>
-                                        </tree>
-                                    </field>
-                                </page>
                                 <!--
                                 <page string="Vaccine">
                                     <field name="hospital_vaccination_ids">
@@ -214,8 +202,16 @@
                                         </tree>
                                     </field>
                                 </page>-->
-                            </notebook>
                         </page>
+                        <page string="Suivi obstétrique">
+                                    <field name="obstetric_ids">
+                                        <tree>
+                                            <field name="patient_id"/>
+                                            <field name="ddr"/>
+                                            <field name="dpr"/>
+                                        </tree>
+                                    </field>
+                                </page>
                         <page string="Internal notes" groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="notes"/>
                         </page>
