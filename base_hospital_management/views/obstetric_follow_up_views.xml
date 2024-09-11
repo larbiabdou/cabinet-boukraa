@@ -22,9 +22,7 @@
                 </header>
                 <sheet>
                     <group>
-                        <group>
-                            <field name="patient_id"/>
-                        </group>
+                        <field name="patient_id"/>
                         <group string="1er trimestre">
                             <field name="date_1st_trimester"/>
                             <field name="gp_1"/>
