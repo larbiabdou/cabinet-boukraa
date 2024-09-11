@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="obstetric_follow_up_view_form" model="ir.ui.view">
-        <field name="name">obstetric_follow_up_view_form</field>
+    <record id="obstetric_follow_up_view_tree" model="ir.ui.view">
+        <field name="name">obstetric_follow_up_view_tree</field>
         <field name="model">obstetric.follow.up</field>
         <field name="arch" type="xml">
-            <field name="patient_id"/>
+            <tree>
+                <field name="patient_id"/>
             <field name="ddr"/>
             <field name="dpr"/>
+            </tree>
+
         </field>
     </record>
     <record id="obstetric_follow_up_view_form" model="ir.ui.view">
