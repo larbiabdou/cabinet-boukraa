@@ -57,7 +57,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <record id="laboratory_test_group_action" model="ir.actions.act_window">
-        <field name="name">Groupes de Tests</field>
+        <field name="name">Bilans</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">laboratory.test.group</field>
         <field name="view_mode">tree,form</field>

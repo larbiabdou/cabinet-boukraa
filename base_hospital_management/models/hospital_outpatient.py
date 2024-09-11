@@ -146,7 +146,7 @@ class HospitalOutpatient(models.Model):
 
     test_lab_group_ids = fields.Many2many(
         comodel_name='laboratory.test.group',
-        string='Groupe de tests')
+        string='Bilans')
 
     button_consume_visible = fields.Boolean(
         string='button_consume_visible',
@@ -157,7 +157,7 @@ class HospitalOutpatient(models.Model):
         string='Visit_type',
         selection=[('visit', 'Visit'),
                    ('hijama', 'hijama'),('acupuncture', 'acupuncture'),('soins', 'soins'), ],
-        compute='compute_visit_type',
+        #compute='compute_visit_type',
         store=True,
         required=False, )
     color = fields.Integer('Color', compute='_compute_color')
@@ -192,19 +192,19 @@ class HospitalOutpatient(models.Model):
             elif record.visit_type == 'soins':
                 record.color = 6
 
-    @api.depends('visit_type_id')
-    def compute_visit_type(self):
-        for record in self:
-            if record.visit_type_id == self.env.ref("base_hospital_management.visit_type_visite"):
-                record.visit_type = 'visit'
-            elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_hijama"):
-                record.visit_type = 'hijama'
-            elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_visit_acupuncture"):
-                record.visit_type = 'acupuncture'
-            elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_soins"):
-                record.visit_type = 'soins'
-            else:
-                record.visit_type = ''
+    # @api.depends('visit_type_id')
+    # def compute_visit_type(self):
+    #     for record in self:
+    #         if record.visit_type_id == self.env.ref("base_hospital_management.visit_type_visite"):
+    #             record.visit_type = 'visit'
+    #         elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_hijama"):
+    #             record.visit_type = 'hijama'
+    #         elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_visit_acupuncture"):
+    #             record.visit_type = 'acupuncture'
+    #         elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_soins"):
+    #             record.visit_type = 'soins'
+    #         else:
+    #             record.visit_type = ''
 
     def compute_button_consume_visible(self):
         for record in self:

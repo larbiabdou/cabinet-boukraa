@@ -343,7 +343,7 @@ class ResPartner(models.Model):
 
     display_name = fields.Char(string='Display Name', compute='_compute_display_name', store=True)
 
-    age = fields.Integer(string='Age', compute='_compute_age')
+    age = fields.Integer(string='Age')
 
     firstname = fields.Char(
         string='Prénom',
@@ -376,6 +376,7 @@ class ResPartner(models.Model):
             if record.firstname:
                 record.name += ' ' + record.firstname
 
+    @api.onchange('date_of_birth')
     def _compute_age(self):
         for record in self:
             if record.date_of_birth:

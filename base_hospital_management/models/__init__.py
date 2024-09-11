@@ -20,6 +20,7 @@
 #
 ################################################################################
 #from . import account_payment_register
+from . import obstetric_follow_up
 from . import test_order
 from . import blood_bank
 from . import blood_donation
