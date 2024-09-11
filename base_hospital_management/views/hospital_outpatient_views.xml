@@ -12,8 +12,8 @@
                 <field name="visit_type_id"/>
                 <!--<field name="doctor_id"/>-->
                 <field name="op_date"/>
-                <field name="amount"/>
-                <field name="amount_paid"/>
+            <!--    <field name="amount"/>
+                <field name="amount_paid"/>-->
                 <field name="payment_state" widget='badge'
                        decoration-danger="payment_state=='not_paid'"
                        decoration-warning="payment_state=='in_payment'"
