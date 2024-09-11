@@ -7,7 +7,7 @@ class ObstetricFollowUp(models.Model):
 
     patient_id = fields.Many2one(
         comodel_name='res.partner',
-        string='Patient_id',
+        string='Patient',
         required=False)
 
     date_1st_trimester = fields.Date(
