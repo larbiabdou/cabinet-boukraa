@@ -358,6 +358,12 @@ class ResPartner(models.Model):
         compute="compute_total_credit",
         required=False)
 
+    obstetric_ids = fields.One2many(
+        comodel_name='obstetric.follow.up',
+        inverse_name='patient_id',
+        string='Obstetrics',
+        required=False)
+
     def compute_total_credit(self):
         for record in self:
             appointments = self.env['hospital.outpatient'].search([('patient_id', '=', record.id), ('state', '!=', 'draft')])

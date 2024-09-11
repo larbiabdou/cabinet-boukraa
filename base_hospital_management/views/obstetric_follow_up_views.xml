@@ -4,7 +4,19 @@
         <field name="name">obstetric_follow_up_view_form</field>
         <field name="model">obstetric.follow.up</field>
         <field name="arch" type="xml">
+            <field name="patient_id"/>
+            <field name="ddr"/>
+            <field name="dpr"/>
+        </field>
+    </record>
+    <record id="obstetric_follow_up_view_form" model="ir.ui.view">
+        <field name="name">obstetric_follow_up_view_form</field>
+        <field name="model">obstetric.follow.up</field>
+        <field name="arch" type="xml">
             <form string="obstetric_follow_up_form">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
@@ -29,10 +41,15 @@
                             <field name="date_2nd_trimester"/>
                             <field name="conclusion_2"/>
                         </group>
-
                     </group>
                 </sheet>
             </form>
         </field>
+    </record>
+    <record id="obstetric_follow_up_action" model="ir.actions.act_window">
+        <field name="name">Suivi obstétrique</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">obstetric.follow.up</field>
+        <field name="view_mode">tree,form</field>
     </record>
 </odoo>

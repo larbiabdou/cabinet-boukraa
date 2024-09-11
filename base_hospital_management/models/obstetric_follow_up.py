@@ -68,3 +68,10 @@ class ObstetricFollowUp(models.Model):
         sanitize_style=True,
         required=False)
 
+    state = fields.Selection(
+        string='State',
+        selection=[('current', 'En cours'),
+                   ('ended', 'Terminé'), ],
+        required=False, )
+
+
