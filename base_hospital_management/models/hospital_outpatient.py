@@ -94,7 +94,7 @@ class HospitalOutpatient(models.Model):
     is_sale_created = fields.Boolean(string='Sale Created',
                                      help='True if sale order created')
     
-    note = fields.Text(
+    note = fields.Html(
         string="Note",
         sanitize_style=True,
         required=False)
