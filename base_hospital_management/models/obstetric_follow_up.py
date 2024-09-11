@@ -72,6 +72,7 @@ class ObstetricFollowUp(models.Model):
         string='State',
         selection=[('current', 'En cours'),
                    ('ended', 'Terminé'), ],
+        default="current",
         required=False, )
 
 
