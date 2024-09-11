@@ -96,6 +96,7 @@ class HospitalOutpatient(models.Model):
     
     note = fields.Text(
         string="Note",
+        sanitize_style=True,
         required=False)
     
     amount = fields.Float(

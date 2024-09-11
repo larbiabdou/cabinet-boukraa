@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="obstetric_follow_up_view_form" model="ir.ui.view">
+        <field name="name">obstetric_follow_up_view_form</field>
+        <field name="model">obstetric.follow.up</field>
+        <field name="arch" type="xml">
+            <form string="obstetric_follow_up_form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                        </group>
+                        <group string="1er trimestre">
+                            <field name="date_1st_trimester"/>
+                            <field name="gp_1"/>
+                            <field name="ddr"/>
+                            <field name="dpr"/>
+                            <field name="ac"/>
+                            <field name="vv"/>
+                            <field name="lcc"/>
+                            <field name="cn"/>
+                            <field name="pole_cephalique"/>
+                            <field name="membre_4"/>
+                            <field name="trophoblaste"/>
+                            <field name="maf"/>
+                            <field name="conclusion_1"/>
+                        </group>
+                        <group string="2ème trimestre">
+                            <field name="date_2nd_trimester"/>
+                            <field name="conclusion_2"/>
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

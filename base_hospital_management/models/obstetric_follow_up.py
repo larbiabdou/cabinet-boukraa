@@ -49,6 +49,7 @@ class ObstetricFollowUp(models.Model):
         required=False)
     conclusion_1 = fields.Text(
         string="Conclusion",
+        sanitize_style=True,
         required=False)
 
     date_2nd_trimester = fields.Date(
@@ -56,6 +57,7 @@ class ObstetricFollowUp(models.Model):
         required=False)
     conclusion_2 = fields.Text(
         string="Conclusion",
+        sanitize_style=True,
         required=False)
 
     date_3rd_trimester = fields.Date(
@@ -63,5 +65,6 @@ class ObstetricFollowUp(models.Model):
         required=False)
     conclusion_3 = fields.Text(
         string="Conclusion",
+        sanitize_style=True,
         required=False)
 
