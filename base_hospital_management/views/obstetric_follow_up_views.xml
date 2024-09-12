@@ -22,13 +22,18 @@
                 </header>
                 <sheet>
                     <group>
-                        <field name="patient_id"/>
-                        <group string="1er trimestre">
-                            <field name="date_1st_trimester"/>
+                        <group>
+                            <field name="patient_id"/>
+                        <field name="ddr"/>
+                        <field name="dpr"/>
+                        </group>
+                    </group>
+                        <notebook>
+                            <page string="1er trimestre">
+                                <group>
+                                    <field name="date_1st_trimester"/>
                             <field name="g_1"/>
                             <field name="p_1"/>
-                            <field name="ddr"/>
-                            <field name="dpr"/>
                             <field name="ac"/>
                             <field name="vv"/>
                             <field name="lcc"/>
@@ -38,12 +43,17 @@
                             <field name="trophoblaste"/>
                             <field name="maf"/>
                             <field name="conclusion_1"/>
-                        </group>
-                        <group string="2ème trimestre">
-                            <field name="date_2nd_trimester"/>
-                            <field name="g_2"/>
-                            <field name="p_2"/>
-                            <field name="grossesse_2"/>
+                                </group>
+
+                        </page>
+                        <page string="2ème trimestre">
+                            <group>
+                                <group string="Générale">
+                                    <field name="date_2nd_trimester"/>
+                                    <field name="g_2"/>
+                                    <field name="p_2"/>
+                                    <field name="grossesse_2"/>
+                                </group>
                                 <group string="Biométrie">
                                     <field name="ac_2"/>
                                     <field name="maf_2"/>
@@ -62,14 +72,21 @@
                                     <field name="membres_2"/>
                                     <field name="reins_2"/>
                                 </group>
-                            <field name="presentation_2"/>
-                            <field name="conclusion_2"/>
-                        </group>
-                        <group string="3ème trimestre">
-                            <field name="date_3nd_trimester"/>
-                            <field name="g_3"/>
-                            <field name="p_3"/>
-                            <field name="grossesse_3"/>
+                                <group string="Conclusion">
+                                    <field name="presentation_2"/>
+                                    <field name="conclusion_2"/>
+                                </group>
+                            </group>
+
+                        </page>
+                        <page string="3ème trimestre">
+                            <group>
+                                <group string="Générale">
+                                    <field name="date_3nd_trimester"/>
+                                    <field name="g_3"/>
+                                    <field name="p_3"/>
+                                    <field name="grossesse_3"/>
+                                </group>
                                 <group string="Biométrie">
                                     <field name="ac_3"/>
                                     <field name="maf_3"/>
@@ -88,10 +105,13 @@
                                     <field name="membres_3"/>
                                     <field name="reins_3"/>
                                 </group>
-                            <field name="presentation_3"/>
-                            <field name="conclusion_3"/>
-                        </group>
-                    </group>
+                                <group string="Conclusion">
+                                    <field name="presentation_3"/>
+                                    <field name="conclusion_3"/>
+                                </group>
+                            </group>
+                        </page>
+                        </notebook>
                 </sheet>
             </form>
         </field>
@@ -102,4 +122,6 @@
         <field name="res_model">obstetric.follow.up</field>
         <field name="view_mode">tree,form</field>
     </record>
+    <menuitem id="obstetric_follow_up_menu" parent="hospital_menu_root"
+              action="obstetric_follow_up_action" sequence="1"/>
 </odoo>
