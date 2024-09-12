@@ -9,8 +9,8 @@
                 <field name="ddr"/>
                 <field name="dpr"/>
                 <field name="state" widget='badge'
-                       decoration-warning="state=='current'"
-                       decoration-info="state=='ended'"/>
+                       decoration-info="state=='current'"
+                       decoration-success="state=='ended'"/>
             </tree>
 
         </field>
