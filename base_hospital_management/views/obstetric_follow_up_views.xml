@@ -6,8 +6,11 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="patient_id"/>
-            <field name="ddr"/>
-            <field name="dpr"/>
+                <field name="ddr"/>
+                <field name="dpr"/>
+                <field name="state" widget='badge'
+                       decoration-warning="payment_state=='current'"
+                       decoration-info="payment_state=='ended'"/>
             </tree>
 
         </field>

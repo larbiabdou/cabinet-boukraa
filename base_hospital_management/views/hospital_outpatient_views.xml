@@ -14,10 +14,6 @@
                 <field name="op_date"/>
             <!--    <field name="amount"/>
                 <field name="amount_paid"/>-->
-                <field name="payment_state" widget='badge'
-                       decoration-danger="payment_state=='not_paid'"
-                       decoration-warning="payment_state=='in_payment'"
-                       decoration-info="payment_state=='paid'"/>
             </tree>
         </field>
     </record>
@@ -71,7 +67,6 @@
                             invisible="state not in ('op') or button_consume_visible"
                     class="oe_highlight"/>-->
                     <field name="button_consume_visible" invisible="1"/>
-                    <field name="payment_state" widget="statusbar" />
                 </header>
                 <sheet>
                     <field name="state" invisible="1"/>
