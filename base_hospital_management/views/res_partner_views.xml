@@ -209,6 +209,9 @@
                                             <field name="patient_id"/>
                                             <field name="ddr"/>
                                             <field name="dpr"/>
+                                            <field name="state" widget='badge'
+                                               decoration-info="state=='current'"
+                                               decoration-success="state=='ended'"/>
                                         </tree>
                                     </field>
                                 </page>
