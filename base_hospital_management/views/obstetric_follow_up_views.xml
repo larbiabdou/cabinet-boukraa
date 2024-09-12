@@ -25,7 +25,8 @@
                         <field name="patient_id"/>
                         <group string="1er trimestre">
                             <field name="date_1st_trimester"/>
-                            <field name="gp_1"/>
+                            <field name="g_1"/>
+                            <field name="p_1"/>
                             <field name="ddr"/>
                             <field name="dpr"/>
                             <field name="ac"/>
@@ -40,7 +41,55 @@
                         </group>
                         <group string="2ème trimestre">
                             <field name="date_2nd_trimester"/>
+                            <field name="g_2"/>
+                            <field name="p_2"/>
+                            <field name="grossesse_2"/>
+                                <group string="Biométrie">
+                                    <field name="ac_2"/>
+                                    <field name="maf_2"/>
+                                    <field name="bip_2"/>
+                                    <field name="femur_2"/>
+                                    <field name="ca_2"/>
+                                    <field name="poids_2"/>
+                                </group>
+                                <group string="Morphologie">
+                                    <field name="face_2"/>
+                                    <field name="estomac_2"/>
+                                    <field name="rachis_2"/>
+                                    <field name="liquide_amni_2"/>
+                                    <field name="placenta_2"/>
+                                    <field name="hearth_2"/>
+                                    <field name="membres_2"/>
+                                    <field name="reins_2"/>
+                                </group>
+                            <field name="presentation_2"/>
                             <field name="conclusion_2"/>
+                        </group>
+                        <group string="3ème trimestre">
+                            <field name="date_3nd_trimester"/>
+                            <field name="g_3"/>
+                            <field name="p_3"/>
+                            <field name="grossesse_3"/>
+                                <group string="Biométrie">
+                                    <field name="ac_3"/>
+                                    <field name="maf_3"/>
+                                    <field name="bip_3"/>
+                                    <field name="femur_3"/>
+                                    <field name="ca_3"/>
+                                    <field name="poids_3"/>
+                                </group>
+                                <group string="Morphologie">
+                                    <field name="face_3"/>
+                                    <field name="estomac_3"/>
+                                    <field name="rachis_3"/>
+                                    <field name="liquide_amni_3"/>
+                                    <field name="placenta_3"/>
+                                    <field name="hearth_3"/>
+                                    <field name="membres_3"/>
+                                    <field name="reins_3"/>
+                                </group>
+                            <field name="presentation_3"/>
+                            <field name="conclusion_3"/>
                         </group>
                     </group>
                 </sheet>
