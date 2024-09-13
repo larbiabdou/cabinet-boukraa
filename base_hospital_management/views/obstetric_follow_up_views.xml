@@ -34,18 +34,23 @@
                         <notebook>
                             <page string="1er trimestre">
                                 <group>
-                                    <field name="date_1st_trimester"/>
-                            <field name="g_1"/>
-                            <field name="p_1"/>
-                            <field name="ac"/>
-                            <field name="vv"/>
-                            <field name="lcc"/>
-                            <field name="cn"/>
-                            <field name="pole_cephalique"/>
-                            <field name="membre_4"/>
-                            <field name="trophoblaste"/>
-                            <field name="maf"/>
-                            <field name="conclusion_1"/>
+                                    <group>
+                                        <field name="date_1st_trimester"/>
+                                        <field name="g_1"/>
+                                        <field name="p_1"/>
+                                        <field name="conclusion_1"/>
+
+                                    </group>
+                                    <group>
+                                        <field name="ac"/>
+                                        <field name="vv"/>
+                                        <field name="lcc"/>
+                                        <field name="cn"/>
+                                        <field name="pole_cephalique"/>
+                                        <field name="membre_4"/>
+                                        <field name="trophoblaste"/>
+                                        <field name="maf"/>
+                                    </group>
                                 </group>
 
                         </page>
