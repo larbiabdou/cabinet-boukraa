@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="obstetric_follow_up_view_search" model="ir.ui.view">
+        <field name="name">obstetric_follow_up_view_search</field>
+        <field name="model">obstetric.follow.up</field>
+        <field name="arch" type="xml">
+            <search string="Search Tips">
+                <field name="patient_id"/>
+            </search>
+        </field>
+    </record>
     <record id="obstetric_follow_up_view_tree" model="ir.ui.view">
         <field name="name">obstetric_follow_up_view_tree</field>
         <field name="model">obstetric.follow.up</field>
@@ -12,7 +21,6 @@
                        decoration-info="state=='current'"
                        decoration-success="state=='ended'"/>
             </tree>
-
         </field>
     </record>
     <record id="obstetric_follow_up_view_form" model="ir.ui.view">
