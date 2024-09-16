@@ -4,6 +4,7 @@ from odoo import api, fields, models
 class ObstetricFollowUp(models.Model):
     _name = 'obstetric.follow.up'
     _description = 'Obstetric Follow-up'
+    _rec_name = 'patient_id'
 
     patient_id = fields.Many2one(
         comodel_name='res.partner',

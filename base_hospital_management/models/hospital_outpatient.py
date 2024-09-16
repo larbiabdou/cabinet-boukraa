@@ -65,12 +65,12 @@ class HospitalOutpatient(models.Model):
                           help='Date of OP')
 
     reason = fields.Text(string='Reason', help='Reason for visiting hospital')
-    test_count = fields.Integer(string='Test Created',
-                                help='Number of tests created for the patient',
-                                compute='_compute_test_count')
-    test_ids = fields.One2many('lab.test.line', 'op_id',
-                               string='Tests',
-                               help='Tests for the patient')
+    # test_count = fields.Integer(string='Test Created',
+    #                             help='Number of tests created for the patient',
+    #                             compute='_compute_test_count')
+    # test_ids = fields.One2many('lab.test.line', 'op_id',
+    #                            string='Tests',
+    #                            help='Tests for the patient')
     state = fields.Selection(
         [('draft', 'Draft'), ('op', 'OP')],
         default='draft', string='State', help='State of the outpatient')
@@ -145,8 +145,8 @@ class HospitalOutpatient(models.Model):
         string='Test_lab_ids',
         required=False)
 
-    test_lab_group_ids = fields.Many2many(
-        comodel_name='laboratory.test.group',
+    test_ids = fields.Many2many(
+        comodel_name='laboratory.test',
         string='Bilans')
 
     button_consume_visible = fields.Boolean(
@@ -214,14 +214,24 @@ class HospitalOutpatient(models.Model):
             else:
                 record.button_consume_visible = False
 
-    @api.onchange('test_lab_group_ids')
+    @api.onchange('test_ids')
     def onchange_test_lab_group(self):
         for record in self:
-            for group in record.test_lab_group_ids:
-                for test in group.sub_tests:
-                    if test._origin.id not in record.test_lab_ids.mapped('test_id').ids:
+            for test in record.test_ids:
+                if test._origin.id not in record.test_lab_ids.mapped('test_id').ids:
+                    record.test_lab_ids = [(0, 0, {
+                        'test_id': test._origin.id,
+                        'name': test.name,
+                        'is_sub_test': False,  # Indique qu'il s'agit d'un test principal
+                        'parent_test_id': False
+                    })]
+                    for sub_test in test._origin.sub_test_ids:
                         record.test_lab_ids = [(0, 0, {
-                            'test_id': test._origin.id
+                            'test_id': sub_test._origin.id,
+                            'name': ' ->   ' + sub_test.name,
+                            'is_sub_test': True,  # Indique qu'il s'agit d'un test principal
+                            'parent_test_id': test._origin.id
+
                         })]
 
     def consume_medical_care_ids(self):
@@ -284,10 +294,10 @@ class HospitalOutpatient(models.Model):
         #         'allocation')
         return super().create(vals)
 
-    @api.depends('test_ids')
-    def _compute_test_count(self):
-        """Computes the value of test count"""
-        self.test_count = len(self.test_ids.ids)
+    # @api.depends('test_ids')
+    # def _compute_test_count(self):
+    #     """Computes the value of test count"""
+    #     self.test_count = len(self.test_ids.ids)
     #
     # @api.onchange('op_date')
     # def _onchange_op_date(self):
@@ -479,19 +489,19 @@ class HospitalOutpatient(models.Model):
         """Method for printing prescription"""
         data = False
         p_list = []
-        for rec in self.test_lab_ids:
-            datas = {
-                'name': rec.test_id.name,
-                'parent_id': False,
-            }
-            p_list.append(datas)
-            if rec.test_id.sub_test_ids:
-                for test in rec.test_id.sub_test_ids:
-                    datas = {
-                        'name': test.name,
-                        'parent_id': test.id,
-                    }
-                    p_list.append(datas)
+        for test in self.test_lab_ids:
+            if not test.is_sub_test:
+                datas = {
+                    'name': test.test_id.name,
+                    'is_sub_test': False,
+                }
+                p_list.append(datas)
+            else:
+                datas = {
+                    'name': test.test_id.name,
+                    'is_sub_test': True,
+                }
+                p_list.append(datas)
 
         data = {
             'datas': p_list,
@@ -556,6 +566,10 @@ class laboratoryTestLine(models.Model):
     _name = 'laboratory.test.line'
     _description = 'laboratory Test Line'
 
+    name = fields.Char(
+        string='Name',
+        required=False)
+
     outpatient_id = fields.Many2one(
         comodel_name='hospital.outpatient',
         string='Outpatient_id',
@@ -569,6 +583,9 @@ class laboratoryTestLine(models.Model):
     result = fields.Char(
         string='Résultat',
         required=False)
+    is_sub_test = fields.Boolean(string='Is Sub-Test', default=False)
+    parent_test_id = fields.Many2one('laboratory.test.line', string="Parent Test")  # Test parent, pour les sous-tests
+
 
 
     

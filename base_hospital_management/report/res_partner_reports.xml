@@ -212,7 +212,7 @@ qsp<br/>
                         <t t-set="half_length" t-value="len(datas) // 2"/>
                         <t t-foreach="datas[:half_length]" t-as="test">
                             <div style="margin-bottom: 8px; font-size: 14px;">
-                                <t t-if="test['parent_id']">
+                                <t t-if="test['is_sub_test']">
                             <span style="padding-left: 30px;"><i class="fa fa-square-o" title="Open"></i> &#160;&#160;  <span t-esc="test['name']"/></span>  <br/>
                             </t>
                             <t t-else="">
@@ -226,7 +226,7 @@ qsp<br/>
                     <div class="col-6">
                         <t t-foreach="datas[half_length:]" t-as="test">
                             <div style="margin-bottom: 8px; font-size: 14px;">
-                                <t t-if="test['parent_id']">
+                                <t t-if="test['is_sub_test']">
                             <span style="padding-left: 30px;"><i class="fa fa-square-o" title="Open"></i>  &#160;&#160; <span t-esc="test['name']"/></span>  <br/>
                             </t>
                             <t t-else="">

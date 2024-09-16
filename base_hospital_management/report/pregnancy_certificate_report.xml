@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_obstetric_follow_up_certificate" model="ir.actions.report">
+        <field name="name">CERTIFICAT MÉDICAL DE GROSSESSE</field>
+        <field name="model">obstetric.follow.up</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">base_hospital_management.report_obstetric_follow_up_certificate</field>
+        <field name="report_file">base_hospital_management.report_obstetric_follow_up_certificate</field>
+        <field name="binding_model_id" ref="model_obstetric_follow_up"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base_hospital_management.paperformat_medical_prescription"/>
+    </record>
+    <template id="report_obstetric_follow_up_certificate">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                <table style="width: 100%;border: transparent !important;">
+                    <tr style="border: none;">
+                        <td style="border: none;border-bottom: 2px solid black !important; width: 40%;text-align:center">
+                           <p style="font-size: 16px !important;font-weight: 800 !important;">
+                               DR Exemple
+                           </p>
+                        <p style="font-size: 14px !important;">
+                            Cabinet de médecine générale
+                        </p>
+                        <p style="font-size: 14px!important;">
+                            Example example
+                        </p>
+                            <p style="font-size: 16px !important;font-weight: 800 !important;">
+                                N°
+                            </p>
+
+                        </td>
+                        <td rowspan="4" style="border: none;height: 35px;width: 30%;">
+                            <!--<img src="/base_hospital_management/static/img/logo-cabinet.jpeg" style="width: 100%;" alt=""/>-->
+                        </td>
+                        <td style="border: none;border-bottom: 2px solid black !important;width: 30%;text-align:center">
+                            <p style="font-size: 16px !important;font-weight: 800 !important;">
+                                dzfazfaz fzaefzaf
+                            </p>
+
+                        <p style="font-size: 16px !important;font-weight: 800 !important;">
+                            dazfazfazfaz
+                        </p>
+                            <p style="font-size: 14px !important;">
+                                sdazfazfa dzafazfaz
+                            </p>
+
+                        </td>
+                    </tr>
+                </table>
+                <table style="width: 100%; border: transparent !important;">
+                    <tr style="border: none;">
+                        <td style="font-size: 16px !important;font-weight: 800 !important;border: none; height: 25px;width: 70%">Nom: &#160;&#160;&#160;<span t-esc="lastname"/></td>
+                        <td style="border:none"></td>
+                    </tr>
+                    <tr style="font-size: 16px !important;font-weight: 800 !important;border: none;">
+                        <td style="border: none; height: 25px;">Prénom: &#160;&#160;&#160;<span t-esc="firstname"/></td>
+                        <td style="border: none; height: 25px;width: 50%;">Le: &#160;&#160;&#160;<span t-esc="date"/></td>
+                    </tr>
+                    <tr style="border:none">
+                        <td style="font-size: 16px !important;font-weight: 800 !important;border: none; height: 25px;">Age: &#160;&#160;&#160;
+                        <span t-esc="age"/> Ans</td>
+                        <td style="border:none"></td>
+                    </tr>
+                </table>
+                <br/>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div style="width: 350px;padding: 10px;border-radius:5px; color: #FFF; background-color: #222D7E;font-size: 17px!important; font-weight: 800 !important; text-align: center">
+                    CERTIFICAT MÉDICAL DE GROSSESSE
+                </div>
+                    <div class="col-3"></div>
+                </div>
+
+
+                <br/>
+                <br/>
+                <br/>
+		<br/>
+                <br/>
+                <p>Je soussigné, Dr. Chibane A., certifie que:</p>
+                    <p>Madame : <strong><t t-esc="doc.patient_id.name"/></strong></p>
+                    <p>Présente une grossesse de : <strong> semaines</strong></p>
+                    <p>Sa date prévue d’accouchement est le : <strong><t t-esc="doc.dpr" t-options="{'widget': 'date', 'format': 'dd/MM/YYYY'}"/></strong></p>
+
+               <div t-attf-class="footer" style="border-top: 1px solid #000; padding-top: 10px;">
+                   <table style="border: transparent !important; width:100%">
+                       <tr>
+                           <td>
+                               <i class="fa fa-phone"></i>
+                               05 50 46 81 10 / 07 95 42 53 77</td>
+
+                           <td> <i class="fa fa-map-marker"></i>
+                               Ain Amor, SEG</td>
+                       </tr>
+                   </table>
+
+                </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -71,12 +71,12 @@
                 <sheet>
                     <field name="state" invisible="1"/>
                     <div class="oe_button_box" name="button_box">
-                        <button invisible="test_count == 0"
+                        <!--<button invisible="test_count == 0"
                                 name="action_view_test" type="object"
                                 class="oe_stat_button"
                                 icon="fa-tint">
                             <field name="test_count" widget="statinfo"/>
-                        </button>
+                        </button>-->
                         <!--<button name="action_view_invoice" type="object"
                                 class="oe_stat_button"
                                 invisible="invoiced == False"
@@ -104,8 +104,8 @@
                             <field name="visit_type_id" invisible="1"/>
                             <field name="visit_type" invisible="1"/>
 
-                            <field name="test_count" invisible="1"/>
-                            <field name="test_lab_group_ids" widget="many2many_tags" readonly="not has_group_doctor" groups="base_hospital_management.base_hospital_management_group_doctor" invisible="state not in ('op')"/>
+                            <!--<field name="test_count" invisible="1"/>-->
+                            <field name="test_ids" widget="many2many_tags" readonly="not has_group_doctor" groups="base_hospital_management.base_hospital_management_group_doctor" invisible="state not in ('op')"/>
                         </group>
                     </group>
                     <notebook invisible="state not in ('op')">
@@ -141,7 +141,10 @@
                         <page string="Demande de Bilan" groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="test_lab_ids" readonly="not has_group_doctor">
                                 <tree editable="bottom">
-                                    <field name="test_id" domain="[('parent_id', '=', False)]"/>
+                                    <field name="name"/>
+                                    <field name="test_id" domain="[('parent_id', '=', False)]" column_invisible="1"/>
+                                     <field name="is_sub_test" column_invisible="1"/> <!-- Masquer l'indicateur pour les utilisateurs -->
+                                    <field name="parent_test_id" column_invisible="1"/> <!-- Référence invisible au test parent -->
                                     <field name="result"/>
                                 </tree>
                             </field>
