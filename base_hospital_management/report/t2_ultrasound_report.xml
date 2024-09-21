@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_obstetric_follow_up_t2" model="ir.actions.report">
+        <field name="name">COMPTE RENDU D’ECHOGRAPHIE DU T2</field>
+        <field name="model">obstetric.follow.up</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">base_hospital_management.report_obstetric_follow_up_t2</field>
+        <field name="report_file">base_hospital_management.report_obstetric_follow_up_t2</field>
+        <field name="binding_model_id" ref="model_obstetric_follow_up"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base_hospital_management.paperformat_a4_without_margin"/>
+    </record>
+    <template id="report_obstetric_follow_up_t2">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <t t-set="date" t-value="doc.date_2nd_trimester.strftime('%d/%m/%Y')"/>
+                        <t t-call="base_hospital_management.template_header_a4"/>
+                        <br/>
+                        <div class="text-center" style="font-weight:900;font-size: 24px">
+                            COMPTE RENDU D’ECHOGRAPHIE DU T2
+                        </div>
+
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="font-size:16px">
+
+                            <!-- Affichage des informations G et P -->
+                            <p>
+                                <strong>G :</strong>
+                                <t t-esc="doc.g_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                <strong>P :</strong>
+                                <t t-esc="doc.p_1"/> <br/>
+                                <strong>C:</strong>
+                                <span t-field="doc.c_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                <strong>A:</strong>
+                                <span t-field="doc.a_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                            </p>
+
+                            <!-- Affichage des dates DDR et DPR -->
+                            <p>
+                                <strong>DDR:</strong>
+                                <t t-esc="doc.ddr.strftime('%d/%m/%Y') if doc.ddr else ''"/> &#160;&#160;&#160;&#160;&#160;&#160;
+                                <strong>DPA:</strong>
+                                <t t-esc="doc.dpr.strftime('%d/%m/%Y') if doc.dpr else ''"/>
+                            </p>
+                            <p>
+                                <strong>Grossesse :</strong>
+                                <span t-field="doc.grossesse_2"/>
+                            </p>
+                            <br/>
+                            <p>Biométrie :</p>
+                            <p>
+                                <strong>AC:</strong>
+                                <span t-field="doc.ac_2"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                <strong>MAF:</strong>
+                                <span t-field="doc.maf_2"/>
+                            </p>
+                            <p>
+                                <strong>BIP:</strong>
+                                <span t-field="doc.bip_2"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                <strong>FEMUR:</strong>
+                                <span t-field="doc.femur_2"/>
+                            </p>
+                            <p>
+                                <strong>POIDS:</strong>
+                                <span t-field="doc.poids_2"/>
+                            </p>
+                            <!-- Affichage des champs Boolean avec cases cochées ou non -->
+                            <br/>
+                            <p>Morphologie :</p>
+                            <p>
+                                <t t-if="doc.face_2">
+                                    <i class="fa fa-check-square"></i> <!-- Icône cochée -->
+                                </t>
+                                <t t-if="not doc.face_2">
+                                    <i class="fa fa-square-o"></i> <!-- Icône non cochée -->
+                                </t>
+                                &#160;&#160;
+                                <strong>FACE</strong>
+                                &#160;&#160;&#160;&#160;&#160;&#160;
+
+                                <t t-if="doc.hearth_2">
+                                    <i class="fa fa-check-square"></i>
+                                </t>
+                                <t t-if="not doc.hearth_2">
+                                    <i class="fa fa-square-o"></i>
+                                </t>
+                                &#160;&#160;
+                                <strong>Cœur et vx</strong>
+                            </p>
+                            <p>
+
+                                <t t-if="doc.estomac_2">
+                                    <i class="fa fa-check-square"></i>
+                                </t>
+                                <t t-if="not doc.estomac_2">
+                                    <i class="fa fa-square-o"></i>
+                                </t>
+                                &#160;&#160;
+                                <strong>Estomac</strong>
+                                &#160;&#160;&#160;&#160;&#160;&#160;
+
+                                <t t-if="doc.membres_2">
+                                    <i class="fa fa-check-square"></i>
+                                </t>
+                                <t t-if="not doc.membres_2">
+                                    <i class="fa fa-square-o"></i>
+                                </t>
+                                &#160;&#160;
+                                <strong>Membres</strong>
+                            </p>
+                            <p>
+
+                                <t t-if="doc.rachis_2">
+                                    <i class="fa fa-check-square"></i>
+                                </t>
+                                <t t-if="not doc.rachis_2">
+                                    <i class="fa fa-square-o"></i>
+                                </t>
+                                &#160;&#160;
+                                <strong>Rachis</strong>
+                                &#160;&#160;&#160;&#160;&#160;&#160;
+
+                                <t t-if="doc.reins_2">
+                                    <i class="fa fa-check-square"></i>
+                                </t>
+                                <t t-if="not doc.reins_2">
+                                    <i class="fa fa-square-o"></i>
+                                </t>
+                                &#160;&#160;
+                                <strong>Reins et vessie</strong>
+                            </p>
+                            <p>
+
+                                <t t-if="doc.liquide_amni_2">
+                                    <i class="fa fa-check-square"></i>
+                                </t>
+                                <t t-if="not doc.liquide_amni_2">
+                                    <i class="fa fa-square-o"></i>
+                                </t>
+                                &#160;&#160;
+                                <strong>Liquide amniotique</strong>
+                                &#160;&#160;&#160;&#160;&#160;&#160;
+
+                                <t t-if="doc.placenta_2">
+                                    <i class="fa fa-check-square"></i>
+                                </t>
+                                <t t-if="not doc.placenta_2">
+                                    <i class="fa fa-square-o"></i>
+                                </t>
+                                &#160;&#160;
+                                <strong>Placenta</strong>
+                            </p>
+                            <p>
+                                <strong>Présentation:</strong>
+                                <br/>
+                                <t t-esc="doc.presentation_2"/>
+                            </p>
+
+                            <!-- Affichage de la conclusion -->
+                            <p>
+                                <strong>Conclusion:</strong>
+                                <br/>
+                                <t t-esc="doc.conclusion_2"/>
+                            </p>
+                        </div>
+                        <t t-call="base_hospital_management.template_footer_a4"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

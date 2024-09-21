@@ -20,6 +20,7 @@
 #
 ################################################################################
 #from . import account_payment_register
+from . import medical_leave_certificate
 from . import obstetric_follow_up
 from . import test_order
 from . import blood_bank
@@ -62,3 +63,4 @@ from . import hospital_medecine
 #from . import medecin_forme
 #from . import hospital_laboratoire
 from . import medical_care
+from . import abdominal_ultrasound_report

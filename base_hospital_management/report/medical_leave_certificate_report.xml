@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_medical_leave_certificate" model="ir.actions.report">
+        <field name="name">Certificat d'aret de travail</field>
+        <field name="model">medical.leave.certificate</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">base_hospital_management.report_medical_leave_certificate</field>
+        <field name="report_file">base_hospital_management.report_medical_leave_certificate</field>
+        <field name="binding_model_id" ref="model_medical_leave_certificate"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base_hospital_management.paperformat_medical_prescription"/>
+    </record>
+    <template id="report_medical_leave_certificate">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="date" t-value="doc.date.strftime('%d/%m/%Y')"/>
+                    <t t-call="base_hospital_management.template_header_a5"/>
+                    <br/>
+                    <div class="text-center" style="font-weight:900;font-size: 24px">
+                        Certificat d'arrêt de travail
+                    </div>
+
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div style="font-size:18px">
+                        <p>
+                            <strong>Je soussigné, Docteur en médecine, certifie que l'état de santé de</strong>
+                            <t t-esc="doc.patient_id.name"/>
+                            nécessite:
+                        </p>
+                        <br/>
+                        <t t-if="doc.type == 'leave'">
+                            <p>- Un arrêt de travail de
+                                <t t-esc="doc.leave_duration"/>
+                                jours du
+                                <t t-esc="doc.leave_start_date.strftime('%d/%m/%Y')"/>
+                                au
+                                <t t-esc="doc.leave_end_date.strftime('%d/%m/%Y')"/>
+                            </p>
+                        </t>
+                        <t t-if="doc.type == 'extended'">
+                            <p>- Une prolongation d'arrêt de travail de
+                            <t t-esc="doc.extended_duration"/>
+                            jours à compter de
+                            <t t-esc="doc.date_extention.strftime('%d/%m/%Y')"/>
+                        </p>
+                        </t>
+
+                        <p>
+                            <strong>- La reprise du travail à partir de</strong>
+                            <t t-esc="doc.resume_work_date.strftime('%d/%m/%Y')"/>
+                        </p>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <p class="text-end">Signature: &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>
+                    </div>
+
+                    <t t-call="base_hospital_management.template_footer_a5"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -42,42 +42,42 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="patient_id"/>
-                        <field name="ddr"/>
-                        <field name="dpr"/>
+                            <field name="patient_id" domain="[('is_patient', '=', True)]" context="{'default_is_patient': True,'form_view_ref': 'base_hospital_management.res_partner_view_form'}"/>
+                            <field name="ddr"/>
+                            <field name="dpr"/>
+                            <field name="g_1"/>
+                            <field name="p_1"/>
+                            <field name="c_1"/>
+                            <field name="a_1"/>
                         </group>
                     </group>
-                        <notebook>
-                            <page string="1er trimestre">
+                    <notebook>
+                        <page string="1er trimestre">
+                            <group>
                                 <group>
-                                    <group>
-                                        <field name="date_1st_trimester"/>
-                                        <field name="g_1"/>
-                                        <field name="p_1"/>
+                                    <field name="date_1st_trimester"/>
+                                    <field name="ac"/>
+                                    <field name="vv"/>
+                                    <field name="lcc"/>
+                                    <field name="cn"/>
 
-                                    </group>
-                                    <group>
-                                        <field name="ac"/>
-                                        <field name="vv"/>
-                                        <field name="lcc"/>
-                                        <field name="cn"/>
-                                        <field name="pole_cephalique"/>
-                                        <field name="membre_4"/>
-                                        <field name="trophoblaste"/>
-                                        <field name="maf"/>
-                                    </group>
-                                    <group>
-                                        <field name="conclusion_1"/>
-                                    </group>
                                 </group>
+                                <group>
+                                    <field name="pole_cephalique"/>
+                                    <field name="membre_4"/>
+                                    <field name="trophoblaste"/>
+                                    <field name="maf"/>
+                                </group>
+                                <group>
+                                    <field name="conclusion_1"/>
+                                </group>
+                            </group>
 
                         </page>
                         <page string="2ème trimestre">
                             <group>
                                 <group string="Générale">
                                     <field name="date_2nd_trimester"/>
-                                    <field name="g_2"/>
-                                    <field name="p_2"/>
                                     <field name="grossesse_2"/>
                                 </group>
                                 <group string="Biométrie">
@@ -85,7 +85,6 @@
                                     <field name="maf_2"/>
                                     <field name="bip_2"/>
                                     <field name="femur_2"/>
-                                    <field name="ca_2"/>
                                     <field name="poids_2"/>
                                 </group>
                                 <group string="Morphologie">
@@ -109,8 +108,6 @@
                             <group>
                                 <group string="Générale">
                                     <field name="date_3nd_trimester"/>
-                                    <field name="g_3"/>
-                                    <field name="p_3"/>
                                     <field name="grossesse_3"/>
                                 </group>
                                 <group string="Biométrie">
@@ -118,7 +115,6 @@
                                     <field name="maf_3"/>
                                     <field name="bip_3"/>
                                     <field name="femur_3"/>
-                                    <field name="ca_3"/>
                                     <field name="poids_3"/>
                                 </group>
                                 <group string="Morphologie">
@@ -137,7 +133,7 @@
                                 </group>
                             </group>
                         </page>
-                        </notebook>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -149,6 +145,6 @@
         <field name="view_mode">tree,form</field>
         <field name="context">{'group_by': 'patient_id', 'search_default_current': 1}</field>
     </record>
-    <menuitem id="obstetric_follow_up_menu" parent="hospital_menu_root"
+    <menuitem id="obstetric_follow_up_menu" parent="suivi_super_menu"
               action="obstetric_follow_up_action" sequence="1"/>
 </odoo>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_abdominal_ultrasound_report_tree" model="ir.ui.view">
+        <field name="name">abdominal.ultrasound.report.tree</field>
+        <field name="model">abdominal.ultrasound.report</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="patient_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_abdominal_ultrasound_report_form" model="ir.ui.view">
+        <field name="name">abdominal.ultrasound.report.form</field>
+        <field name="model">abdominal.ultrasound.report</field>
+        <field name="arch" type="xml">
+            <form string="Compte Rendu d'Échographie Abdominale">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="outpatient_id" invisible="1"/>
+                        <!-- Groupe pour le Foie -->
+                        <group string="Foie">
+                            <field name="liver_texture"/>
+                            <field name="liver_contours"/>
+
+                        </group>
+
+                        <!-- Groupe pour la Vésicule Biliaire (VB) -->
+                        <group string="Vésicule Biliaire (VB)">
+                            <field name="gallbladder_wall"/>
+                            <field name="gallbladder_content"/>
+
+                        </group>
+                        <group string="Rein Droit">
+                            <field name="right_kidney_position"/>
+                            <field name="right_kidney_texture"/>
+                            <field name="right_kidney_size"/>
+                            <field name="right_kidney_cortico_sinus_differentiation"/>
+                            <field name="right_kidney_hydronephrosis"/>
+
+                        </group>
+
+                        <!-- Groupe pour le Rein Gauche -->
+                        <group string="Rein Gauche">
+                            <field name="left_kidney_position"/>
+                            <field name="left_kidney_texture"/>
+                            <field name="left_kidney_size"/>
+                            <field name="left_kidney_cortico_sinus_differentiation"/>
+                            <field name="left_kidney_hydronephrosis"/>
+
+                        </group>
+
+                        <!-- Groupe pour les Voies Biliaires Intra-Hépatiques (VBIH) -->
+                        <group string="VBIH">
+                            <field name="vbih"/>
+
+                        </group>
+
+                        <!-- Groupe pour le Rein Droit -->
+
+                        <!-- Groupe pour la Rate -->
+                        <group string="Rate">
+                            <field name="spleen_texture"/>
+                            <field name="spleen_size"/>
+
+                        </group>
+
+                        <!-- Groupe pour le Pancréas -->
+                        <group string="Pancréas">
+                            <field name="pancreas_texture"/>
+                            <field name="wirsung_canal"/>
+
+                        </group>
+
+                        <!-- Groupe pour la Collection Liquidienne Intra-Abdominale -->
+                        <group string="Collection Liquidienne Intra-Abdominale">
+                            <field name="intra_abdominal_fluid_collection"/>
+
+                        </group>
+
+                        <!-- Conclusion -->
+                        <group string="Conclusion">
+                            <field name="conclusion"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="abdominal_ultrasound_report_action" model="ir.actions.act_window">
+        <field name="name">Compte rendu d’échographie abdominal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">abdominal.ultrasound.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="abdominal_ultrasound_report_menu" parent="suivi_super_menu"
+              action="abdominal_ultrasound_report_action" sequence="1"/>
+
+</odoo>

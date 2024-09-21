@@ -6,11 +6,6 @@
               groups="base_hospital_management.base_hospital_management_group_doctor,base_hospital_management.base_hospital_management_group_receptionist"
               name="Hospital Management"/>
     <!--    Appointment menu-->
-    <menuitem id="hospital_menu_appointment" name="Appointment"
-              parent="hospital_menu_root"
-              action="hospital_outpatient_action"
-              groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor"
-              sequence="2"/>
     <!--    Patient menu
     <menuitem id="appointment_menu_patient" name="Patient"
               parent="hospital_menu_appointment"
@@ -26,11 +21,19 @@
               -->
     <menuitem name="Report" id="hospital_report" parent="hospital_menu_root"
               sequence="6"/>
+    <menuitem id="certificate_menu" name="Certificats" parent="base_hospital_management.hospital_menu_root" sequence="90"/>
+    <menuitem id="visite_super_menu" name="Visites" parent="base_hospital_management.hospital_menu_root" sequence="50"/>
+    <menuitem id="suivi_super_menu" name="Suivis obstétrique" parent="base_hospital_management.hospital_menu_root" sequence="60"/>
     <!--    Configuration menu-->
-    <menuitem id="hospital_menu_configuration" name="Configuration" sequence="6"
+    <menuitem id="hospital_menu_configuration" name="Configuration" sequence="100"
               groups="base_hospital_management.base_hospital_management_group_doctor"
               parent="hospital_menu_root"/>
     <!--Reception dashboard action-->
+        <menuitem id="hospital_menu_appointment" name="Appointment"
+              parent="visite_super_menu"
+              action="hospital_outpatient_action"
+              groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor"
+              sequence="2"/>
     <!--<record id="reception_dashboard_action" model="ir.actions.client">
         <field name="name">Reception Dashboard</field>
         <field name="tag">reception_dashboard_tags</field>
@@ -61,7 +64,7 @@
               groups="base_hospital_management.base_hospital_management_group_pharmacist"
               action="pharmacist_dashboard_action"/>-->
             <menuitem id="hospital_menu_visite" name="Visites"
-              parent="hospital_menu_root"
+              parent="visite_super_menu"
               action="hospital_outpatient_action_visite" groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor"
 
               sequence="2"/>

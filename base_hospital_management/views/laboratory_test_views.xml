@@ -51,7 +51,7 @@
         </field>
     </record>
     <record id="laboratory_test_action" model="ir.actions.act_window">
-        <field name="name">Tests</field>
+        <field name="name">Bilans</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">laboratory.test</field>
         <field name="view_mode">tree,form</field>
@@ -64,5 +64,4 @@
     </record>
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="laboratory_test_menu" parent="hospital_menu_configuration" action="laboratory_test_action"/>
-    <menuitem id="laboratory_test_group_menu" parent="hospital_menu_configuration" action="laboratory_test_group_action"/>
 </odoo>

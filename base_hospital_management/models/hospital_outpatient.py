@@ -163,6 +163,37 @@ class HospitalOutpatient(models.Model):
         required=False, )
     color = fields.Integer('Color', compute='_compute_color')
 
+    count_abdominal_report = fields.Integer(
+        string='Count_abdominal_report',
+        compute='compute_count_abdominal_report',
+        required=False)
+
+    def compute_count_abdominal_report(self):
+        for record in self:
+            record.count_abdominal_report = self.env['abdominal.ultrasound.report'].search_count([('outpatient_id', '=', record.id)])
+
+    def action_view_abdominal_report(self):
+        self.ensure_one()
+        reports = self.env['abdominal.ultrasound.report'].search([('outpatient_id', '=', self.id)])
+
+        action = {
+            'res_model': 'abdominal.ultrasound.report',
+            'type': 'ir.actions.act_window',
+            'context': {'default_outpatient_id': self.id}
+        }
+        if len(reports) == 1:
+            action.update({
+                'view_mode': 'form',
+                'res_id': reports[0].id,
+            })
+        else:
+            action.update({
+                'name': "Compte rendu d’échographie abdominal",
+                'domain': [('id', 'in', reports.ids)],
+                'view_mode': 'tree,form',
+            })
+        return action
+
     def _default_has_group_doctor(self):
         if self.env.user.has_group('base_hospital_management.base_hospital_management_group_doctor'):
             return True

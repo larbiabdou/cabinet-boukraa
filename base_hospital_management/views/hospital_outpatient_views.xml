@@ -69,14 +69,15 @@
                     <field name="button_consume_visible" invisible="1"/>
                 </header>
                 <sheet>
+
                     <field name="state" invisible="1"/>
                     <div class="oe_button_box" name="button_box">
-                        <!--<button invisible="test_count == 0"
-                                name="action_view_test" type="object"
+                        <button
+                                name="action_view_abdominal_report" type="object"
                                 class="oe_stat_button"
-                                icon="fa-tint">
-                            <field name="test_count" widget="statinfo"/>
-                        </button>-->
+                                icon="fa-list">
+                            <field name="count_abdominal_report" string="Compte rendu abdominal" widget="statinfo"/>
+                        </button>
                         <!--<button name="action_view_invoice" type="object"
                                 class="oe_stat_button"
                                 invisible="invoiced == False"
