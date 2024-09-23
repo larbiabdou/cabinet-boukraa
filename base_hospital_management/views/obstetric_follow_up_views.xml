@@ -56,9 +56,10 @@
                             <group>
                                 <group>
                                     <field name="date_1st_trimester"/>
+                                    <field name="sac_gestationnel"/>
                                     <field name="ac"/>
                                     <field name="vv"/>
-                                    <field name="lcc"/>
+                                    <field name="lcc_1"/>
                                     <field name="cn"/>
 
                                 </group>
@@ -89,6 +90,7 @@
                                 </group>
                                 <group string="Morphologie">
                                     <field name="face_2"/>
+                                    <field name="nez_bouche_2"/>
                                     <field name="estomac_2"/>
                                     <field name="rachis_2"/>
                                     <field name="liquide_amni_2"/>
@@ -119,6 +121,7 @@
                                 </group>
                                 <group string="Morphologie">
                                     <field name="face_3"/>
+                                    <field name="nez_bouche_3"/>
                                     <field name="estomac_3"/>
                                     <field name="rachis_3"/>
                                     <field name="liquide_amni_3"/>

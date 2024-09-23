@@ -33,10 +33,16 @@
 
                             <!-- Affichage des informations G et P -->
                             <p>
-                                <strong>G</strong>
+                                <strong>G :</strong>
                                 <t t-esc="doc.g_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
-                                <strong>P</strong>
+                                <strong>P :</strong>
                                 <t t-esc="doc.p_1"/>
+                            </p>
+                            <p>
+                                <strong>C :</strong>
+                                <t t-esc="doc.c_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                <strong>A :</strong>
+                                <t t-esc="doc.a_1"/>
                             </p>
 
                             <!-- Affichage des dates DDR et DPR -->
@@ -47,92 +53,40 @@
                                 <t t-esc="doc.dpr.strftime('%d/%m/%Y') if doc.dpr else ''"/>
                             </p>
                             <p></p>
-                            <p>Sac gestationnel :</p>
+                            <p><strong>Sac gestationnel :</strong> &#160;&#160; <t t-esc="dict(doc._fields['sac_gestationnel'].selection).get(doc.sac_gestationnel)" />
+                            </p>
                             <!-- Affichage des champs Boolean avec cases cochées ou non -->
                             <p>
-                                <t t-if="doc.ac">
-                                    <i class="fa fa-check-square"></i> <!-- Icône cochée -->
-                                </t>
-                                <t t-if="not doc.ac">
-                                    <i class="fa fa-square-o"></i> <!-- Icône non cochée -->
-                                </t>
-                                &#160;&#160;
-                                <strong>AC</strong>
+
+                                <strong>AC</strong> &#160;&#160;<t t-esc="dict(doc._fields['ac'].selection).get(doc.ac)" />
                                 &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <t t-if="doc.maf">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.maf">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>MAF</strong>
+                                <strong>MAF</strong> &#160;&#160; <t t-esc="dict(doc._fields['maf'].selection).get(doc.maf)" />
                             </p>
                             <p>
 
-                                <t t-if="doc.vv">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.vv">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>VV</strong>
+                                <strong>VV</strong> &#160;&#160; <t t-esc="dict(doc._fields['vv'].selection).get(doc.vv)" />
                                 &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <t t-if="doc.lcc">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.lcc">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>LCC</strong>
+                                <strong>LCC</strong> &#160;&#160; <t t-esc="doc.lcc_1"/>
                             </p>
 
                             <p>
-                                <t t-if="doc.cn">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.cn">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>CN</strong>
+
+                                <strong>CN</strong> &#160;&#160; <t t-esc="dict(doc._fields['cn'].selection).get(doc.cn)" />
                             </p>
 
                             <p>
-                                <t t-if="doc.pole_cephalique">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.pole_cephalique">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Pole céphaliqu</strong>
+                                <strong>Pole céphaliqu</strong> &#160;&#160;  <t t-esc="dict(doc._fields['pole_cephalique'].selection).get(doc.pole_cephalique)" />
                             </p>
 
                             <p>
-                                <t t-if="doc.membre_4">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.membre_4">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-
-                                <strong>4 membres + 3 segments</strong>
+                                <strong>4 membres + 3 segments</strong>  &#160;&#160; <t t-esc="dict(doc._fields['membre_4'].selection).get(doc.membre_4)" />
                             </p>
 
                             <p>
-                                <t t-if="doc.trophoblaste">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.trophoblaste">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Trophoblaste:</strong>
+
+                                <strong>Trophoblaste:</strong> &#160;&#160; <t t-esc="dict(doc._fields['trophoblaste'].selection).get(doc.trophoblaste)" />
                             </p>
 
                             <!-- Affichage de la conclusion -->

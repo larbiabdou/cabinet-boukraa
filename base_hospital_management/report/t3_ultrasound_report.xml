@@ -77,87 +77,37 @@
                             <br/>
                             <p>Morphologie :</p>
                             <p>
-                                <t t-if="doc.face_3">
-                                    <i class="fa fa-check-square"></i> <!-- Icône cochée -->
-                                </t>
-                                <t t-if="not doc.face_3">
-                                    <i class="fa fa-square-o"></i> <!-- Icône non cochée -->
-                                </t>
-                                &#160;&#160;
-                                <strong>FACE</strong>
+
+                                <strong>FACE</strong> &#160;&#160; <t t-esc="dict(doc._fields['face_3'].selection).get(doc.face_3)" />
                                 &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <t t-if="doc.hearth_3">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.hearth_3">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Cœur et vx</strong>
+                                <strong>Cœur et vx</strong> &#160;&#160;  <t t-esc="dict(doc._fields['hearth_3'].selection).get(doc.hearth_3)" />
+                            </p>
+                            <p>
+                                <strong>Nez-Bouche</strong> &#160;&#160; <t t-esc="dict(doc._fields['nez_bouche_3'].selection).get(doc.nez_bouche_3)" />
                             </p>
                             <p>
 
-                                <t t-if="doc.estomac_3">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.estomac_3">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Estomac</strong>
+
+                                <strong>Estomac</strong> &#160;&#160;  <t t-esc="dict(doc._fields['estomac_3'].selection).get(doc.estomac_3)" />
                                 &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <t t-if="doc.membres_3">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.membres_3">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Membres</strong>
+                                <strong>Membres</strong> &#160;&#160; <t t-esc="dict(doc._fields['membres_3'].selection).get(doc.membres_3)" />
                             </p>
                             <p>
 
-                                <t t-if="doc.rachis_3">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.rachis_3">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Rachis</strong>
+
+                                <strong>Rachis</strong> &#160;&#160;  <t t-esc="dict(doc._fields['rachis_3'].selection).get(doc.rachis_3)" />
                                 &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <t t-if="doc.reins_3">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.reins_3">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Reins et vessie</strong>
+                                <strong>Reins et vessie</strong>  &#160;&#160; <t t-esc="dict(doc._fields['reins_3'].selection).get(doc.reins_3)" />
                             </p>
                             <p>
 
-                                <t t-if="doc.liquide_amni_3">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.liquide_amni_3">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Liquide amniotique</strong>
+                                <strong>Liquide amniotique</strong> <t t-esc="dict(doc._fields['liquide_amni_3'].selection).get(doc.liquide_amni_3)" />
                                 &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <t t-if="doc.placenta_3">
-                                    <i class="fa fa-check-square"></i>
-                                </t>
-                                <t t-if="not doc.placenta_3">
-                                    <i class="fa fa-square-o"></i>
-                                </t>
-                                &#160;&#160;
-                                <strong>Placenta</strong>
+                                <strong>Placenta</strong>  &#160;&#160; <t t-esc="dict(doc._fields['placenta_3'].selection).get(doc.placenta_3)" />
                             </p>
                             <p>
                                 <strong>Présentation:</strong>

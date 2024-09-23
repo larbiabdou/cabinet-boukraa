@@ -33,30 +33,53 @@ class ObstetricFollowUp(models.Model):
     dpr = fields.Date(
         string='DPA',
         required=False)
-    ac = fields.Boolean(
+    sac_gestationnel = fields.Selection(
+        string='Sac gestationnel',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+        
+    ac = fields.Selection(
         string='AC',
-        required=False)
-    vv = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+
+    vv = fields.Selection(
         string='VV',
-        required=False)
-    lcc = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+
+    lcc_1 = fields.Float(
         string='LCC',
         required=False)
-    cn = fields.Boolean(
+
+    cn = fields.Selection(
         string='CN',
+        selection=[('fine', 'Fine'),
+                   ('épaisse', 'Epaisse'), ],
         required=False)
-    pole_cephalique = fields.Boolean(
-        string='Pole céphalique',
-        required=False)
-    membre_4 = fields.Boolean(
+    pole_cephalique = fields.Selection(
+        string='Pole cephalique',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    membre_4 = fields.Selection(
         string='4 membres + 3 segments',
-        required=False)
-    trophoblaste = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    trophoblaste = fields.Selection(
         string='Trophoblaste',
-        required=False)
-    maf = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    maf = fields.Selection(
         string='MAF',
-        required=False)
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
     conclusion_1 = fields.Text(
         string="Conclusion",
         sanitize_style=True,
@@ -84,29 +107,54 @@ class ObstetricFollowUp(models.Model):
     poids_2 = fields.Float(
         string='Poids',
         required=False)
-    face_2 = fields.Boolean(
-        string='FACE',
-        required=False)
-    estomac_2 = fields.Boolean(
+    face_2 = fields.Selection(
+        string='Face',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    nez_bouche_2 = fields.Selection(
+        string='Nez-Bouche',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    estomac_2 = fields.Selection(
         string='Estomac',
-        required=False)
-    rachis_2 = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    rachis_2 = fields.Selection(
         string='Rachis',
-        required=False)
-    liquide_amni_2 = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+
+    liquide_amni_2 = fields.Selection(
         string='Liquide amniotique',
+        selection=[('normale', 'Normale'),
+                   ('oligoamnios', 'Oligoamnios'), ('hydramnios', 'Hydramnios') ],
         required=False)
-    placenta_2 = fields.Boolean(
+
+    placenta_2 = fields.Selection(
         string='Placenta',
+        selection=[('antérieur', 'Antérieur'),
+                   ('postérieur', 'Postérieur'), ('fundique', 'Fundique'), ('bas_inséré', 'Bas inséré')],
         required=False)
-    hearth_2 = fields.Boolean(
+
+    hearth_2 = fields.Selection(
         string='Coeur et vx',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
         required=False)
-    membres_2 = fields.Boolean(
+    membres_2 = fields.Selection(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
         string='Membres', 
         required=False)
-    reins_2 = fields.Boolean(
+
+    reins_2 = fields.Selection(
         string='Reins et vessie',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
         required=False)
     presentation_2 = fields.Html(
         string="Presentation",
@@ -138,29 +186,54 @@ class ObstetricFollowUp(models.Model):
     poids_3 = fields.Float(
         string='Poids',
         required=False)
-    face_3 = fields.Boolean(
-        string='FACE',
-        required=False)
-    estomac_3 = fields.Boolean(
+    face_3 = fields.Selection(
+        string='Face',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    nez_bouche_3 = fields.Selection(
+        string='Nez-Bouche',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    estomac_3 = fields.Selection(
         string='Estomac',
-        required=False)
-    rachis_3 = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    rachis_3 = fields.Selection(
         string='Rachis',
-        required=False)
-    liquide_amni_3 = fields.Boolean(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+
+    liquide_amni_3 = fields.Selection(
         string='Liquide amniotique',
+        selection=[('normale', 'Normale'),
+                   ('oligoamnios', 'Oligoamnios'), ('hydramnios', 'Hydramnios')],
         required=False)
-    placenta_3 = fields.Boolean(
+
+    placenta_3 = fields.Selection(
         string='Placenta',
+        selection=[('antérieur', 'Antérieur'),
+                   ('postérieur', 'Postérieur'), ('fundique', 'Fundique'), ('bas_inséré', 'Bas inséré')],
         required=False)
-    hearth_3 = fields.Boolean(
+
+    hearth_3 = fields.Selection(
         string='Coeur et vx',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
         required=False)
-    membres_3 = fields.Boolean(
+    membres_3 = fields.Selection(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
         string='Membres',
         required=False)
-    reins_3 = fields.Boolean(
+
+    reins_3 = fields.Selection(
         string='Reins et vessie',
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
         required=False)
     presentation_3 = fields.Html(
         string="Presentation",
