@@ -9,9 +9,9 @@
                 <field name="name" string="Name" filter_domain="['|',('patient_seq','ilike',self),('name','ilike',self)]"/>
                 <field name="patient_seq" string="Patient Code"/>
                 <field name="gender" string="Gender"/>
-                <filter name="Diabétique" string="Diabétique" domain="[('is_diabetic', '=', True)]"/>
+                <!--<filter name="Diabétique" string="Diabétique" domain="[('is_diabetic', '=', True)]"/>
                 <filter name="HTA" string="HTA" domain="[('is_hta', '=', True)]"/>
-                <filter name="Divers" string="Divers" domain="[('is_divers', '=', True)]"/>
+                <filter name="Divers" string="Divers" domain="[('is_divers', '=', True)]"/>-->
             </search>
         </field>
     </record>
@@ -126,9 +126,7 @@
                                        options="{'horizontal': true}"
                                        class="o_address_state"/>
                             </div>
-                            <field name="is_diabetic"/>
-                            <field name="is_hta"/>
-                            <field name="is_divers"/>
+                            <field name="antecedents_ids" widget="many2many_tags"/>
                             <field name="gender"/>
                             <field name="marital_status"/>
                             <field name="is_alive" widget="radio" invisible="1"

@@ -98,4 +98,6 @@ access_laboratory_test_group,access.laboratory.test.group,model_laboratory_test_
 access_obstetric_follow_up,access.obstetric.follow.up,model_obstetric_follow_up,base.group_user,1,1,1,1
 access_medical_leave_certificate,access.medical.leave.certificate,model_medical_leave_certificate,base.group_user,1,1,1,1
 access_abdominal_ultrasound_report,access.abdominal.ultrasound.report,model_abdominal_ultrasound_report,base.group_user,1,1,1,1
+access_medical_antecedent,access.medical.antecedent,model_medical_antecedent,base.group_user,1,1,1,1
+
 

@@ -357,6 +357,9 @@ class ResPartner(models.Model):
         string='Crédit',
         compute="compute_total_credit",
         required=False)
+    antecedents_ids = fields.Many2many(
+        comodel_name='medical.antecedent',
+        string='Antécédents')
 
     obstetric_ids = fields.One2many(
         comodel_name='obstetric.follow.up',
@@ -684,3 +687,12 @@ class ResPartner(models.Model):
         """Method for returning patient data"""
         return self.sudo().search_read(
             [('is_patient', '=', True)])
+
+
+class MedicalAntecedent(models.Model):
+    _name = 'medical.antecedent'
+    _description = 'medical Antecedent'
+
+    name = fields.Char()
+
+
