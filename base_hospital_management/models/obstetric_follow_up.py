@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from dateutil.relativedelta import relativedelta
 
 
 class ObstetricFollowUp(models.Model):
@@ -9,6 +10,10 @@ class ObstetricFollowUp(models.Model):
     patient_id = fields.Many2one(
         comodel_name='res.partner',
         string='Patient',
+        required=False)
+
+    duration = fields.Integer(
+        string='Durée en mois',
         required=False)
 
     date_1st_trimester = fields.Date(
@@ -249,5 +254,11 @@ class ObstetricFollowUp(models.Model):
                    ('ended', 'Terminé'), ],
         default="current",
         required=False, )
+
+    @api.onchange('ddr')
+    def _onchange_ddr(self):
+        for record in self:
+            record.dpr = record.ddr + relativedelta(days=14) + relativedelta(months=9)
+
 
 

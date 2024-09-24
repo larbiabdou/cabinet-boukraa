@@ -28,18 +28,21 @@
                     <br/>
                     <div style="font-size:18px">
                         <p>Je soussigné, Dr. Chibane A., certifie que:</p>
-                        <p>Madame :
+                        <p>Madame : &#160;&#160;
                             <strong>
                                 <t t-esc="doc.patient_id.name"/>
                             </strong>
+                            &#160;&#160;
                         </p>
-                        <p>Présente une grossesse de :
-                            <strong>semaines</strong>
+                        <p>Présente une grossesse de : &#160;&#160; <t t-esc="doc.duration" /> &#160;&#160;
+                            <strong>Mois</strong>
                         </p>
                         <p>Sa date prévue d’accouchement est le :
+                            &#160;&#160;
                             <strong>
                                 <t t-esc="doc.dpr" t-options="{'widget': 'date', 'format': 'dd/MM/YYYY'}"/>
                             </strong>
+                            &#160;&#160;
                         </p>
                     </div>
                     <t t-call="base_hospital_management.template_footer_a5"/>

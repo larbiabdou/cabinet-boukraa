@@ -43,8 +43,11 @@
                     <group>
                         <group>
                             <field name="patient_id" domain="[('is_patient', '=', True)]" context="{'default_is_patient': True,'form_view_ref': 'base_hospital_management.res_partner_view_form'}"/>
+                            <field name="duration"/>
                             <field name="ddr"/>
                             <field name="dpr"/>
+                        </group>
+                        <group>
                             <field name="g_1"/>
                             <field name="p_1"/>
                             <field name="c_1"/>
