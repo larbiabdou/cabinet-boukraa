@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Bilan Hématologique -->
+        <record id="laboratory_test_bilan_hematologique" model="laboratory.test">
+            <field name="name">Bilan Hématologique</field>
+        </record>
+        <record id="laboratory_test_fns" model="laboratory.test">
+            <field name="name">FNS</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_ionogramme" model="laboratory.test">
+            <field name="name">Ionogramme sanguin</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_groupage" model="laboratory.test">
+            <field name="name">Groupage</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_frottis_sanguin" model="laboratory.test">
+            <field name="name">Frottis sanguin</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_electrophorese_hemoglobine" model="laboratory.test">
+            <field name="name">Electrophorèse de l’hémoglobine</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_glycemie" model="laboratory.test">
+            <field name="name">Glycémie à jeun</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_hba1c" model="laboratory.test">
+            <field name="name">HBA1C</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_vit_d" model="laboratory.test">
+            <field name="name">Vitamine D OH25</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+        <record id="laboratory_test_vit_b12" model="laboratory.test">
+            <field name="name">Vitamine B12</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        </record>
+
+        <!-- Bilan Inflammatoire -->
+        <record id="laboratory_test_bilan_inflammatoire" model="laboratory.test">
+            <field name="name">Bilan Inflammatoire</field>
+        </record>
+        <record id="laboratory_test_vs" model="laboratory.test">
+            <field name="name">VS</field>
+            <field name="parent_id" ref="laboratory_test_bilan_inflammatoire"/>
+        </record>
+        <record id="laboratory_test_crp" model="laboratory.test">
+            <field name="name">CRP</field>
+            <field name="parent_id" ref="laboratory_test_bilan_inflammatoire"/>
+        </record>
+
+        <!-- Bilan Lipidique -->
+        <record id="laboratory_test_bilan_lipidique" model="laboratory.test">
+            <field name="name">Bilan Lipidique</field>
+        </record>
+        <record id="laboratory_test_cholesterol_total" model="laboratory.test">
+            <field name="name">Cholestérol total</field>
+            <field name="parent_id" ref="laboratory_test_bilan_lipidique"/>
+        </record>
+        <record id="laboratory_test_hdl_cholesterol" model="laboratory.test">
+            <field name="name">HDL-cholestérol</field>
+            <field name="parent_id" ref="laboratory_test_bilan_lipidique"/>
+        </record>
+        <record id="laboratory_test_ldl_cholesterol" model="laboratory.test">
+            <field name="name">LDL-cholestérol</field>
+            <field name="parent_id" ref="laboratory_test_bilan_lipidique"/>
+        </record>
+        <record id="laboratory_test_triglycerides" model="laboratory.test">
+            <field name="name">Triglycérides</field>
+            <field name="parent_id" ref="laboratory_test_bilan_lipidique"/>
+        </record>
+
+        <!-- Bilan Rénal -->
+        <record id="laboratory_test_bilan_renal" model="laboratory.test">
+            <field name="name">Bilan Rénal</field>
+        </record>
+        <record id="laboratory_test_uree_sanguine" model="laboratory.test">
+            <field name="name">Urée sanguine</field>
+            <field name="parent_id" ref="laboratory_test_bilan_renal"/>
+        </record>
+        <record id="laboratory_test_creatinemie" model="laboratory.test">
+            <field name="name">Créatinémie</field>
+            <field name="parent_id" ref="laboratory_test_bilan_renal"/>
+        </record>
+        <record id="laboratory_test_clairance_creatinine" model="laboratory.test">
+            <field name="name">Clairance à la créatinine</field>
+            <field name="parent_id" ref="laboratory_test_bilan_renal"/>
+        </record>
+        <record id="laboratory_test_acr" model="laboratory.test">
+            <field name="name">ACR</field>
+            <field name="parent_id" ref="laboratory_test_bilan_renal"/>
+        </record>
+        <record id="laboratory_test_acide_urique" model="laboratory.test">
+            <field name="name">Acide urique</field>
+            <field name="parent_id" ref="laboratory_test_bilan_renal"/>
+        </record>
+
+        <!-- Bilan Hépatique -->
+        <record id="laboratory_test_bilan_hepatique" model="laboratory.test">
+            <field name="name">Bilan Hépatique</field>
+        </record>
+        <record id="laboratory_test_transaminase" model="laboratory.test">
+            <field name="name">Transaminases</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
+        </record>
+        <record id="laboratory_test_phosphatases_alcalines" model="laboratory.test">
+            <field name="name">Phosphatases alcalines</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
+        </record>
+        <record id="laboratory_test_tp_tck_inr" model="laboratory.test">
+            <field name="name">TP – TCK – INR</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
+        </record>
+        <record id="laboratory_test_fibrinogene" model="laboratory.test">
+            <field name="name">Fibrinogène</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
+        </record>
+        <record id="laboratory_test_haptoglobine" model="laboratory.test">
+            <field name="name">Haptoglobine</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
+        </record>
+        <record id="laboratory_test_fer_serique" model="laboratory.test">
+            <field name="name">Fer sérique</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
+        </record>
+        <record id="laboratory_test_ferritinemie" model="laboratory.test">
+            <field name="name">Ferritinémie</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
+        </record>
+
+        <!-- Bilan Thyroïdien -->
+        <record id="laboratory_test_bilan_thyroidien" model="laboratory.test">
+            <field name="name">Bilan Thyroïdien</field>
+        </record>
+        <record id="laboratory_test_tshus" model="laboratory.test">
+            <field name="name">TSHus</field>
+            <field name="parent_id" ref="laboratory_test_bilan_thyroidien"/>
+        </record>
+        <record id="laboratory_test_ft4" model="laboratory.test">
+            <field name="name">FT4</field>
+            <field name="parent_id" ref="laboratory_test_bilan_thyroidien"/>
+        </record>
+        <record id="laboratory_test_ft3" model="laboratory.test">
+            <field name="name">FT3</field>
+            <field name="parent_id" ref="laboratory_test_bilan_thyroidien"/>
+        </record>
+        <record id="laboratory_test_pth" model="laboratory.test">
+            <field name="name">PTH</field>
+            <field name="parent_id" ref="laboratory_test_bilan_thyroidien"/>
+        </record>
+
+        <!-- Bilan Immunologique -->
+        <record id="laboratory_test_bilan_immunologique" model="laboratory.test">
+            <field name="name">Bilan Immunologique</field>
+        </record>
+        <record id="laboratory_test_ac_anti_tpo" model="laboratory.test">
+            <field name="name">Ac anti TPO</field>
+            <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
+        </record>
+        <record id="laboratory_test_ac_anti_ccp" model="laboratory.test">
+            <field name="name">Ac anti CCP</field>
+            <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
+        </record>
+        <record id="laboratory_test_ac_anti_nucleaire" model="laboratory.test">
+            <field name="name">Ac anti-nucléaire</field>
+            <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
+        </record>
+        <record id="laboratory_test_ac_anti_transglutaminase" model="laboratory.test">
+            <field name="name">Ac anti transglutaminase</field>
+            <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
+        </record>
+        <record id="laboratory_test_ac_anti_phospholipides" model="laboratory.test">
+            <field name="name">Ac anti phospholipides (S.A.P.L)</field>
+            <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
+        </record>
+
+        <!-- Sérologie -->
+        <record id="laboratory_test_serologie" model="laboratory.test">
+            <field name="name">Sérologie</field>
+        </record>
+        <record id="laboratory_test_toxoplasmose" model="laboratory.test">
+            <field name="name">Toxoplasmose (IgG - IgM)</field>
+            <field name="parent_id" ref="laboratory_test_serologie"/>
+        </record>
+        <record id="laboratory_test_rubeole" model="laboratory.test">
+            <field name="name">Rubéole (IgG - IgM)</field>
+            <field name="parent_id" ref="laboratory_test_serologie"/>
+        </record>
+        <record id="laboratory_test_cmv" model="laboratory.test">
+            <field name="name">CMV</field>
+            <field name="parent_id" ref="laboratory_test_serologie"/>
+        </record>
+        <record id="laboratory_test_hiv" model="laboratory.test">
+            <field name="name">HIV</field>
+            <field name="parent_id" ref="laboratory_test_serologie"/>
+        </record>
+        <record id="laboratory_test_syphilis" model="laboratory.test">
+            <field name="name">Sérologie de la Syphilis</field>
+            <field name="parent_id" ref="laboratory_test_serologie"/>
+        </record>
+        <record id="laboratory_test_serologie_hepatique" model="laboratory.test">
+            <field name="name">Sérologie Hépatique (HBS – HVC - HBA)</field>
+            <field name="parent_id" ref="laboratory_test_serologie"/>
+        </record>
+        <record id="laboratory_test_brucellose" model="laboratory.test">
+            <field name="name">Sérologie de la Brucellose</field>
+            <field name="parent_id" ref="laboratory_test_serologie"/>
+        </record>
+
+        <!-- Continuez de cette manière pour les autres sections -->
+
+    </data>
+</odoo>
