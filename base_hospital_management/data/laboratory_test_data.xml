@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Bilan Hématologique -->
+        <!-- Bilan Hématologique (Test parent) -->
         <record id="laboratory_test_bilan_hematologique" model="laboratory.test">
             <field name="name">Bilan Hématologique</field>
         </record>
@@ -9,7 +9,7 @@
             <field name="name">FNS</field>
             <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
         </record>
-        <record id="laboratory_test_ionogramme" model="laboratory.test">
+        <record id="laboratory_test_ionogramme_sanguin" model="laboratory.test">
             <field name="name">Ionogramme sanguin</field>
             <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
         </record>
@@ -25,24 +25,22 @@
             <field name="name">Electrophorèse de l’hémoglobine</field>
             <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
         </record>
-        <record id="laboratory_test_glycemie" model="laboratory.test">
+
+        <!-- Tests sans parent direct (hors sous-tests) -->
+        <record id="laboratory_test_glycemie_a_jeun" model="laboratory.test">
             <field name="name">Glycémie à jeun</field>
-            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
         </record>
         <record id="laboratory_test_hba1c" model="laboratory.test">
             <field name="name">HBA1C</field>
-            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
         </record>
-        <record id="laboratory_test_vit_d" model="laboratory.test">
-            <field name="name">Vitamine D OH25</field>
-            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+        <record id="laboratory_test_vit_d_oh25" model="laboratory.test">
+            <field name="name">Vit D OH25</field>
         </record>
         <record id="laboratory_test_vit_b12" model="laboratory.test">
-            <field name="name">Vitamine B12</field>
-            <field name="parent_id" ref="laboratory_test_bilan_hematologique"/>
+            <field name="name">Vit B12</field>
         </record>
 
-        <!-- Bilan Inflammatoire -->
+        <!-- Bilan Inflammatoire (Test parent) -->
         <record id="laboratory_test_bilan_inflammatoire" model="laboratory.test">
             <field name="name">Bilan Inflammatoire</field>
         </record>
@@ -55,7 +53,7 @@
             <field name="parent_id" ref="laboratory_test_bilan_inflammatoire"/>
         </record>
 
-        <!-- Bilan Lipidique -->
+        <!-- Bilan Lipidique (Test parent) -->
         <record id="laboratory_test_bilan_lipidique" model="laboratory.test">
             <field name="name">Bilan Lipidique</field>
         </record>
@@ -76,7 +74,7 @@
             <field name="parent_id" ref="laboratory_test_bilan_lipidique"/>
         </record>
 
-        <!-- Bilan Rénal -->
+        <!-- Bilan Rénal (Test parent) -->
         <record id="laboratory_test_bilan_renal" model="laboratory.test">
             <field name="name">Bilan Rénal</field>
         </record>
@@ -101,12 +99,12 @@
             <field name="parent_id" ref="laboratory_test_bilan_renal"/>
         </record>
 
-        <!-- Bilan Hépatique -->
+        <!-- Bilan Hépatique (Test parent) -->
         <record id="laboratory_test_bilan_hepatique" model="laboratory.test">
             <field name="name">Bilan Hépatique</field>
         </record>
         <record id="laboratory_test_transaminase" model="laboratory.test">
-            <field name="name">Transaminases</field>
+            <field name="name">Transaminase</field>
             <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
         </record>
         <record id="laboratory_test_phosphatases_alcalines" model="laboratory.test">
@@ -133,8 +131,20 @@
             <field name="name">Ferritinémie</field>
             <field name="parent_id" ref="laboratory_test_bilan_hepatique"/>
         </record>
+        <record id="laboratory_test_latex" model="laboratory.test">
+            <field name="name">Latex</field>
+        </record>
+        <record id="laboratory_test_waaler_rose" model="laboratory.test">
+            <field name="name">Waaler-Rose</field>
+        </record>
+        <record id="laboratory_test_electrophorese_proteines" model="laboratory.test">
+            <field name="name">Electrophorèse des protéines</field>
+        </record>
+        <record id="laboratory_test_calcemie" model="laboratory.test">
+            <field name="name">Calcémie</field>
+        </record>
 
-        <!-- Bilan Thyroïdien -->
+        <!-- Bilan Thyroïdien (Test parent) -->
         <record id="laboratory_test_bilan_thyroidien" model="laboratory.test">
             <field name="name">Bilan Thyroïdien</field>
         </record>
@@ -155,7 +165,7 @@
             <field name="parent_id" ref="laboratory_test_bilan_thyroidien"/>
         </record>
 
-        <!-- Bilan Immunologique -->
+        <!-- Bilan Immunologique (Test parent) -->
         <record id="laboratory_test_bilan_immunologique" model="laboratory.test">
             <field name="name">Bilan Immunologique</field>
         </record>
@@ -171,13 +181,100 @@
             <field name="name">Ac anti-nucléaire</field>
             <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
         </record>
-        <record id="laboratory_test_ac_anti_transglutaminase" model="laboratory.test">
-            <field name="name">Ac anti transglutaminase</field>
+        <record id="laboratory_test_ac_anti_transglutamine" model="laboratory.test">
+            <field name="name">Ac anti transglutamine</field>
             <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
         </record>
         <record id="laboratory_test_ac_anti_phospholipides" model="laboratory.test">
             <field name="name">Ac anti phospholipides (S.A.P.L)</field>
             <field name="parent_id" ref="laboratory_test_bilan_immunologique"/>
+        </record>
+
+        <!-- Chimie des urines -->
+        <record id="laboratory_test_chimie_urines" model="laboratory.test">
+            <field name="name">Chimie des urines</field>
+        </record>
+        <record id="laboratory_test_ecbu_antibiogramme" model="laboratory.test">
+            <field name="name">ECBU + Antibiogramme</field>
+        </record>
+
+        <!-- Spermogramme -->
+        <record id="laboratory_test_spermogramme" model="laboratory.test">
+            <field name="name">Spermogramme + spermoculture</field>
+        </record>
+
+        <!-- Bilan Hormonal (Test parent) -->
+        <record id="laboratory_test_bilan_hormonal" model="laboratory.test">
+            <field name="name">Bilan Hormonal</field>
+        </record>
+        <record id="laboratory_test_fsh" model="laboratory.test">
+            <field name="name">FSH</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_lh" model="laboratory.test">
+            <field name="name">LH</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_oestradiol" model="laboratory.test">
+            <field name="name">Œstradiol</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_testosterone" model="laboratory.test">
+            <field name="name">Testostérone</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_prolactine" model="laboratory.test">
+            <field name="name">Prolactine</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_cholesterol" model="laboratory.test">
+            <field name="name">Cholestérol</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_igf1" model="laboratory.test">
+            <field name="name">IGF1</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_c1_inhibiteur" model="laboratory.test">
+            <field name="name">C1 inhibiteur</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_progestérone" model="laboratory.test">
+            <field name="name">Progestérone</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_amh" model="laboratory.test">
+            <field name="name">AMH</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+        <record id="laboratory_test_bhcg" model="laboratory.test">
+            <field name="name">BHCG</field>
+            <field name="parent_id" ref="laboratory_test_bilan_hormonal"/>
+        </record>
+
+        <!-- Marqueurs tumoraux -->
+        <record id="laboratory_test_marqueurs_tumoraux" model="laboratory.test">
+            <field name="name">Marqueurs tumoraux</field>
+        </record>
+        <record id="laboratory_test_ca_199" model="laboratory.test">
+            <field name="name">CA 19,9</field>
+            <field name="parent_id" ref="laboratory_test_marqueurs_tumoraux"/>
+        </record>
+        <record id="laboratory_test_ca_125" model="laboratory.test">
+            <field name="name">CA 125</field>
+            <field name="parent_id" ref="laboratory_test_marqueurs_tumoraux"/>
+        </record>
+        <record id="laboratory_test_ace" model="laboratory.test">
+            <field name="name">ACE</field>
+            <field name="parent_id" ref="laboratory_test_marqueurs_tumoraux"/>
+        </record>
+        <record id="laboratory_test_alpha_foetoprotéine" model="laboratory.test">
+            <field name="name">Alpha-fœtoprotéine</field>
+            <field name="parent_id" ref="laboratory_test_marqueurs_tumoraux"/>
+        </record>
+        <record id="laboratory_test_psa_t_l" model="laboratory.test">
+            <field name="name">PSA T et L</field>
+            <field name="parent_id" ref="laboratory_test_marqueurs_tumoraux"/>
         </record>
 
         <!-- Sérologie -->
@@ -204,7 +301,7 @@
             <field name="name">Sérologie de la Syphilis</field>
             <field name="parent_id" ref="laboratory_test_serologie"/>
         </record>
-        <record id="laboratory_test_serologie_hepatique" model="laboratory.test">
+        <record id="laboratory_test_hepatique" model="laboratory.test">
             <field name="name">Sérologie Hépatique (HBS – HVC - HBA)</field>
             <field name="parent_id" ref="laboratory_test_serologie"/>
         </record>
@@ -212,8 +309,5 @@
             <field name="name">Sérologie de la Brucellose</field>
             <field name="parent_id" ref="laboratory_test_serologie"/>
         </record>
-
-        <!-- Continuez de cette manière pour les autres sections -->
-
     </data>
 </odoo>
