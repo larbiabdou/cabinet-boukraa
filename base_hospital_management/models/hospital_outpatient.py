@@ -245,7 +245,7 @@ class HospitalOutpatient(models.Model):
             else:
                 record.button_consume_visible = False
 
-    @api.onchange('test_ids')
+    @api.depends('test_ids')
     def onchange_test_lab_group(self):
         for record in self:
             for test in record.test_ids:
