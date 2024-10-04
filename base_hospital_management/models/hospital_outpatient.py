@@ -254,7 +254,7 @@ class HospitalOutpatient(models.Model):
                         'test_id': test._origin.id,
                         'name': test.name,
                         'is_sub_test': False,  # Indique qu'il s'agit d'un test principal
-                        'parent_test_id': False
+                        #'parent_test_id': False
                     })]
                     for sub_test in test._origin.sub_test_ids:
                         record.test_lab_ids = [(0, 0, {

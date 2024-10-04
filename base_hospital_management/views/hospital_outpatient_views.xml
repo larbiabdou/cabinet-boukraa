@@ -106,7 +106,7 @@
                             <field name="visit_type" invisible="1"/>
 
                             <!--<field name="test_count" invisible="1"/>-->
-                            <field name="test_ids" widget="many2many_tags" readonly="not has_group_doctor" groups="base_hospital_management.base_hospital_management_group_doctor" invisible="state not in ('op')"/>
+                            <field name="test_ids" widget="many2many_tags" domain="[('parent_id', '=', False)]" readonly="not has_group_doctor" groups="base_hospital_management.base_hospital_management_group_doctor" invisible="state not in ('op')"/>
                         </group>
                     </group>
                     <notebook invisible="state not in ('op')">
