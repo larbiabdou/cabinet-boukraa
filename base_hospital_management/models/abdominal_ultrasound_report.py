@@ -17,7 +17,6 @@ class AbdominalUltrasoundReport(models.Model):
     patient_id = fields.Many2one(
         comodel_name='res.partner',
         string='Patient',
-        related='outpatient_id.patient_id',
         required=False)
 
     liver_texture = fields.Selection([

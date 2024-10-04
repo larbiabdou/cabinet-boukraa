@@ -18,6 +18,7 @@
                     <group>
                         <field name="date"/>
                         <field name="outpatient_id" invisible="1"/>
+                        <field name="patient_id"/>
                         <!-- Groupe pour le Foie -->
                         <group string="Foie">
                             <field name="liver_texture"/>

@@ -179,7 +179,7 @@ class HospitalOutpatient(models.Model):
         action = {
             'res_model': 'abdominal.ultrasound.report',
             'type': 'ir.actions.act_window',
-            'context': {'default_outpatient_id': self.id}
+            'context': {'default_outpatient_id': self.id, 'default_patient_id': self.patient_id.id}
         }
         if len(reports) == 1:
             action.update({
