@@ -130,3 +130,6 @@ class AbdominalUltrasoundReport(models.Model):
 
     # Conclusion
     conclusion = fields.Text(string='Conclusion')
+
+    def action_print_ultrasound_report(self):
+        return self.env.ref('base_hospital_management.action_abdominal_ultrasound_report').report_action(self)

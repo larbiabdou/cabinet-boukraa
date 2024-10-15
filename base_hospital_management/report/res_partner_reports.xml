@@ -26,107 +26,131 @@
     <template id="patient_prescription_report">
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
-                <t t-set="date" t-value="date"/>
-                <t t-call="base_hospital_management.template_header_a5"/>
-                <br/>
-                <div class="text-center" style="font-weight:900;font-size: 24px">
-                    ORDONNANCE
-                </div>
+                <div class="page" style="position: relative; width: 100%; height: 100%;">
 
-
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <t t-foreach="datas" t-as="line">
-                    <div style="width: 85%; margin-left:100px; margin-bottom:50px;" class="row">
-                        <div class="col-7">
-                            <span t-esc="line['medicine']"/>
-                            <span t-esc="line['forme']"/>
-                            <span t-esc="line['dosage']"/>
-                            <br/>
-                            <span t-esc="line['posologie']"/>
-
-                        </div>
-                        <div class="col-2">
-                        </div>
-                        <div class="col-3 text-center">
-                            <t t-if="line['qsp']">
-                                qsp
-                                <br/>
-                                <span t-esc="line['qsp']"/>
-                            </t>
-                        </div>
+                    <!-- Adding background image -->
+                    <div style="position: absolute; top: 250px; left: 0; width: 100%; height: 400px;
+                        background-image: url('/base_hospital_management/static/img/new-img-removebg-preview.png');
+                        background-size: cover; background-repeat: no-repeat; opacity: 0.2;">
                     </div>
 
+                    <!-- Content of the report here -->
+                    <div style="position: relative; z-index: 10;">
+                        <t t-set="date" t-value="date"/>
+                        <t t-call="base_hospital_management.template_header_a5"/>
+                        <br/>
+                        <div class="text-center" style="font-weight:900;font-size: 24px">
+                            ORDONNANCE
+                        </div>
 
-                </t>
 
-                <t t-call="base_hospital_management.template_footer_a5"/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <t t-foreach="datas" t-as="line">
+                            <div style="width: 85%; margin-left:100px; margin-bottom:50px;" class="row">
+                                <div class="col-7">
+                                    <span t-esc="line['medicine']"/>
+                                    <span t-esc="line['forme']"/>
+                                    <span t-esc="line['dosage']"/>
+                                    <br/>
+                                    <span t-esc="line['posologie']"/>
+
+                                </div>
+                                <div class="col-2">
+                                </div>
+                                <div class="col-3 text-center">
+                                    <t t-if="line['qsp']">
+                                        qsp
+                                        <br/>
+                                        <span t-esc="line['qsp']"/>
+                                    </t>
+                                </div>
+                            </div>
+
+
+                        </t>
+
+                        <t t-call="base_hospital_management.template_footer_a5"/>
+                    </div>
+                </div>
             </t>
         </t>
     </template>
     <template id="patient_test_order">
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
-                <t t-set="date" t-value="date"/>
-                <t t-call="base_hospital_management.template_header_a5"/>
-                <br/>
-                    <div class="text-center" style="font-weight:900;font-size: 24px">
-                    Demande de bilan
-                </div>
-                <br/>
-                <br/>
-                <div class="row" style="display: flex; justify-content: space-between;">
-                    <!-- Première colonne -->
-                    <div class="col-6">
-                        <t t-set="half_length" t-value="len(datas) // 2"/>
-                        <t t-foreach="datas[:half_length]" t-as="test">
-                            <div style="margin-bottom: 8px; font-size: 14px;">
-                                <t t-if="test['is_sub_test']">
-                                    <span style="padding-left: 30px;">
-                                        <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
-                                        <span t-esc="test['name']"/>
-                                    </span>
-                                    <br/>
-                                </t>
-                                <t t-else="">
-                                    <span>
-                                        <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
-                                        <span t-esc="test['name']"/>
-                                    </span>
-                                    <br/>
-                                </t>
-                            </div>
-                        </t>
+                <div class="page" style="position: relative; width: 100%; height: 100%;">
+
+                    <!-- Adding background image -->
+                    <div style="position: absolute; top: 250px; left: 0; width: 100%; height: 400px;
+                        background-image: url('/base_hospital_management/static/img/new-img-removebg-preview.png');
+                        background-size: cover; background-repeat: no-repeat; opacity: 0.2;">
                     </div>
 
-                    <!-- Deuxième colonne -->
-                    <div class="col-6">
-                        <t t-foreach="datas[half_length:]" t-as="test">
-                            <div style="margin-bottom: 8px; font-size: 14px;">
-                                <t t-if="test['is_sub_test']">
-                                    <span style="padding-left: 30px;">
-                                        <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
-                                        <span t-esc="test['name']"/>
-                                    </span>
-                                    <br/>
-                                </t>
-                                <t t-else="">
-                                    <span>
-                                        <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
-                                        <span t-esc="test['name']"/>
-                                    </span>
-                                    <br/>
+                    <!-- Content of the report here -->
+                    <div style="position: relative; z-index: 10;">
+                        <t t-set="date" t-value="date"/>
+                        <t t-call="base_hospital_management.template_header_a5"/>
+                        <br/>
+                        <div class="text-center" style="font-weight:900;font-size: 24px">
+                            Demande de bilan
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="row" style="display: flex; justify-content: space-between;">
+                            <!-- Première colonne -->
+                            <div class="col-6">
+                                <t t-set="half_length" t-value="len(datas) // 2"/>
+                                <t t-foreach="datas[:half_length]" t-as="test">
+                                    <div style="margin-bottom: 8px; font-size: 14px;">
+                                        <t t-if="test['is_sub_test']">
+                                            <span style="padding-left: 30px;">
+                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
+                                                <span t-esc="test['name']"/>
+                                            </span>
+                                            <br/>
+                                        </t>
+                                        <t t-else="">
+                                            <span>
+                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
+                                                <span t-esc="test['name']"/>
+                                            </span>
+                                            <br/>
+                                        </t>
+                                    </div>
                                 </t>
                             </div>
 
-                        </t>
+                            <!-- Deuxième colonne -->
+                            <div class="col-6">
+                                <t t-foreach="datas[half_length:]" t-as="test">
+                                    <div style="margin-bottom: 8px; font-size: 14px;">
+                                        <t t-if="test['is_sub_test']">
+                                            <span style="padding-left: 30px;">
+                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
+                                                <span t-esc="test['name']"/>
+                                            </span>
+                                            <br/>
+                                        </t>
+                                        <t t-else="">
+                                            <span>
+                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
+                                                <span t-esc="test['name']"/>
+                                            </span>
+                                            <br/>
+                                        </t>
+                                    </div>
+
+                                </t>
+                            </div>
+                        </div>
+
+                        <t t-call="base_hospital_management.template_footer_a5"/>
                     </div>
                 </div>
-
-                <t t-call="base_hospital_management.template_footer_a5"/>
             </t>
         </t>
     </template>

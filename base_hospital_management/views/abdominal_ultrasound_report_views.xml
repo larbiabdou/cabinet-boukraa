@@ -14,6 +14,9 @@
         <field name="model">abdominal.ultrasound.report</field>
         <field name="arch" type="xml">
             <form string="Compte Rendu d'Échographie Abdominale">
+                <header>
+                    <button name="action_print_ultrasound_report" type="object" string="Imprimer" class="oe_highlight"/>
+                </header>
                 <sheet>
                     <group>
                         <group>

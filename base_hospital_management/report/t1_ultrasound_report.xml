@@ -14,89 +14,108 @@
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
                 <t t-foreach="docs" t-as="doc">
-                    <div class="page">
-                        <t t-set="date" t-value="doc.date_1st_trimester.strftime('%d/%m/%Y')"/>
-                        <t t-call="base_hospital_management.template_header_a4"/>
-                        <br/>
+                    <div class="page" style="position: relative; width: 100%; height: 100%;">
 
-                        <div class="text-center" style="font-weight:900;font-size: 24px">
-                            COMPTE RENDU D’ECHOGRAPHIE DU T1
+                        <!-- Adding background image -->
+                        <div style="position: absolute; top: 300px; left: 0; width: 100%; height: 700px;
+                        background-image: url('/base_hospital_management/static/img/new-img-removebg-preview.png');
+                        background-size: cover; background-repeat: no-repeat; opacity: 0.2;">
                         </div>
 
+                        <!-- Content of the report here -->
+                        <div style="position: relative; z-index: 10;">
+                            <t t-set="date" t-value="doc.date_1st_trimester.strftime('%d/%m/%Y')"/>
+                            <t t-call="base_hospital_management.template_header_a4"/>
+                            <br/>
 
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <div style="font-size:16px">
+                            <div class="text-center" style="font-weight:900;font-size: 24px">
+                                COMPTE RENDU D’ECHOGRAPHIE DU T1
+                            </div>
 
-                            <!-- Affichage des informations G et P -->
-                            <p>
-                                <strong>G :</strong>
-                                <t t-esc="doc.g_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
-                                <strong>P :</strong>
-                                <t t-esc="doc.p_1"/>
-                            </p>
-                            <p>
-                                <strong>C :</strong>
-                                <t t-esc="doc.c_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
-                                <strong>A :</strong>
-                                <t t-esc="doc.a_1"/>
-                            </p>
 
-                            <!-- Affichage des dates DDR et DPR -->
-                            <p>
-                                <strong>DDR:</strong>
-                                <t t-esc="doc.ddr.strftime('%d/%m/%Y') if doc.ddr else ''"/> &#160;&#160;&#160;&#160;&#160;&#160;
-                                <strong>DPA:</strong>
-                                <t t-esc="doc.dpr.strftime('%d/%m/%Y') if doc.dpr else ''"/>
-                            </p>
-                            <p></p>
-                            <p><strong>Sac gestationnel :</strong> &#160;&#160; <t t-esc="dict(doc._fields['sac_gestationnel'].selection).get(doc.sac_gestationnel)" />
-                            </p>
-                            <!-- Affichage des champs Boolean avec cases cochées ou non -->
-                            <p>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div style="font-size:16px">
 
-                                <strong>AC</strong> &#160;&#160;<t t-esc="dict(doc._fields['ac'].selection).get(doc.ac)" />
-                                &#160;&#160;&#160;&#160;&#160;&#160;
+                                <!-- Affichage des informations G et P -->
+                                <p>
+                                    <strong>G :</strong>
+                                    <t t-esc="doc.g_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                    <strong>P :</strong>
+                                    <t t-esc="doc.p_1"/>
+                                </p>
+                                <p>
+                                    <strong>C :</strong>
+                                    <t t-esc="doc.c_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                    <strong>A :</strong>
+                                    <t t-esc="doc.a_1"/>
+                                </p>
 
-                                <strong>MAF</strong> &#160;&#160; <t t-esc="dict(doc._fields['maf'].selection).get(doc.maf)" />
-                            </p>
-                            <p>
+                                <!-- Affichage des dates DDR et DPR -->
+                                <p>
+                                    <strong>DDR:</strong>
+                                    <t t-esc="doc.ddr.strftime('%d/%m/%Y') if doc.ddr else ''"/> &#160;&#160;&#160;&#160;&#160;&#160;
+                                    <strong>DPA:</strong>
+                                    <t t-esc="doc.dpr.strftime('%d/%m/%Y') if doc.dpr else ''"/>
+                                </p>
+                                <p></p>
+                                <p>
+                                    <strong>Sac gestationnel :</strong> &#160;&#160;
+                                    <t t-esc="dict(doc._fields['sac_gestationnel'].selection).get(doc.sac_gestationnel)"/>
+                                </p>
+                                <!-- Affichage des champs Boolean avec cases cochées ou non -->
+                                <p>
 
-                                <strong>VV</strong> &#160;&#160; <t t-esc="dict(doc._fields['vv'].selection).get(doc.vv)" />
-                                &#160;&#160;&#160;&#160;&#160;&#160;
+                                    <strong>AC</strong> &#160;&#160;<t t-esc="dict(doc._fields['ac'].selection).get(doc.ac)"/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <strong>LCC</strong> &#160;&#160; <t t-esc="doc.lcc_1"/>
-                            </p>
+                                    <strong>MAF</strong> &#160;&#160;
+                                    <t t-esc="dict(doc._fields['maf'].selection).get(doc.maf)"/>
+                                </p>
+                                <p>
 
-                            <p>
+                                    <strong>VV</strong> &#160;&#160;
+                                    <t t-esc="dict(doc._fields['vv'].selection).get(doc.vv)"/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                <strong>CN</strong> &#160;&#160; <t t-esc="dict(doc._fields['cn'].selection).get(doc.cn)" />
-                            </p>
+                                    <strong>LCC</strong> &#160;&#160;
+                                    <t t-esc="doc.lcc_1"/>
+                                </p>
 
-                            <p>
-                                <strong>Pole céphaliqu</strong> &#160;&#160;  <t t-esc="dict(doc._fields['pole_cephalique'].selection).get(doc.pole_cephalique)" />
-                            </p>
+                                <p>
 
-                            <p>
-                                <strong>4 membres + 3 segments</strong>  &#160;&#160; <t t-esc="dict(doc._fields['membre_4'].selection).get(doc.membre_4)" />
-                            </p>
+                                    <strong>CN</strong> &#160;&#160;
+                                    <t t-esc="dict(doc._fields['cn'].selection).get(doc.cn)"/>
+                                </p>
 
-                            <p>
+                                <p>
+                                    <strong>Pole céphaliqu</strong> &#160;&#160;
+                                    <t t-esc="dict(doc._fields['pole_cephalique'].selection).get(doc.pole_cephalique)"/>
+                                </p>
 
-                                <strong>Trophoblaste:</strong> &#160;&#160; <t t-esc="dict(doc._fields['trophoblaste'].selection).get(doc.trophoblaste)" />
-                            </p>
+                                <p>
+                                    <strong>4 membres + 3 segments</strong> &#160;&#160;
+                                    <t t-esc="dict(doc._fields['membre_4'].selection).get(doc.membre_4)"/>
+                                </p>
 
-                            <!-- Affichage de la conclusion -->
-                            <p>
-                                <strong>Conclusion:</strong>
-                                <br/>
-                                <t t-esc="doc.conclusion_1"/>
-                            </p>
+                                <p>
+
+                                    <strong>Trophoblaste:</strong> &#160;&#160;
+                                    <t t-esc="dict(doc._fields['trophoblaste'].selection).get(doc.trophoblaste)"/>
+                                </p>
+
+                                <!-- Affichage de la conclusion -->
+                                <p>
+                                    <strong>Conclusion:</strong>
+                                    <br/>
+                                    <t t-esc="doc.conclusion_1"/>
+                                </p>
+                            </div>
+                            <t t-call="base_hospital_management.template_footer_a4"/>
                         </div>
-                        <t t-call="base_hospital_management.template_footer_a4"/>
                     </div>
                 </t>
             </t>

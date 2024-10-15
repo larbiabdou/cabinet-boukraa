@@ -23,3 +23,8 @@ class MedicalLeaveCertificate(models.Model):
                    ('extended', 'Prolongation'), ],
         default='leave',
         required=True, )
+
+    def action_print_leave_certificate(self):
+        return self.env.ref('base_hospital_management.action_medical_leave_certificate').report_action(self)
+
+
