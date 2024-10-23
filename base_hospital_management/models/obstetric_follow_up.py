@@ -258,7 +258,9 @@ class ObstetricFollowUp(models.Model):
     @api.onchange('ddr')
     def _onchange_ddr(self):
         for record in self:
-            record.dpr = record.ddr + relativedelta(days=14) + relativedelta(months=9)
+            record.dpr = False
+            if record.ddr:
+                record.dpr = record.ddr + relativedelta(days=14) + relativedelta(months=9)
 
 
 

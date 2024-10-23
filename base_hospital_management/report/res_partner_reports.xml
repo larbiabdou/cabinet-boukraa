@@ -50,7 +50,7 @@
                         <br/>
                         <br/>
                         <t t-foreach="datas" t-as="line">
-                            <div style="width: 85%; margin-left:100px; margin-bottom:50px;" class="row">
+                            <div style="width: 95%; margin-left:10px; margin-bottom:50px;" class="row">
                                 <div class="col-7">
                                     <span t-esc="line['medicine']"/>
                                     <span t-esc="line['forme']"/>

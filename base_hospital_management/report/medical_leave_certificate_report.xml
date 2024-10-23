@@ -25,6 +25,9 @@
                         <!-- Content of the report here -->
                         <div style="position: relative; z-index: 10;">
                             <t t-set="date" t-value="doc.date.strftime('%d/%m/%Y')"/>
+                            <t t-set="firstname" t-value="doc.patient_id.firstname"/>
+                            <t t-set="lastname" t-value="doc.patient_id.lastname"/>
+                            <t t-set="age" t-value="doc.patient_id.age"/>
                             <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">

@@ -69,12 +69,12 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                       
-                        <button name="action_generate_patient_card"
+                       <!-- <button name="action_generate_patient_card"
                                 type="object"
                                 class="oe_stat_button"
                                 invisible="is_alive == 'dead'"
                                 icon="fa-download"
-                                string="Patient Card"/>
+                                string="Patient Card"/>-->
                         <button class="oe_stat_button" type="object"
                                 name="alive_status"
                                 invisible = "['|',(is_alive == 'dead'),(name == False)]"
