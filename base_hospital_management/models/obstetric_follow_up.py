@@ -76,7 +76,7 @@ class ObstetricFollowUp(models.Model):
                    ('non_vue', 'Non vue'), ],
         required=False, )
     trophoblaste = fields.Selection(
-        string='Trophoblaste',
+        string='Trophoblaste annulaire',
         selection=[('vu', 'Vu'),
                    ('non_vue', 'Non vue'), ],
         required=False, )
@@ -97,12 +97,16 @@ class ObstetricFollowUp(models.Model):
         string='Grossesse',
         required=False)
 
-    ac_2 = fields.Char(
+    ac_2 = fields.Selection(
         string='AC',
-        required=False)
-    maf_2 = fields.Char(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    maf_2 = fields.Selection(
         string='MAF',
-        required=False)
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
     bip_2 = fields.Char(
         string='BIP',
         required=False)
@@ -176,12 +180,16 @@ class ObstetricFollowUp(models.Model):
         string='Grossesse',
         required=False)
 
-    ac_3 = fields.Char(
+    ac_3 = fields.Selection(
         string='AC',
-        required=False)
-    maf_3 = fields.Char(
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+    maf_3 = fields.Selection(
         string='MAF',
-        required=False)
+        selection=[('vu', 'Vu'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
     bip_3 = fields.Char(
         string='BIP',
         required=False)

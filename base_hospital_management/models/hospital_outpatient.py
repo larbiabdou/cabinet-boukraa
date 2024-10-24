@@ -168,6 +168,23 @@ class HospitalOutpatient(models.Model):
         compute='compute_count_abdominal_report',
         required=False)
 
+    ta = fields.Char(
+        string='TA',
+        required=False)
+    poids = fields.Char(
+        string='Poids',
+        required=False)
+    glycemie = fields.Char(
+        string='Glycemie',
+        required=False)
+
+    sao2 = fields.Char(
+        string='SAO2',
+        required=False)
+
+    taille = fields.Char(
+        string='Taille',
+        required=False)
     def compute_count_abdominal_report(self):
         for record in self:
             record.count_abdominal_report = self.env['abdominal.ultrasound.report'].search_count([('outpatient_id', '=', record.id)])
@@ -223,20 +240,6 @@ class HospitalOutpatient(models.Model):
                 record.color = 10
             elif record.visit_type == 'soins':
                 record.color = 6
-
-    # @api.depends('visit_type_id')
-    # def compute_visit_type(self):
-    #     for record in self:
-    #         if record.visit_type_id == self.env.ref("base_hospital_management.visit_type_visite"):
-    #             record.visit_type = 'visit'
-    #         elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_hijama"):
-    #             record.visit_type = 'hijama'
-    #         elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_visit_acupuncture"):
-    #             record.visit_type = 'acupuncture'
-    #         elif record.visit_type_id == self.env.ref("base_hospital_management.visit_type_soins"):
-    #             record.visit_type = 'soins'
-    #         else:
-    #             record.visit_type = ''
 
     def compute_button_consume_visible(self):
         for record in self:

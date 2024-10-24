@@ -29,7 +29,7 @@
                             <t t-set="lastname" t-value="doc.patient_id.lastname"/>
                             <t t-set="age" t-value="doc.patient_id.age"/>
                             <t t-set="date" t-value="datetime.datetime.now().strftime('%d/%m/%Y')"/>
-                            <t t-call="base_hospital_management.template_header_a4"/>
+                            <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
                                 CERTIFICAT MÉDICAL DE GROSSESSE

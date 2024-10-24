@@ -107,6 +107,11 @@
 
                             <!--<field name="test_count" invisible="1"/>-->
                             <field name="test_ids" widget="many2many_tags" domain="[('parent_id', '=', False)]" readonly="not has_group_doctor" groups="base_hospital_management.base_hospital_management_group_doctor" invisible="state not in ('op')"/>
+                            <field name="ta"/>
+                            <field name="poids"/>
+                            <field name="glycemie"/>
+                            <field name="sao2"/>
+                            <field name="taille"/>
                         </group>
                     </group>
                     <notebook invisible="state not in ('op')">
