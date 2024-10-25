@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="patient_id"/>
+                <field name="date"/>
             </tree>
         </field>
     </record>
@@ -22,7 +23,8 @@
                         <group>
                             <field name="date"/>
                             <field name="outpatient_id" invisible="1"/>
-                            <field name="patient_id"/>
+                            <field name="patient_id" required="1" domain="[('is_patient', '=', True)]" context="{'default_is_patient': True,'form_view_ref': 'base_hospital_management.res_partner_view_form'}"/>
+                            <field name="gender" required="1"/>
                         </group>
 
                         <!-- Groupe pour le Foie -->
@@ -36,6 +38,23 @@
                         <group string="Vésicule Biliaire (VB)">
                             <field name="gallbladder_wall"/>
                             <field name="gallbladder_content"/>
+
+                        </group>
+                        <!-- Groupe pour les Voies Biliaires Intra-Hépatiques (VBIH) -->
+                        <group string="VBIH">
+                            <field name="vbih"/>
+
+                        </group>
+                        <group string="Rate">
+                            <field name="spleen_texture"/>
+                            <field name="spleen_size"/>
+
+                        </group>
+
+                        <!-- Groupe pour le Pancréas -->
+                        <group string="Pancréas">
+                            <field name="pancreas_texture"/>
+                            <field name="wirsung_canal"/>
 
                         </group>
                         <group string="Rein Droit">
@@ -56,30 +75,26 @@
                             <field name="left_kidney_hydronephrosis"/>
 
                         </group>
-
-                        <!-- Groupe pour les Voies Biliaires Intra-Hépatiques (VBIH) -->
-                        <group string="VBIH">
-                            <field name="vbih"/>
-
-                        </group>
-
-                        <!-- Groupe pour le Rein Droit -->
-
-                        <!-- Groupe pour la Rate -->
-                        <group string="Rate">
-                            <field name="spleen_texture"/>
-                            <field name="spleen_size"/>
+                        <group string="Vessie">
+                            <field name="vessie_paroie"/>
+                            <field name="vessie_contenu"/>
 
                         </group>
-
-                        <!-- Groupe pour le Pancréas -->
-                        <group string="Pancréas">
-                            <field name="pancreas_texture"/>
-                            <field name="wirsung_canal"/>
-
+                        <group string="Echographie pelvienne">
+                            <label for="prostate_taille" invisible="gender != 'male'"/>
+                                <div invisible="gender != 'male'">
+                                    <field name="prostate_taille" nolabel="1" class="oe_inline" invisible="gender != 'male'"/>
+                                    <field name="prostate_contour" nolabel="1" class="oe_inline" invisible="gender != 'male'"/>
+                                </div>
+                            <field name="vesicule_seminale" invisible="gender != 'male'"/>
+                            <field name="uterus" invisible="gender != 'female'"/>
+                            <label for="endometre_fine" invisible="gender != 'female'"/>
+                                <div invisible="gender != 'female'">
+                                    <field name="endometre_fine" nolabel="1" class="oe_inline" invisible="gender != 'female'"/>
+                                    <field name="endometre_heter" nolabel="1" class="oe_inline" invisible="gender != 'female'"/>
+                                </div>
+                            <field name="annexes" invisible="gender != 'female'"/>
                         </group>
-
-                        <!-- Groupe pour la Collection Liquidienne Intra-Abdominale -->
                         <group string="Collection Liquidienne Intra-Abdominale">
                             <field name="intra_abdominal_fluid_collection"/>
 

@@ -165,10 +165,10 @@ class ObstetricFollowUp(models.Model):
         selection=[('vu', 'Vu'),
                    ('non_vue', 'Non vue'), ],
         required=False)
-    presentation_2 = fields.Html(
+    presentation_2 = fields.Text(
         string="Presentation",
         required=False)
-    conclusion_2 = fields.Html(
+    conclusion_2 = fields.Text(
         string="Conclusion",
         sanitize_style=True,
         required=False)
@@ -248,10 +248,10 @@ class ObstetricFollowUp(models.Model):
         selection=[('vu', 'Vu'),
                    ('non_vue', 'Non vue'), ],
         required=False)
-    presentation_3 = fields.Html(
+    presentation_3 = fields.Text(
         string="Presentation",
         required=False)
-    conclusion_3 = fields.Html(
+    conclusion_3 = fields.Text(
         string="Conclusion",
         sanitize_style=True,
         required=False)

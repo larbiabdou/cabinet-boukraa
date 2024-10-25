@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class AbdominalUltrasoundReport(models.Model):
@@ -19,6 +19,63 @@ class AbdominalUltrasoundReport(models.Model):
         string='Patient',
         required=False)
 
+    @api.onchange('patient_id')
+    def onchange_patient_id(self):
+        for record in self:
+            if record.patient_id and record.patient_id.gender:
+                record.gender = record.patient_id.gender
+#####################
+    gender = fields.Selection(selection=[
+        ('male', 'Male'), ('female', 'Femelle')
+    ], string='Sexe', help='Gender of the patient')
+
+    vessie_paroie = fields.Selection(
+        string='Paroie',
+        selection=[('fine', 'Fine'),
+                   ('epaisse', 'Epaisse'), ],
+        required=False, )
+
+    vessie_contenu = fields.Selection(
+        string='Contenu',
+        selection=[('transonore', 'Transonore'),
+                   ('trouble', 'Trouble'), ],
+        required=False, )
+    prostate_taille = fields.Char(
+        string='Prostate',
+        required=False)
+    prostate_contour = fields.Selection(
+        string='Contour',
+        selection=[('Régulier', 'Régulier'),
+                   ('Irrégulier', 'Irrégulier'), ],
+        required=False, )
+    vesicule_seminale = fields.Selection(
+        string='Vesicule séminale',
+        selection=[('vue', 'Vue'),
+                   ('non_vue', 'Non vue'), ],
+        required=False, )
+
+    uterus = fields.Selection(
+        string='Uterus',
+        selection=[('Homogène', 'Homogène'),
+                   ('Hétérogène', 'Hétérogène'), ],
+        required=False, )
+    endometre_fine = fields.Selection(
+        string='Endomètre',
+        selection=[('Fin', 'Fin'),
+                   ('Epaisse', 'Epaisse')],
+        required=False, )
+
+    endometre_heter = fields.Selection(
+        string='Uterus',
+        selection=[('Echogène', 'Echogène'),
+                   ('Hétérogène', 'Hétérogène'), ],
+        required=False, )
+
+    annexes = fields.Char(
+        string='Annexes',
+        required=False)
+
+    #######################
     liver_texture = fields.Selection([
         ('homogeneous', 'Homogène'),
         ('heterogeneous', 'Hétérogène')

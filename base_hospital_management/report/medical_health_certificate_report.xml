@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_medical_health_certificate_report" model="ir.actions.report">
+        <field name="name">Certificat de bonne santé</field>
+        <field name="model">medical.health.certificate</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">base_hospital_management.report_medical_health_certificate</field>
+        <field name="report_file">base_hospital_management.report_medical_health_certificate</field>
+        <field name="binding_model_id" ref="model_medical_health_certificate"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base_hospital_management.paperformat_medical_prescription"/>
+    </record>
+    <template id="report_medical_health_certificate">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="position: relative; width: 100%; height: 100%;">
+
+                        <!-- Adding background image -->
+                        <div style="position: absolute; top: 250px; left: 0; width: 100%; height: 400px;
+                        background-image: url('/base_hospital_management/static/img/new-img-removebg-preview.png');
+                        background-size: cover; background-repeat: no-repeat; opacity: 0.2;">
+                        </div>
+
+                        <!-- Content of the report here -->
+                        <div style="position: relative; z-index: 10;">
+                            <t t-set="date" t-value="doc.date.strftime('%d/%m/%Y')"/>
+                            <t t-set="firstname" t-value="doc.firstname"/>
+                            <t t-set="lastname" t-value="doc.lastname"/>
+                            <t t-set="age" t-value="doc.patient_age"/>
+                            <t t-call="base_hospital_management.template_header_a5"/>
+                            <br/>
+                            <div class="text-center" style="font-weight:900;font-size: 24px">
+                                Certificat Médical de Bonne Santé
+                            </div>
+                            <br/>
+                            <br/>
+                            <div style="font-size:16px; border-bottom: 1px solid black">
+                                <p>
+                                    &#160;&#160;&#160; Je soussigne , Docteur en medecine , certifie que l’etat de sante de Mr (Mme , Mlle )
+                                    <span t-field="doc.lastname"/>
+                                    <span t-field="doc.firstname"/>
+                                    age (e)
+                                    <span t-field="doc.patient_age"/>
+                                    ans
+                                    <br/> &#160;&#160;&#160;Adresse
+                                    <span t-field="doc.patient_address"/>
+                                    <br/>
+                                    &#160;&#160;&#160; Le / la patient (e) est en bonne santephysique ne souffre pas de graves maladies chroniques ou veneriennes, de tuberculose ni d’autres maladies mortelles.
+                                </p>
+                                <br/>
+                            <br/>
+                            </div>
+
+                            <br/>
+                            <div class="text-center" style="font-weight:900;font-size: 24px">
+                                Certificat medicale de PNEUMO-PHTYSIO
+                            </div>
+                            <br/>
+                            <br/>
+                            <div style="font-size:16px">
+                                <p>
+                                    &#160;&#160;&#160; Je soussigne , Docteur en medecine , certifie avoir examine Le (La)nomme (e)
+                                    <span t-field="doc.lastname"/>
+                                    <span t-field="doc.firstname"/>
+                                    age (e)
+                                    <span t-field="doc.patient_age"/>
+                                    ans
+                                    <br/> &#160;&#160;&#160; Adresse
+                                    <span t-field="doc.patient_address"/>
+                                    <br/> &#160;&#160;&#160;
+                                    Et je declare que l’interesse (e) est cliniquement *Indemme
+                                </p>
+                                <br/>
+                                <br/>
+                                <p class="text-end">Signature: &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>
+                            </div>
+
+                            <t t-call="base_hospital_management.template_footer_a5"/>
+                        </div>
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

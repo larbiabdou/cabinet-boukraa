@@ -83,6 +83,7 @@
         'views/abdominal_ultrasound_report_views.xml',
         'views/obstetric_follow_up_views.xml',
         'views/medical_leave_certificate_views.xml',
+        'views/medical_health_certificate_views.xml',
         'report/pregnancy_certificate_report.xml',
         'report/medical_leave_certificate_report.xml',
         'report/t1_ultrasound_report.xml',
@@ -92,6 +93,7 @@
         #'views/medicament_form_views.xml',
         #'views/medicament_laboratoire_views.xml',
         "report/res_partner_reports.xml",
+        'report/medical_health_certificate_report.xml',
     ],
     "demo": ["demo/hr_job_demo.xml"],
     "assets": {

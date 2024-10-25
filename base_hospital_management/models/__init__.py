@@ -64,3 +64,4 @@ from . import hospital_medecine
 #from . import hospital_laboratoire
 from . import medical_care
 from . import abdominal_ultrasound_report
+from . import medical_health_certificate

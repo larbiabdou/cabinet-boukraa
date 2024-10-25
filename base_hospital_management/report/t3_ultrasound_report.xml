@@ -24,119 +24,118 @@
 
                         <!-- Content of the report here -->
                         <div style="position: relative; z-index: 10;">
-                           <t t-set="firstname" t-value="doc.patient_id.firstname"/>
+                            <t t-set="firstname" t-value="doc.patient_id.firstname"/>
                             <t t-set="lastname" t-value="doc.patient_id.lastname"/>
                             <t t-set="age" t-value="doc.patient_id.age"/>
                             <t t-set="date" t-if="doc.date_3nd_trimester" t-value="doc.date_3nd_trimester.strftime('%d/%m/%Y')"/>
                             <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>
-
                             <div class="text-center" style="font-weight:900;font-size: 24px">
                                 COMPTE RENDU D’ECHOGRAPHIE DU T3
                             </div>
                             <br/>
+                            <br/>
                             <div style="font-size:16px">
+                                <div class="row col-12" style="margin-bottom: 10px">
+                                    <div class="col-6">
+                                        <p>
+                                            <strong>G :</strong>
+                                            <t t-esc="doc.g_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                            <strong>P :</strong>
+                                            <t t-esc="doc.p_1"/>
+                                            <br/>
+                                            <strong>C :</strong>
+                                            <span t-field="doc.c_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                            <strong>A :</strong>
+                                            <span t-field="doc.a_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                        </p>
 
-                                <!-- Affichage des informations G et P -->
-                                <p>
-                                    <strong>G :</strong>
-                                    <t t-esc="doc.g_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
-                                    <strong>P :</strong>
-                                    <t t-esc="doc.p_1"/>
-                                    <br/>
-                                    <strong>C :</strong>
-                                    <span t-field="doc.c_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
-                                    <strong>A :</strong>
-                                    <span t-field="doc.a_1"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                        <!-- Affichage des dates DDR et DPR -->
+                                        <p>
+                                            <strong>DDR:</strong>
+                                            <t t-esc="doc.ddr.strftime('%d/%m/%Y') if doc.ddr else ''"/> &#160;&#160;&#160;&#160;&#160;&#160;
+                                            <strong>DPA:</strong>
+                                            <t t-esc="doc.dpr.strftime('%d/%m/%Y') if doc.dpr else ''"/>
+                                        </p>
+                                        <p>
+                                            <strong>Grossesse :</strong>
+                                            <span t-field="doc.grossesse_3"/>
+                                        </p>
+                                        <br/>
+                                        <p>Biométrie :</p>
+                                        <p>
+                                            <strong>AC</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['ac_3'].selection).get(doc.ac_3)"/>
+                                            &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                </p>
+                                            <strong>MAF</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['maf_3'].selection).get(doc.maf_3)"/>
+                                        </p>
+                                        <p>
+                                            <strong>BIP:</strong>
+                                            <span t-field="doc.bip_3"/> &#160;&#160;&#160; &#160;&#160;&#160;
+                                            <strong>FEMUR:</strong>
+                                            <span t-field="doc.femur_3"/>
+                                        </p>
+                                        <p>
+                                            <strong>POIDS:</strong>
+                                            <span t-field="doc.poids_3"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Morphologie :</p>
+                                         <p>
 
-                                <!-- Affichage des dates DDR et DPR -->
-                                <p>
-                                    <strong>DDR:</strong>
-                                    <t t-esc="doc.ddr.strftime('%d/%m/%Y') if doc.ddr else ''"/> &#160;&#160;&#160;&#160;&#160;&#160;
-                                    <strong>DPA:</strong>
-                                    <t t-esc="doc.dpr.strftime('%d/%m/%Y') if doc.dpr else ''"/>
-                                </p>
-                                <p>
-                                    <strong>Grossesse :</strong>
-                                    <span t-field="doc.grossesse_3"/>
-                                </p>
-                                <br/>
-                                <p>Biométrie :</p>
-                                <p>
-                                    <strong>AC</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['ac_3'].selection).get(doc.ac_3)"/>
-                                    &#160;&#160;&#160;&#160;&#160;&#160;
+                                            <strong>FACE</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['face_3'].selection).get(doc.face_3)"/>
+                                            &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                    <strong>MAF</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['maf_3'].selection).get(doc.maf_3)"/>
-                                </p>
-                                <p>
-                                    <strong>BIP:</strong>
-                                    <span t-field="doc.bip_3"/> &#160;&#160;&#160; &#160;&#160;&#160;
-                                    <strong>FEMUR:</strong>
-                                    <span t-field="doc.femur_3"/>
-                                </p>
-                                <p>
-                                    <strong>POIDS:</strong>
-                                    <span t-field="doc.poids_3"/>
-                                </p>
-                                <!-- Affichage des champs Boolean avec cases cochées ou non -->
-                                <br/>
-                                <p>Morphologie :</p>
-                                <p>
-
-                                    <strong>FACE</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['face_3'].selection).get(doc.face_3)"/>
-                                    &#160;&#160;&#160;&#160;&#160;&#160;
-
-                                    <strong>Cœur et vx</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['hearth_3'].selection).get(doc.hearth_3)"/>
-                                </p>
-                                <p>
-                                    <strong>Nez-Bouche</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['nez_bouche_3'].selection).get(doc.nez_bouche_3)"/>
-                                </p>
-                                <p>
-
-
-                                    <strong>Estomac</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['estomac_3'].selection).get(doc.estomac_3)"/>
-                                    &#160;&#160;&#160;&#160;&#160;&#160;
-
-                                    <strong>Membres</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['membres_3'].selection).get(doc.membres_3)"/>
-                                </p>
-                                <p>
+                                            <strong>Cœur et vx</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['hearth_3'].selection).get(doc.hearth_3)"/>
+                                        </p>
+                                        <p>
+                                            <strong>Nez-Bouche</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['nez_bouche_3'].selection).get(doc.nez_bouche_3)"/>
+                                        </p>
+                                        <p>
 
 
-                                    <strong>Rachis</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['rachis_3'].selection).get(doc.rachis_3)"/>
-                                    &#160;&#160;&#160;&#160;&#160;&#160;
+                                            <strong>Estomac</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['estomac_3'].selection).get(doc.estomac_3)"/>
+                                            &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                    <strong>Reins et vessie</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['reins_3'].selection).get(doc.reins_3)"/>
-                                </p>
-                                <p>
+                                            <strong>Membres</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['membres_3'].selection).get(doc.membres_3)"/>
+                                        </p>
+                                        <p>
 
-                                    <strong>Liquide amniotique</strong>
-                                    <t t-esc="dict(doc._fields['liquide_amni_3'].selection).get(doc.liquide_amni_3)"/>
-                                    &#160;&#160;&#160;&#160;&#160;&#160;
 
-                                    <strong>Placenta</strong> &#160;&#160;
-                                    <t t-esc="dict(doc._fields['placenta_3'].selection).get(doc.placenta_3)"/>
-                                </p>
+                                            <strong>Rachis</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['rachis_3'].selection).get(doc.rachis_3)"/>
+                                            &#160;&#160;&#160;&#160;&#160;&#160;
+
+                                            <strong>Reins et vessie</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['reins_3'].selection).get(doc.reins_3)"/>
+                                        </p>
+                                        <p>
+
+                                            <strong>Liquide amniotique</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['liquide_amni_3'].selection).get(doc.liquide_amni_3)"/>
+                                            &#160;&#160;&#160;&#160;&#160;&#160;
+
+                                            <strong>Placenta</strong> &#160;&#160;
+                                            <t t-esc="dict(doc._fields['placenta_3'].selection).get(doc.placenta_3)"/>
+                                        </p>
+                                    </div>
+                                </div>
+
                                 <p>
                                     <strong>Présentation:</strong>
-                                    <br/>
                                     <t t-esc="doc.presentation_3"/>
                                 </p>
 
-                                <!-- Affichage de la conclusion -->
                                 <p>
                                     <strong>Conclusion:</strong>
-                                    <br/>
                                     <t t-esc="doc.conclusion_3"/>
                                 </p>
                             </div>

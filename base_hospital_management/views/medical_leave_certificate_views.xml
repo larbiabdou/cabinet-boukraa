@@ -18,9 +18,9 @@
     <field name="model">medical.leave.certificate</field>
     <field name="arch" type="xml">
         <form string="Certificat d'arrêt de travail">
-               <header>
-                    <button name="action_print_leave_certificate" type="object" string="Imprimer" class="oe_highlight"/>
-                </header>
+            <header>
+                <button name="action_print_leave_certificate" type="object" string="Imprimer" class="oe_highlight"/>
+            </header>
             <sheet>
                 <group>
                     <group>

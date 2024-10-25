@@ -1,0 +1,55 @@
+<odoo>
+
+    <!-- Action pour la liste des certificats -->
+    <record id="action_medical_health_certificate" model="ir.actions.act_window">
+        <field name="name">Certificats Médicaux</field>
+        <field name="res_model">medical.health.certificate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Vue Liste -->
+    <record id="view_medical_health_certificate_tree" model="ir.ui.view">
+        <field name="name">medical.health.certificate.tree</field>
+        <field name="model">medical.health.certificate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="lastname"/>
+                <field name="firstname"/>
+                <field name="patient_age"/>
+                <field name="patient_address"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue Formulaire -->
+    <record id="view_medical_health_certificate_form" model="ir.ui.view">
+        <field name="name">medical.health.certificate.form</field>
+        <field name="model">medical.health.certificate</field>
+        <field name="arch" type="xml">
+            <form>
+                 <header>
+                    <button name="action_print_health_certificate" type="object" string="Imprimer" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="patient_id" required="1" domain="[('is_patient', '=', True)]" context="{'default_is_patient': True,'form_view_ref': 'base_hospital_management.res_partner_view_form'}"/>
+                            <field name="lastname"/>
+                            <field name="firstname"/>
+                        </group>
+                        <group>
+                            <field name="patient_age"/>
+                            <field name="patient_address"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Liaison de la vue et action au menu -->
+    <menuitem id="menu_medical_health_certificate" name="Certificats de bonne santé" parent="base_hospital_management.certificate_menu" action="action_medical_health_certificate"/>
+</odoo>

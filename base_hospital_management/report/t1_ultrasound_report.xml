@@ -60,7 +60,7 @@
                                     <strong>DPA:</strong>
                                     <t t-esc="doc.dpr.strftime('%d/%m/%Y') if doc.dpr else ''"/>
                                 </p>
-                                <p></p>
+
                                 <p>
                                     <strong>Sac gestationnel :</strong> &#160;&#160;
                                     <t t-esc="dict(doc._fields['sac_gestationnel'].selection).get(doc.sac_gestationnel)"/>

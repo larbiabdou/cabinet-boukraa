@@ -35,97 +35,165 @@
                                 Compte rendu d’échographie abdominal
                             </div>
                             <br/>
-                            <br/>
-                            <br/>
-                            <div style="font-size:16px">
-                                <p>- Foie:
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;<span t-field="doc.liver_texture"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Contours :
-                                    <span t-field="doc.liver_contours"/>
-                                </p>
-                                <p>- VB:
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Paroi
-                                    <span t-field="doc.gallbladder_wall"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;<span t-field="doc.gallbladder_content"/>
-                                </p>
-                                <p>
-                                    - VBIH:
-                                    &#160;&#160;&#160; &#160;&#160;<span t-field="doc.vbih"/>
-                                </p>
-                                <p>
-                                    - Rein droit :
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Siège :
-                                    <span t-field="doc.right_kidney_position"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;<span t-field="doc.right_kidney_texture"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Taille :
-                                    <span t-field="doc.right_kidney_size"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Bonne différenciation cortico sinusale :
-                                    <span t-field="doc.right_kidney_cortico_sinus_differentiation"/>
-                                    <br/>&#160;&#160;&#160; &#160;&#160;
-                                    <t t-if="doc.right_kidney_hydronephrosis == 'yes'">
-                                        Hydronéphrose
-                                    </t>
-                                    <t t-if="doc.right_kidney_hydronephrosis == 'no'">
-                                        Pas d’hydronéphrose
-                                    </t>
-                                </p>
-                                <p>
-                                    - Rein gauche :
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Siège :
-                                    <span t-field="doc.left_kidney_position"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;<span t-field="doc.left_kidney_texture"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Taille :
-                                    <span t-field="doc.left_kidney_size"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Bonne différenciation cortico sinusale :
-                                    <span t-field="doc.left_kidney_cortico_sinus_differentiation"/>
-                                    <br/>&#160;&#160;&#160; &#160;&#160;
-                                    <t t-if="doc.left_kidney_hydronephrosis == 'yes'">
-                                        Hydronéphrose
-                                    </t>
-                                    <t t-if="doc.left_kidney_hydronephrosis == 'no'">
-                                        Pas d’hydronéphrose
-                                    </t>
-                                </p>
-                                <p>
-                                    - Rate :
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;<span t-field="doc.spleen_texture"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Taille
-                                    <span t-field="doc.spleen_size"/>
-                                </p>
-                                <p>
-                                    - Pancras :
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Tète et corps :
-                                    <span t-field="doc.pancreas_texture"/>
-                                    <br/>
-                                    &#160;&#160;&#160; &#160;&#160;Canal de Wirsung :
-                                    <span t-field="doc.wirsung_canal"/>
-                                </p>
-                                <p>
-                                    <t t-if="doc.intra_abdominal_fluid_collection == 'present'">
-                                        - collection liquidienne intra abdominal
-                                    </t>
-                                    <t t-if="doc.intra_abdominal_fluid_collection == 'absent'">
-                                        - Pas de collection liquidienne intra abdominal
-                                    </t>
-                                </p>
+                            <div style="font-size:15px">
+                                <div class="row col-12" style="margin-bottom: 10px">
+                                    <div class="col-6">
+                                        <p>- Foie:
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;<span t-field="doc.liver_texture"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Contours :
+                                            <span t-field="doc.liver_contours"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="col-6">
+                                            <p>
+                                                <t t-if="doc.intra_abdominal_fluid_collection == 'present'">
+                                                    - collection liquidienne intra abdominal
+                                                </t>
+                                                <t t-if="doc.intra_abdominal_fluid_collection == 'absent'">
+                                                    - Pas de collection liquidienne intra abdominal
+                                                </t>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12" style="margin-bottom: 10px">
+                                    <div class="col-6">
+                                        <p>- VB:
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Paroi
+                                            <span t-field="doc.gallbladder_wall"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;<span t-field="doc.gallbladder_content"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            - VBIH:
+                                            &#160;&#160;&#160; &#160;&#160;<span t-field="doc.vbih"/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row col-12" style="margin-bottom: 10px">
+                                    <div class="col-6">
+                                        <p>
+                                            - Pancras :
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Tète et corps :
+                                            <span t-field="doc.pancreas_texture"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Canal de Wirsung :
+                                            <span t-field="doc.wirsung_canal"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            - Rate :
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;<span t-field="doc.spleen_texture"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Taille
+                                            <span t-field="doc.spleen_size"/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row col-12" style="margin-bottom: 10px">
+                                    <div class="col-6">
+                                        <p>
+                                            - Rein droit :
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Siège :
+                                            <span t-field="doc.right_kidney_position"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;<span t-field="doc.right_kidney_texture"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Taille :
+                                            <span t-field="doc.right_kidney_size"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Bonne différenciation cortico sinusale :
+                                            <span t-field="doc.right_kidney_cortico_sinus_differentiation"/>
+                                            <br/>&#160;&#160;&#160; &#160;&#160;
+                                            <t t-if="doc.right_kidney_hydronephrosis == 'yes'">
+                                                Hydronéphrose
+                                            </t>
+                                            <t t-if="doc.right_kidney_hydronephrosis == 'no'">
+                                                Pas d’hydronéphrose
+                                            </t>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            - Rein gauche :
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Siège :
+                                            <span t-field="doc.left_kidney_position"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;<span t-field="doc.left_kidney_texture"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Taille :
+                                            <span t-field="doc.left_kidney_size"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Bonne différenciation cortico sinusale :
+                                            <span t-field="doc.left_kidney_cortico_sinus_differentiation"/>
+                                            <br/>&#160;&#160;&#160; &#160;&#160;
+                                            <t t-if="doc.left_kidney_hydronephrosis == 'yes'">
+                                                Hydronéphrose
+                                            </t>
+                                            <t t-if="doc.left_kidney_hydronephrosis == 'no'">
+                                                Pas d’hydronéphrose
+                                            </t>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row col-12" style="margin-bottom: 10px">
+                                    <div class="col-6">
+                                        <p>
+                                            - Vessie :
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Paroie :
+                                            <span t-field="doc.vessie_paroie"/>
+                                            <br/>
+                                            &#160;&#160;&#160; &#160;&#160;Contenu :
+                                            <span t-field="doc.vessie_contenu"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>
+                                            - Echographie pelvienne :
+                                            <t t-if="doc.gender == 'male'">
+                                                <br/>
+                                                &#160;&#160;&#160; &#160;&#160;Prostate :
+                                                <span t-field="doc.prostate_taille"/>
+                                                &#160;&#160;&#160; &#160;&#160;
+                                                <span t-field="doc.prostate_contour"/>
+                                                <br/>
+                                                <t t-if="doc.vesicule_seminale == 'vue'">
+                                                    - Vesicule séminale: Vue
+                                                </t>
+                                                <t t-if="doc.vesicule_seminale == 'non_vue'">
+                                                    - Vesicule séminale: Non Vue
+                                                </t>
+                                            </t>
+                                            <t t-if="doc.gender == 'female'">
+                                                <br/>
+                                                &#160;&#160;&#160; &#160;&#160;Uterus :
+                                                <span t-field="doc.uterus"/>
+                                                &#160;&#160;&#160; Endomètre : &#160;&#160;
+                                                <span t-field="doc.endometre_fine"/>
+                                                &#160;&#160;
+                                                <span t-field="doc.endometre_heter"/>
+                                                <br/>
+                                                &#160;&#160;&#160; &#160;&#160;Annexes :
+                                                <span t-field="doc.annexes"/>
+                                            </t>
+                                        </p>
+                                    </div>
+                                </div>
                                 <p>
                                     - Conclusion :
-                                    <br/> &#160;&#160;&#160; &#160;&#160;
+                                     &#160;&#160;&#160;
                                     <span t-field="doc.conclusion"/>
                                 </p>
                             </div>
