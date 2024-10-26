@@ -248,24 +248,45 @@ class HospitalOutpatient(models.Model):
             else:
                 record.button_consume_visible = False
 
-    @api.onchange('test_ids')
-    def onchange_test_lab_group(self):
-        for record in self:
-            for test in record.test_ids:
-                if test._origin.id not in record.test_lab_ids.mapped('test_id').ids:
-                    record.test_lab_ids = [(0, 0, {
-                        'test_id': test._origin.id,
+    # @api.depends('test_ids')
+    # def onchange_test_lab_group(self):
+    #     for record in self:
+    #         for test in record.test_ids:
+    #             test_id = test.id or test._origin.id
+    #             # if test_id not in record.test_lab_ids.mapped('test_id').ids:
+    #             record.test_lab_ids = [(0, 0, {
+    #                 'test_id': test_id,
+    #                 'name': test.name,
+    #                 'is_sub_test': False,  # Indique qu'il s'agit d'un test principal
+    #                 'parent_test_id': False
+    #             })]
+    #             for sub_test in test._origin.sub_test_ids:
+    #                 record.test_lab_ids = [(0, 0, {
+    #                     'test_id': sub_test._origin.id,
+    #                     'name': ' ->   ' + sub_test.name,
+    #                     'is_sub_test': True,  # Indique qu'il s'agit d'un test principal
+    #                     'parent_test_id': test_id
+    #
+    #                 })]
+    def write(self, values):
+        # Add code here
+        super(HospitalOutpatient, self).write(values)
+        if 'test_ids' in values and values['test_ids']:
+            for test in self.test_ids:
+                if test.id not in self.test_lab_ids.mapped('test_id').ids:
+                    lab_test = self.env['laboratory.test.line'].create({
+                        'outpatient_id': self.id,
+                        'test_id': test.id,
                         'name': test.name,
                         'is_sub_test': False,  # Indique qu'il s'agit d'un test principal
-                        #'parent_test_id': False
-                    })]
-                    for sub_test in test._origin.sub_test_ids:
-                        record.test_lab_ids = [(0, 0, {
-                            'test_id': sub_test._origin.id,
+                        'parent_test_id': False
+                    })
+                    for sub_test in test.sub_test_ids:
+                        self.test_lab_ids = [(0, 0, {
+                            'test_id': sub_test.id,
                             'name': ' ->   ' + sub_test.name,
                             'is_sub_test': True,  # Indique qu'il s'agit d'un test principal
-                            'parent_test_id': test._origin.id
-
+                            'parent_test_id': lab_test.id
                         })]
 
     def consume_medical_care_ids(self):

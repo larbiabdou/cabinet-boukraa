@@ -37,16 +37,17 @@
                             <br/>
                             <div style="font-size:16px; border-bottom: 1px solid black">
                                 <p>
-                                    &#160;&#160;&#160; Je soussigne , Docteur en medecine , certifie que l’etat de sante de Mr (Mme , Mlle )
-                                    <span t-field="doc.lastname"/>
-                                    <span t-field="doc.firstname"/>
-                                    age (e)
-                                    <span t-field="doc.patient_age"/>
+                                    &#160;&#160;&#160; Je soussigne , Docteur en médecine , certifie que l’etat de santé de Mr (Mme , Mlle )
+
+                                    <span style="font-weight: 700" t-field="doc.lastname"/>
+                                    <span style="font-weight: 700" t-field="doc.firstname"/>
+                                    âgé (e)
+                                    <span style="font-weight: 700" t-field="doc.patient_age"/>
                                     ans
                                     <br/> &#160;&#160;&#160;Adresse
-                                    <span t-field="doc.patient_address"/>
+                                    <span style="font-weight: 700" t-field="doc.patient_address"/>
                                     <br/>
-                                    &#160;&#160;&#160; Le / la patient (e) est en bonne santephysique ne souffre pas de graves maladies chroniques ou veneriennes, de tuberculose ni d’autres maladies mortelles.
+                                    &#160;&#160;&#160; Le / la patient (e) est en bonne santé physique ne souffre pas de graves maladies chroniques ou vénériennes, de tuberculose ni d’autres maladies mortelles.
                                 </p>
                                 <br/>
                             <br/>
@@ -54,22 +55,22 @@
 
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
-                                Certificat medicale de PNEUMO-PHTYSIO
+                                Certificat médicale de PNEUMO-PHTYSIO
                             </div>
                             <br/>
                             <br/>
                             <div style="font-size:16px">
                                 <p>
-                                    &#160;&#160;&#160; Je soussigne , Docteur en medecine , certifie avoir examine Le (La)nomme (e)
-                                    <span t-field="doc.lastname"/>
-                                    <span t-field="doc.firstname"/>
-                                    age (e)
-                                    <span t-field="doc.patient_age"/>
+                                    &#160;&#160;&#160; Je soussigne , Docteur en médecine , certifie avoir examiné Le (La) nommé (e)
+                                    <span style="font-weight: bold" t-field="doc.lastname"/>
+                                    <span style="font-weight: bold" t-field="doc.firstname"/>
+                                    âgé (e)
+                                    <span style="font-weight: bold" t-field="doc.patient_age"/>
                                     ans
                                     <br/> &#160;&#160;&#160; Adresse
-                                    <span t-field="doc.patient_address"/>
+                                    <span style="font-weight: 700" t-field="doc.patient_address"/>
                                     <br/> &#160;&#160;&#160;
-                                    Et je declare que l’interesse (e) est cliniquement *Indemme
+                                    Et je déclare que l’intéressé (e) est cliniquement *Indemme
                                 </p>
                                 <br/>
                                 <br/>

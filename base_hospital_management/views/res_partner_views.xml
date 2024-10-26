@@ -75,7 +75,7 @@
                                 invisible="is_alive == 'dead'"
                                 icon="fa-download"
                                 string="Patient Card"/>-->
-                        <button class="oe_stat_button" type="object"
+                        <!--<button class="oe_stat_button" type="object"
                                 name="alive_status"
                                 invisible = "['|',(is_alive == 'dead'),(name == False)]"
                                 icon="fa-check">
@@ -86,7 +86,7 @@
                                 invisible="is_alive == 'alive'"
                                 icon="fa-times-circle">
                             <span class="o_stat_text text-danger">EXPIRED</span>
-                        </button>
+                        </button>-->
                         <button invisible="appointment_count == 0"
                                 name="action_view_appointmen" type="object"
                                 class="oe_stat_button"
@@ -201,7 +201,7 @@
                                     </field>
                                 </page>-->
                         </page>
-                        <page string="Suivi obstétrique">
+                        <page string="Suivi obstétrique" groups="base_hospital_management.base_hospital_management_group_doctor">
                                     <field name="obstetric_ids">
                                         <tree>
                                             <field name="patient_id"/>

@@ -49,8 +49,7 @@
             <form>
                 <header>
                     <button name="action_confirm" string="Confirm"
-                            type="object" class="oe_highlight" invisible="state != 'draft'"
-                            groups="base_hospital_management.base_hospital_management_group_doctor"/>
+                            type="object" class="oe_highlight" invisible="state != 'draft'"/>
 
                     <button name="action_print_prescription" string="Print"
                             type="object" class="oe_highlight"
@@ -107,14 +106,14 @@
 
                             <!--<field name="test_count" invisible="1"/>-->
                             <field name="test_ids" widget="many2many_tags" domain="[('parent_id', '=', False)]" readonly="not has_group_doctor" groups="base_hospital_management.base_hospital_management_group_doctor" invisible="state not in ('op')"/>
-                            <field name="ta"/>
-                            <field name="poids"/>
-                            <field name="glycemie"/>
-                            <field name="sao2"/>
-                            <field name="taille"/>
+                            <field name="ta" invisible="state not in ('op')"/>
+                            <field name="poids" invisible="state not in ('op')"/>
+                            <field name="glycemie" invisible="state not in ('op')"/>
+                            <field name="sao2" invisible="state not in ('op')"/>
+                            <field name="taille" invisible="state not in ('op')"/>
                         </group>
                     </group>
-                    <notebook invisible="state not in ('op')">
+                    <notebook invisible="state not in ('op')" groups="base_hospital_management.base_hospital_management_group_doctor">
                         <page name="Prescription" string="Prescription" groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="prescription_ids" readonly="not has_group_doctor"
 

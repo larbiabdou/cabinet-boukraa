@@ -103,19 +103,19 @@
                         <div class="row" style="display: flex; justify-content: space-between;">
                             <!-- Première colonne -->
                             <div class="col-6">
-                                <t t-set="half_length" t-value="len(datas) // 2"/>
+                                <t t-set="half_length" t-value="min(len(datas), 18)"/>
                                 <t t-foreach="datas[:half_length]" t-as="test">
                                     <div style="margin-bottom: 8px; font-size: 14px;">
                                         <t t-if="test['is_sub_test']">
                                             <span style="padding-left: 30px;">
-                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
+                                                <i class="fa fa-check" title="Open"></i> &#160;&#160;
                                                 <span t-esc="test['name']"/>
                                             </span>
                                             <br/>
                                         </t>
                                         <t t-else="">
                                             <span>
-                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
+                                                <i class="fa fa-check" title="Open"></i> &#160;&#160;
                                                 <span t-esc="test['name']"/>
                                             </span>
                                             <br/>
@@ -125,27 +125,29 @@
                             </div>
 
                             <!-- Deuxième colonne -->
-                            <div class="col-6">
-                                <t t-foreach="datas[half_length:]" t-as="test">
-                                    <div style="margin-bottom: 8px; font-size: 14px;">
-                                        <t t-if="test['is_sub_test']">
-                                            <span style="padding-left: 30px;">
-                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
-                                                <span t-esc="test['name']"/>
-                                            </span>
-                                            <br/>
-                                        </t>
-                                        <t t-else="">
-                                            <span>
-                                                <i class="fa fa-square-o" title="Open"></i> &#160;&#160;
-                                                <span t-esc="test['name']"/>
-                                            </span>
-                                            <br/>
-                                        </t>
-                                    </div>
+                            <t t-if="len(datas) > 20">
+                                <div class="col-6">
+                                    <t t-foreach="datas[half_length:]" t-as="test">
+                                        <div style="margin-bottom: 8px; font-size: 14px;">
+                                            <t t-if="test['is_sub_test']">
+                                                <span style="padding-left: 30px;">
+                                                    <i class="fa fa-check" title="Open"></i> &#160;&#160;
+                                                    <span t-esc="test['name']"/>
+                                                </span>
+                                                <br/>
+                                            </t>
+                                            <t t-else="">
+                                                <span>
+                                                    <i class="fa fa-check" title="Open"></i> &#160;&#160;
+                                                    <span t-esc="test['name']"/>
+                                                </span>
+                                                <br/>
+                                            </t>
+                                        </div>
 
-                                </t>
-                            </div>
+                                    </t>
+                                </div>
+                            </t>
                         </div>
 
                         <t t-call="base_hospital_management.template_footer_a5"/>
