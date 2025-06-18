@@ -38,7 +38,7 @@
 
     <menuitem id="hospital_menu_visite" name="Visites"
               parent="visite_super_menu"
-              action="hospital_outpatient_action_visite" groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor"
+              action="hospital_outpatient_action_visite" groups="base_hospital_management.base_hospital_management_group_doctor"
 
               sequence="2"/>
     <!--    Doctor dashboard action
