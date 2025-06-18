@@ -34,8 +34,30 @@ class MedicalCare(models.Model):
         string='Consommé',
         required=False)
 
+    included_in_payment = fields.Boolean(
+        string='Inclus dans le paiement',
+        required=False)
+
+    cost = fields.Float(
+        string='Coût',
+        required=False)
+
+    amount_total = fields.Float(
+        string='Amount_total',
+        compute="compute_total_amount",
+        store=True,
+        required=False)
+
     @api.onchange('product_id')
     def _compute_uom_id(self):
         for record in self:
             record.uom_id = record.product_id.uom_id.id
+            record.cost = record.product_id.standard_price
+
+    @api.depends('cost', 'quantity')
+    def compute_total_amount(self):
+        for record in self:
+            record.amount_total = record.cost * record.quantity
+
+
 

@@ -22,7 +22,7 @@
 import boto3
 import dropbox
 import ftplib
-import nextcloud_client
+#import nextcloud_client
 import os
 import paramiko
 import requests

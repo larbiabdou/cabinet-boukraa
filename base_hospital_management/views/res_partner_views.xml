@@ -87,7 +87,7 @@
                                 icon="fa-times-circle">
                             <span class="o_stat_text text-danger">EXPIRED</span>
                         </button>-->
-                        <button invisible="appointment_count == 0"
+                        <button invisible="appointment_count == 0" groups="base_hospital_management.base_hospital_management_group_doctor"
                                 name="action_view_appointmen" type="object"
                                 class="oe_stat_button"
                                 icon="fa-tint">
@@ -126,11 +126,11 @@
                                        options="{'horizontal': true}"
                                        class="o_address_state"/>
                             </div>
-                            <field name="antecedents_ids" widget="many2many_tags"/>
                             <field name="gender"/>
                             <field name="marital_status"/>
                             <field name="is_alive" widget="radio" invisible="1"
                                    options="{'horizontal': true}"/>
+                            <field name="profession"/>
                         </group>
                     </group>
                     <notebook>
@@ -201,18 +201,33 @@
                                     </field>
                                 </page>-->
                         </page>
-                        <page string="Suivi obstétrique" groups="base_hospital_management.base_hospital_management_group_doctor">
-                                    <field name="obstetric_ids">
-                                        <tree>
-                                            <field name="patient_id"/>
-                                            <field name="ddr"/>
-                                            <field name="dpr"/>
-                                            <field name="state" widget='badge'
-                                               decoration-info="state=='current'"
-                                               decoration-success="state=='ended'"/>
-                                        </tree>
-                                    </field>
-                                </page>
+                        <page name="antecedents" string="Antécédents"
+                              groups="base_hospital_management.base_hospital_management_group_doctor">
+                            <group>
+                                <group>
+                                    <field name="antecedents_chirurgicaux"
+                                           placeholder="Détaillez les antécédents chirurgicaux du patient..."
+                                           />
+                                </group>
+                                <group>
+                                    <field name="antecedents_medicaux"
+                                           placeholder="Détaillez les antécédents médicaux du patient..."
+                                           />
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="antecedents_familiaux"
+                                           placeholder="Détaillez les antécédents familiaux du patient..."
+                                           />
+                                </group>
+                                <group>
+                                    <field name="antecedents_allergiques"
+                                           placeholder="Détaillez les antécédents allergiques du patient..."
+                                           />
+                                </group>
+                            </group>
+                        </page>
                         <page string="Internal notes" groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="notes"/>
                         </page>

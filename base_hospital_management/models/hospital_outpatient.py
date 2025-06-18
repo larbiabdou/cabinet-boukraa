@@ -98,13 +98,26 @@ class HospitalOutpatient(models.Model):
         string="Note",
         sanitize_style=True,
         required=False)
+
+    visit_amount = fields.Float(
+        string='Montant de la visite',
+        required=False)
     
     amount = fields.Float(
-        string='Montant à payer', 
+        string='Montant à payer',
+        compute="compute_amount",
+        store=True,
         required=False)
     
     amount_paid = fields.Float(
         string='Montant payé',
+        tracking=True,
+        required=False)
+
+    care_amount = fields.Float(
+        string='Montant de soins',
+        compute="compute_care_amount",
+        store=True,
         tracking=True,
         required=False)
     
@@ -116,7 +129,17 @@ class HospitalOutpatient(models.Model):
         default='not_paid',
         tracking=True,
         required=False, )
-        
+
+    @api.depends('visit_amount', 'care_amount')
+    def compute_amount(self):
+        for record in self:
+            record.amount = record.visit_amount + record.care_amount
+
+    @api.depends('medical_care_ids', 'medical_care_ids.consumed', 'medical_care_ids.included_in_payment', 'medical_care_ids.amount_total')
+    def compute_care_amount(self) :
+        for record in self:
+            record.care_amount = sum(line.amount_total for line in record.medical_care_ids.filtered(lambda l: l.consumed and l.included_in_payment))
+
     @api.onchange('amount_paid', 'amount')
     def _onchange_amount_paid(self):
         for record in self:
@@ -168,8 +191,11 @@ class HospitalOutpatient(models.Model):
         compute='compute_count_abdominal_report',
         required=False)
 
-    ta = fields.Char(
-        string='TA',
+    ta_sys = fields.Char(
+        string='TA Systolique',
+        required=False)
+    ta_dia = fields.Char(
+        string='TA Diastolique',
         required=False)
     poids = fields.Char(
         string='Poids',
@@ -178,13 +204,13 @@ class HospitalOutpatient(models.Model):
         string='Glycemie',
         required=False)
 
-    sao2 = fields.Char(
-        string='SAO2',
-        required=False)
-
     taille = fields.Char(
         string='Taille',
         required=False)
+    other = fields.Char(
+        string='Autres',
+        required=False)
+
     def compute_count_abdominal_report(self):
         for record in self:
             record.count_abdominal_report = self.env['abdominal.ultrasound.report'].search_count([('outpatient_id', '=', record.id)])

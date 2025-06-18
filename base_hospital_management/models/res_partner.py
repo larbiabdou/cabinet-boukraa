@@ -33,12 +33,12 @@ class ResPartner(models.Model):
     """Inherited to add more fields and functions"""
     _inherit = 'res.partner'
     _description = 'Hospital Patients'
-    
+
     is_patient = fields.Boolean(
-        string='Is_patient', 
+        string='Is_patient',
         required=False)
     is_diabetic = fields.Boolean(
-        string='Diabétique', 
+        string='Diabétique',
         required=False)
     is_hta = fields.Boolean(
         string='HTA',
@@ -79,6 +79,9 @@ class ResPartner(models.Model):
                                 domain=[('job_id.name', '=', 'Doctor')],
                                 string="Family Doctor",
                                 help='Family doctor of the patient')
+    profession = fields.Char(
+        string='Profession',
+        required=False)
     #barcode = fields.Char(string='Barcode', help='Barcode for the patient')
     #barcode_png = fields.Binary(string='Barcode PNG',
                                 #help='Image file of the barcode', readonly=True)
@@ -343,7 +346,19 @@ class ResPartner(models.Model):
 
     display_name = fields.Char(string='Display Name', compute='_compute_display_name', store=True)
 
-    age = fields.Integer(string='Age')
+    age = fields.Integer(string='Age', compute="compute_age")
+    antecedents_chirurgicaux = fields.Text(
+        string='Antécédents Chirurgicaux',
+        help='Détails des antécédents chirurgicaux du patient')
+    antecedents_medicaux = fields.Text(
+        string='Antécédents Médicaux',
+        help='Détails des antécédents médicaux du patient')
+    antecedents_familiaux = fields.Text(
+        string='Antécédents Familiaux',
+        help='Détails des antécédents familiaux du patient')
+    antecedents_allergiques = fields.Text(
+        string='Antécédents Allergiques',
+        help='Détails des antécédents allergiques du patient')
 
     firstname = fields.Char(
         string='Prénom',
@@ -385,8 +400,7 @@ class ResPartner(models.Model):
             if record.firstname:
                 record.name += ' ' + record.firstname
 
-    @api.onchange('date_of_birth')
-    def _compute_age(self):
+    def compute_age(self):
         for record in self:
             if record.date_of_birth:
                 today = date.today()
