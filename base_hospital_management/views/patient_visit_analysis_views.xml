@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue Tree des visites avec totaux -->
+    <record id="patient_visit_analysis_tree" model="ir.ui.view">
+        <field name="name">patient.visit.analysis.tree</field>
+        <field name="model">patient.visit.analysis</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="op_reference"/>
+                <field name="patient_id"/>
+                <field name="op_date"/>
+                <field name="payment_state" widget="badge"
+                       decoration-success="payment_state=='paid'"
+                       decoration-warning="payment_state=='in_payment'"
+                       decoration-danger="payment_state=='not_paid'"/>
+                <field name="amount" sum="Total CA Généré" widget="monetary"/>
+                <field name="stock_expenses_visit" sum="Total Dépenses Stock" widget="monetary"/>
+                <field name="stock_value_visit" sum="Total Valeur Stock Utilisé" widget="monetary"/>
+                <field name="gross_margin_visit" sum="Total Marge Brute" widget="monetary"/>
+                <field name="visit_paid" sum="Total Visites Payées"/>
+                <field name="visit_unpaid" sum="Total Visites Non Payées"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue Pivot pour analyses -->
+    <record id="patient_visit_analysis_pivot" model="ir.ui.view">
+        <field name="name">patient.visit.analysis.pivot</field>
+        <field name="model">patient.visit.analysis</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="op_date" interval="month" type="row"/>
+                <field name="payment_state" type="col"/>
+                <field name="amount" type="measure"/>
+                <field name="stock_expenses_visit" type="measure"/>
+                <field name="gross_margin_visit" type="measure"/>
+                <field name="visit_paid" type="measure"/>
+                <field name="visit_unpaid" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue Graph pour graphiques -->
+    <record id="patient_visit_analysis_graph" model="ir.ui.view">
+        <field name="name">patient.visit.analysis.graph</field>
+        <field name="model">patient.visit.analysis</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="op_date" interval="month"/>
+                <field name="amount" type="measure"/>
+                <field name="gross_margin_visit" type="measure"/>
+                <field name="visit_paid" type="measure"/>
+                <field name="visit_unpaid" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue Search avec filtres de date -->
+    <record id="patient_visit_analysis_search" model="ir.ui.view">
+        <field name="name">patient.visit.analysis.search</field>
+        <field name="model">patient.visit.analysis</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="op_reference"/>
+                <field name="patient_id"/>
+                <field name="op_date"/>
+                <field name="payment_state"/>
+
+                <!-- Filtres de date -->
+                <filter name="today" string="Aujourd'hui"
+                        domain="[('op_date', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')),
+                               ('op_date', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                <filter name="this_week" string="Cette Semaine"
+                        domain="[('op_date', '&gt;=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d 00:00:00'))]"/>
+
+                <filter name="this_month" string="Ce Mois"
+                        domain="[('op_date', '&gt;=', context_today().strftime('%Y-%m-01 00:00:00'))]"/>
+
+                <filter name="this_year" string="Cette Année"
+                        domain="[('op_date', '&gt;=', context_today().strftime('%Y-01-01 00:00:00'))]"/>
+
+                <!-- Filtres par état de paiement -->
+                <separator/>
+                <filter name="paid" string="Payé" domain="[('payment_state', '=', 'paid')]"/>
+                <filter name="unpaid" string="Non Payé" domain="[('payment_state', '=', 'not_paid')]"/>
+                <filter name="in_payment" string="En Paiement" domain="[('payment_state', '=', 'in_payment')]"/>
+
+                <!-- Regroupements -->
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_month" string="Mois" context="{'group_by': 'op_date:month'}"/>
+                    <filter name="group_week" string="Semaine" context="{'group_by': 'op_date:week'}"/>
+                    <filter name="group_payment_state" string="État Paiement" context="{'group_by': 'payment_state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action principal -->
+    <record id="action_patient_visit_analysis" model="ir.actions.act_window">
+        <field name="name">Analyse des Visites</field>
+        <field name="res_model">patient.visit.analysis</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="search_view_id" ref="patient_visit_analysis_search"/>
+        <field name="context">{
+            'search_default_this_month': 1,
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Analyse des visites patients
+            </p>
+            <p>
+                <b>Totaux affichés dans la vue :</b>
+                <ul>
+                    <li><b>Total CA Généré</b> : Somme de tous les montants</li>
+                    <li><b>Total Dépenses Stock</b> : Consommation non facturée</li>
+                    <li><b>Total Valeur Stock Utilisé</b> : Tout le stock consommé</li>
+                    <li><b>Total Marge Brute</b> : CA - Dépenses stock</li>
+                    <li><b>Total Visites Payées</b> : Nombre de visites payées</li>
+                    <li><b>Total Visites Non Payées</b> : Nombre de visites non payées</li>
+                </ul>
+                <br/>
+                <b>Vues disponibles :</b> Liste (Tree), Tableau croisé (Pivot), Graphiques (Graph)
+                <br/>
+                <b>Filtres disponibles :</b> Aujourd'hui, Cette semaine, Ce mois, Cette année, État de paiement
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_patient_visit_analysis"
+              name="Analyse Visites"
+              parent="hospital_menu_root"
+              action="action_patient_visit_analysis"
+              sequence="99"/>
+</odoo>
