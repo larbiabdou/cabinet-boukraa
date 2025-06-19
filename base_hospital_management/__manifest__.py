@@ -85,6 +85,7 @@
         #'views/obstetric_follow_up_views.xml',
         'views/medical_leave_certificate_views.xml',
         'views/medical_health_certificate_views.xml',
+        'views/medical_care_analysis_views.xml',
         'report/pregnancy_certificate_report.xml',
         'report/medical_leave_certificate_report.xml',
         'report/t1_ultrasound_report.xml',

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue Tree des produits consommés -->
+    <record id="medical_care_analysis_tree" model="ir.ui.view">
+        <field name="name">medical.care.analysis.tree</field>
+        <field name="model">medical.care.analysis</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="date"/>
+                <field name="outpatient_id"/>
+                <field name="product_id"/>
+                <field name="quantity_used" sum="Total Quantité Utilisée"/>
+                <field name="quantity_billed" sum="Total Quantité Facturée"/>
+                <field name="quantity_free" sum="Total Quantité Gratuite"/>
+                <field name="cost_total" sum="Total Coût" widget="monetary"/>
+                <field name="cost_billed" sum="Total Coût Facturé" widget="monetary"/>
+                <field name="cost_free" sum="Total Coût Gratuit" widget="monetary"/>
+                <field name="included_in_payment" widget="badge"
+                       decoration-success="included_in_payment==True"
+                       decoration-warning="included_in_payment==False"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue Pivot pour analyses croisées -->
+    <record id="medical_care_analysis_pivot" model="ir.ui.view">
+        <field name="name">medical.care.analysis.pivot</field>
+        <field name="model">medical.care.analysis</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="date" interval="month" type="row"/>
+                <field name="product_id" type="row"/>
+                <field name="included_in_payment" type="col"/>
+                <field name="quantity_used" type="measure"/>
+                <field name="quantity_billed" type="measure"/>
+                <field name="quantity_free" type="measure"/>
+                <field name="cost_total" type="measure"/>
+                <field name="cost_billed" type="measure"/>
+                <field name="cost_free" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue Graph pour graphiques -->
+    <record id="medical_care_analysis_graph" model="ir.ui.view">
+        <field name="name">medical.care.analysis.graph</field>
+        <field name="model">medical.care.analysis</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="date" interval="month"/>
+                <field name="quantity_used" type="measure"/>
+                <field name="cost_total" type="measure"/>
+                <field name="cost_billed" type="measure"/>
+                <field name="cost_free" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue Search avec filtres -->
+    <record id="medical_care_analysis_search" model="ir.ui.view">
+        <field name="name">medical.care.analysis.search</field>
+        <field name="model">medical.care.analysis</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="outpatient_id"/>
+
+                <!-- Filtres de date -->
+                <filter name="today" string="Aujourd'hui"
+                        domain="[('date', '=', context_today())]"/>
+
+                <filter name="this_week" string="Cette Semaine"
+                        domain="[('date', '&gt;=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d'))]"/>
+
+                <filter name="this_month" string="Ce Mois"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-%m-01'))]"/>
+
+                <filter name="this_year" string="Cette Année"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-01-01'))]"/>
+
+                <!-- Filtres par facturation -->
+                <separator/>
+                <filter name="billed" string="Facturé" domain="[('included_in_payment', '=', True)]"/>
+                <filter name="free" string="Gratuit" domain="[('included_in_payment', '=', False)]"/>
+
+                <!-- Regroupements -->
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_month" string="Mois" context="{'group_by': 'date:month'}"/>
+                    <filter name="group_week" string="Semaine" context="{'group_by': 'date:week'}"/>
+                    <filter name="group_product" string="Produit" context="{'group_by': 'product_id'}"/>
+                    <filter name="group_billing" string="Facturation" context="{'group_by': 'included_in_payment'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action principal -->
+    <record id="action_medical_care_analysis" model="ir.actions.act_window">
+        <field name="name">Analyse des Produits Consommés</field>
+        <field name="res_model">medical.care.analysis</field>
+        <field name="view_mode">pivot,tree,graph</field>
+        <field name="search_view_id" ref="medical_care_analysis_search"/>
+        <field name="context">{
+            'search_default_this_month': 1,
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Analyse des produits consommés
+            </p>
+            <p>
+                <b>Données analysées :</b>
+                <ul>
+                    <li><b>Quantité Utilisée</b> : Quantité totale consommée</li>
+                    <li><b>Quantité Facturée</b> : Quantité incluse dans le paiement</li>
+                    <li><b>Quantité Gratuite</b> : Quantité non facturée au patient</li>
+                    <li><b>Coût Total</b> : Coût total des produits consommés</li>
+                    <li><b>Coût Facturé</b> : Coût des produits facturés</li>
+                    <li><b>Coût Gratuit</b> : Coût des produits offerts</li>
+                </ul>
+                <br/>
+                <b>Vues disponibles :</b> Liste détaillée, Tableaux croisés, Graphiques
+                <br/>
+                <b>Filtres :</b> Par date, par produit, par statut de facturation
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_medical_care_analysis"
+              name="Analyse Produits Consommés"
+              parent="menu_analysis"
+              action="action_medical_care_analysis"
+              sequence="100"/>
+</odoo>

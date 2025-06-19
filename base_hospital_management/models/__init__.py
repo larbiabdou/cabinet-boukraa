@@ -66,3 +66,4 @@ from . import medical_care
 from . import abdominal_ultrasound_report
 from . import medical_health_certificate
 from . import patient_visit_analysis
+from . import medical_care_analysis
