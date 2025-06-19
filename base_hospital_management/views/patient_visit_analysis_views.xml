@@ -131,6 +131,7 @@
     <menuitem id="menu_patient_visit_analysis"
               name="Analyse Visites"
               parent="hospital_menu_root"
+              groups="base_hospital_management.base_hospital_management_group_doctor"
               action="action_patient_visit_analysis"
               sequence="99"/>
 </odoo>
