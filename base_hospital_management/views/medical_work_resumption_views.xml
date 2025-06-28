@@ -51,5 +51,5 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="medical_work_resumption_menu" parent="base_hospital_management.certificate_menu"
-              action="action_medical_work_resumption"/>
+              action="action_medical_work_resumption" sequence="30"/>
 </odoo>

@@ -54,5 +54,5 @@
     </record>
 
     <menuitem id="medical_leave_extension_menu" parent="base_hospital_management.certificate_menu"
-              action="action_medical_leave_extension"/>
+              action="action_medical_leave_extension" sequence="20"/>
 </odoo>

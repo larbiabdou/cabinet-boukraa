@@ -55,6 +55,6 @@
     </record>
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="medical_leave_certificate_menu" parent="base_hospital_management.certificate_menu"
-              action="medical_leave_certificate_action"/>
+              action="medical_leave_certificate_action" sequence="10"/>
 
 </odoo>

@@ -115,7 +115,6 @@
         <field name="res_model">abdominal.ultrasound.report</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <menuitem id="abdominal_ultrasound_report_menu" parent="suivi_super_menu"
-              action="abdominal_ultrasound_report_action" sequence="1"/>
+
 
 </odoo>

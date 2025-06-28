@@ -151,6 +151,5 @@
         <field name="view_mode">tree,form</field>
         <field name="context">{'group_by': 'patient_id', 'search_default_current': 1}</field>
     </record>
-    <menuitem id="obstetric_follow_up_menu" parent="suivi_super_menu"
-              action="obstetric_follow_up_action" sequence="1"/>
+
 </odoo>

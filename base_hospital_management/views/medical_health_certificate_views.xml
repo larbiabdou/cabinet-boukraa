@@ -2,7 +2,7 @@
 
     <!-- Action pour la liste des certificats -->
     <record id="action_medical_health_certificate" model="ir.actions.act_window">
-        <field name="name">Certificats Médicaux</field>
+        <field name="name">Certificat médical</field>
         <field name="res_model">medical.health.certificate</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -50,6 +50,4 @@
         </field>
     </record>
 
-    <!-- Liaison de la vue et action au menu -->
-    <menuitem id="menu_medical_health_certificate" name="Certificats de bonne santé" parent="base_hospital_management.certificate_menu" action="action_medical_health_certificate"/>
 </odoo>

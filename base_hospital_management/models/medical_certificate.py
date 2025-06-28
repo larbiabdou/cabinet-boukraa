@@ -4,7 +4,7 @@ from jinja2 import Template
 
 
 class MedicalCertificate(models.Model):
-    """Modèle pour les certificats médicaux"""
+    """Modèle pour les Certificat médical"""
     _name = 'medical.certificate'
     _description = "Certificat médical"
     _rec_name = 'patient_id'

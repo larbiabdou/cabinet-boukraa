@@ -37,7 +37,7 @@
         <field name="name">medical.certificate.tree</field>
         <field name="model">medical.certificate</field>
         <field name="arch" type="xml">
-            <tree string="Certificats médicaux">
+            <tree string="Certificat médical">
                 <field name="date"/>
                 <field name="patient_id"/>
                 <field name="firstname"/>
@@ -50,14 +50,14 @@
 
     <!-- Action pour certificat médical -->
     <record id="action_medical_certificate" model="ir.actions.act_window">
-        <field name="name">Certificats médicaux</field>
+        <field name="name">Certificat médical</field>
         <field name="res_model">medical.certificate</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <!-- Menu pour certificat médical -->
     <menuitem id="menu_medical_certificate"
-              name="Certificats médicaux"
+              name="Certificat médical"
               parent="base_hospital_management.certificate_menu"
               action="action_medical_certificate"
               sequence="15"/>
