@@ -129,7 +129,12 @@ class HospitalOutpatient(models.Model):
         default='not_paid',
         tracking=True,
         required=False, )
-
+    clinic_exam = fields.Text(
+        string="Examen clinique",
+        required=False)
+    consult_motif = fields.Text(
+        string="Motif de consultation",
+        required=False)
     @api.depends('visit_amount', 'care_amount')
     def compute_amount(self):
         for record in self:
@@ -266,6 +271,20 @@ class HospitalOutpatient(models.Model):
                 record.color = 10
             elif record.visit_type == 'soins':
                 record.color = 6
+
+    def action_schedule(self):
+        """Returns form view of hospital appointment wizard"""
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hospital.outpatient',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'views': [[False, 'form']],
+            'context': {
+                'default_patient_id': self.patient_id.id
+            }
+        }
 
     def compute_button_consume_visible(self):
         for record in self:

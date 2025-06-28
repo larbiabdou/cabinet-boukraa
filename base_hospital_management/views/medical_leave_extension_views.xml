@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_medical_leave_extension_form" model="ir.ui.view">
+        <field name="name">medical.leave.extension.form</field>
+        <field name="model">medical.leave.extension</field>
+        <field name="arch" type="xml">
+            <form string="Prolongation d'arrêt de travail">
+                <header>
+                    <button name="action_print_extension_certificate" string="Imprimer" type="object"
+                            class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="patient_id"/>
+                            <field name="firstname" invisible="patient_id != False"/>
+                            <field name="lastname" invisible="patient_id != False"/>
+                        </group>
+                        <group>
+                            <field name="extension_duration"/>
+                            <field name="extension_start_date"/>
+                            <field name="extension_end_date" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="content" widget="html"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour prolongation -->
+    <record id="view_medical_leave_extension_tree" model="ir.ui.view">
+        <field name="name">medical.leave.extension.tree</field>
+        <field name="model">medical.leave.extension</field>
+        <field name="arch" type="xml">
+            <tree string="Prolongations d'arrêt de travail">
+                <field name="date"/>
+                <field name="patient_id"/>
+                <field name="extension_duration"/>
+                <field name="extension_start_date"/>
+                <field name="extension_end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action pour prolongation -->
+    <record id="action_medical_leave_extension" model="ir.actions.act_window">
+        <field name="name">Prolongations d'arrêt</field>
+        <field name="res_model">medical.leave.extension</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="medical_leave_extension_menu" parent="base_hospital_management.certificate_menu"
+              action="action_medical_leave_extension"/>
+</odoo>

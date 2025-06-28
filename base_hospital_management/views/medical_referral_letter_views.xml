@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== LETTRE D'ORIENTATION ========== -->
+
+    <!-- Vue formulaire pour lettre d'orientation -->
+    <record id="view_medical_referral_letter_form" model="ir.ui.view">
+        <field name="name">medical.referral.letter.form</field>
+        <field name="model">medical.referral.letter</field>
+        <field name="arch" type="xml">
+            <form string="Lettre d'orientation">
+                <header>
+                    <button name="action_print_referral_letter" string="Imprimer" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="colleague_name"/>
+                            <field name="patient_id"/>
+                            <field name="firstname" invisible="patient_id"/>
+                            <field name="lastname" invisible="patient_id"/>
+                            <field name="age" invisible="patient_id"/>
+                        </group>
+                        <group>
+                            <field name="referral_reason"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="consultation_reason"/>
+                        </group>
+                        <group>
+                            <field name="clinical_findings"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="suspected_diagnosis"/>
+                    </group>
+                    <group>
+                        <field name="content" widget="html"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour lettre d'orientation -->
+    <record id="view_medical_referral_letter_tree" model="ir.ui.view">
+        <field name="name">medical.referral.letter.tree</field>
+        <field name="model">medical.referral.letter</field>
+        <field name="arch" type="xml">
+            <tree string="Lettres d'orientation">
+                <field name="date"/>
+                <field name="patient_id"/>
+                <field name="firstname"/>
+                <field name="lastname"/>
+                <field name="colleague_name"/>
+                <field name="referral_reason"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action pour lettre d'orientation -->
+    <record id="action_medical_referral_letter" model="ir.actions.act_window">
+        <field name="name">Lettres d'orientation</field>
+        <field name="res_model">medical.referral.letter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_medical_referral_letter"
+              parent="base_hospital_management.certificate_menu"
+              action="action_medical_referral_letter"
+              sequence="40"/>
+
+</odoo>

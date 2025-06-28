@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_medical_work_resumption_form" model="ir.ui.view">
+        <field name="name">medical.work.resumption.form</field>
+        <field name="model">medical.work.resumption</field>
+        <field name="arch" type="xml">
+            <form string="Certificat de reprise de travail">
+                <header>
+                    <button name="action_print_resumption_certificate" string="Imprimer" type="object"
+                            class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="patient_id"/>
+                            <field name="firstname" invisible="patient_id != False"/>
+                            <field name="lastname" invisible="patient_id != False"/>
+                        </group>
+                        <group>
+                            <field name="resume_work_date"/>
+                            <field name="work_type"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="content" widget="html"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour reprise -->
+    <record id="view_medical_work_resumption_tree" model="ir.ui.view">
+        <field name="name">medical.work.resumption.tree</field>
+        <field name="model">medical.work.resumption</field>
+        <field name="arch" type="xml">
+            <tree string="Certificats de reprise de travail">
+                <field name="date"/>
+                <field name="patient_id"/>
+                <field name="resume_work_date"/>
+                <field name="work_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action pour reprise -->
+    <record id="action_medical_work_resumption" model="ir.actions.act_window">
+        <field name="name">Reprises de travail</field>
+        <field name="res_model">medical.work.resumption</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="medical_work_resumption_menu" parent="base_hospital_management.certificate_menu"
+              action="action_medical_work_resumption"/>
+</odoo>

@@ -36,7 +36,7 @@
         <field name="name">hospital.outpatient.calendar</field>
         <field name="model">hospital.outpatient</field>
         <field name="arch" type="xml">
-            <calendar string="Outpatients" date_start="op_date" date_stop="op_date" color="color">
+            <calendar string="Outpatients" date_start="op_date" date_stop="op_date">
                 <field name="op_reference" string="Référence"/>
                 <field name="patient_id" string="Patient"/>
             </calendar>
@@ -48,6 +48,10 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+
+                    <button name="action_schedule" string="Créer Rendez-vous"
+                            type="object" class="oe_highlight" invisible="state not in ('op')"/>
+
                     <button name="action_confirm" string="Confirm"
                             type="object" class="oe_highlight" invisible="state != 'draft'"/>
 
@@ -120,7 +124,7 @@
                             <field name="ta_dia" invisible="state not in ('op')"/>
 
                             <field name="glycemie" invisible="state not in ('op')"/>
-                            <field name="other"/>
+                            <field name="other" invisible="state not in ('op')"/>
                         </group>
                     </group>
                     <notebook invisible="state not in ('op')"
@@ -176,6 +180,14 @@
                         <page string="Notes" readonly="not has_group_doctor"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="note"/>
+                        </page>
+                        <page invisible="state not in ('op')" string="Examen clinique"
+                              groups="base_hospital_management.base_hospital_management_group_doctor">
+                            <field name="clinic_exam"/>
+                        </page>
+                        <page invisible="state not in ('op')" string="Motif de consultation"
+                              groups="base_hospital_management.base_hospital_management_group_doctor">
+                            <field name="consult_motif"/>
                         </page>
                     </notebook>
                 </sheet>

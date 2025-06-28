@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="action_medical_leave_certificate" model="ir.actions.report">
-        <field name="name">Certificat d'aret de travail</field>
-        <field name="model">medical.leave.certificate</field>
+    <record id="action_medical_leave_extension_report" model="ir.actions.report">
+        <field name="name">Prolongation d'arrêt de travail</field>
+        <field name="model">medical.leave.extension</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">base_hospital_management.report_medical_leave_certificate</field>
-        <field name="report_file">base_hospital_management.report_medical_leave_certificate</field>
-        <field name="binding_model_id" ref="model_medical_leave_certificate"/>
+        <field name="report_name">base_hospital_management.report_medical_leave_extension</field>
+        <field name="report_file">base_hospital_management.report_medical_leave_extension</field>
+        <field name="binding_model_id" ref="model_medical_leave_extension"/>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="base_hospital_management.paperformat_medical_prescription"/>
     </record>
-    <template id="report_medical_leave_certificate">
+    <template id="report_medical_leave_extension">
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
                 <t t-foreach="docs" t-as="doc">
@@ -38,7 +38,7 @@
                             <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
-                                Certificat d'arrêt de travail
+                                Prolongation d'arrêt de travail
                             </div>
 
                             <br/>

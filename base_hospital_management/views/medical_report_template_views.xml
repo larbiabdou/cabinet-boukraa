@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== TEMPLATES DE RAPPORT ========== -->
+
+    <!-- Vue formulaire pour templates -->
+    <record id="view_medical_report_template_form" model="ir.ui.view">
+        <field name="name">medical.report.template.form</field>
+        <field name="model">medical.report.template</field>
+        <field name="arch" type="xml">
+            <form string="Template de rapport">
+                <sheet>
+                    <group>
+                        <field name="report_type"/>
+                    </group>
+                    <group>
+                        <field name="content" widget="html"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour templates -->
+    <record id="view_medical_report_template_tree" model="ir.ui.view">
+        <field name="name">medical.report.template.tree</field>
+        <field name="model">medical.report.template</field>
+        <field name="arch" type="xml">
+            <tree string="Templates de rapport">
+                <field name="report_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action pour templates -->
+    <record id="action_medical_report_template" model="ir.actions.act_window">
+        <field name="name">Templates de rapport</field>
+        <field name="res_model">medical.report.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu pour templates -->
+    <menuitem id="menu_medical_report_template"
+              name="Templates de rapport"
+              parent="hospital_menu_configuration"
+              action="action_medical_report_template"
+              sequence="50"/>
+
+</odoo>

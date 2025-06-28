@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_medical_leave_certificate_tree" model="ir.ui.view">
-    <field name="name">medical.leave.certificate.tree</field>
-    <field name="model">medical.leave.certificate</field>
-    <field name="arch" type="xml">
-        <tree string="Certificats d'arrêt de travail">
-            <field name="patient_id"/>
-            <field name="leave_start_date"/>
-            <field name="leave_end_date"/>
-            <field name="leave_duration"/>
-            <field name="resume_work_date"/>
-        </tree>
-    </field>
-    </record>
+    <!-- ========== ARRÊT DE TRAVAIL ========== -->
+
+    <!-- Vue formulaire pour arrêt de travail -->
     <record id="view_medical_leave_certificate_form" model="ir.ui.view">
-    <field name="name">medical.leave.certificate.form</field>
-    <field name="model">medical.leave.certificate</field>
-    <field name="arch" type="xml">
-        <form string="Certificat d'arrêt de travail">
-            <header>
-                <button name="action_print_leave_certificate" type="object" string="Imprimer" class="oe_highlight"/>
-            </header>
-            <sheet>
-                <group>
+        <field name="name">medical.leave.certificate.form</field>
+        <field name="model">medical.leave.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Certificat d'arrêt de travail">
+                <header>
+                    <button name="action_print_leave_certificate" string="Imprimer" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
                     <group>
-                        <field name="date"/>
-                        <field name="patient_id" domain="[('is_patient', '=', True)]" context="{'default_is_patient': True,'form_view_ref': 'base_hospital_management.res_partner_view_form'}"/>
-                        <field name="type"/>
+                        <group>
+                            <field name="date"/>
+                            <field name="patient_id"/>
+                            <field name="firstname" invisible="patient_id != False"/>
+                            <field name="lastname" invisible="patient_id != False"/>
+                        </group>
+                        <group>
+                            <field name="leave_duration"/>
+                            <field name="leave_start_date"/>
+                            <field name="leave_end_date" readonly="1"/>
+                        </group>
                     </group>
                     <group>
-                        <field name="resume_work_date"/>
+                        <field name="content" widget="html"/>
                     </group>
-                    <group string="Arêt de travail">
-                        <field name="leave_start_date"/>
-                        <field name="leave_end_date"/>
-                        <field name="leave_duration"/>
-                    </group>
-                    <group string="Prolongation">
-                        <field name="extended_duration"/>
-                        <field name="date_extention"/>
-                    </group>
-                </group>
-            </sheet>
-        </form>
-    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour arrêt de travail -->
+    <record id="view_medical_leave_certificate_tree" model="ir.ui.view">
+        <field name="name">medical.leave.certificate.tree</field>
+        <field name="model">medical.leave.certificate</field>
+        <field name="arch" type="xml">
+            <tree string="Certificats d'arrêt de travail">
+                <field name="date"/>
+                <field name="patient_id"/>
+                <field name="leave_duration"/>
+                <field name="leave_start_date"/>
+                <field name="leave_end_date"/>
+            </tree>
+        </field>
     </record>
     <record id="medical_leave_certificate_action" model="ir.actions.act_window">
         <field name="name">Certificat d'arrêt de travail</field>
@@ -52,6 +54,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="medical_leave_certificate_menu" parent="base_hospital_management.certificate_menu" action="medical_leave_certificate_action" />
+    <menuitem id="medical_leave_certificate_menu" parent="base_hospital_management.certificate_menu"
+              action="medical_leave_certificate_action"/>
 
 </odoo>

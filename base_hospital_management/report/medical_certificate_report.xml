@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="action_medical_leave_certificate" model="ir.actions.report">
-        <field name="name">Certificat d'aret de travail</field>
-        <field name="model">medical.leave.certificate</field>
+    <!-- ========== RAPPORT CERTIFICAT MÉDICAL ========== -->
+
+    <record id="action_medical_certificate_report" model="ir.actions.report">
+        <field name="name">Certificat médical</field>
+        <field name="model">medical.certificate</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">base_hospital_management.report_medical_leave_certificate</field>
-        <field name="report_file">base_hospital_management.report_medical_leave_certificate</field>
-        <field name="binding_model_id" ref="model_medical_leave_certificate"/>
+        <field name="report_name">base_hospital_management.report_medical_certificate</field>
+        <field name="report_file">base_hospital_management.report_medical_certificate</field>
+        <field name="print_report_name">'Certificat médical - %s' % (object.patient_id.name if object.patient_id else
+            (object.firstname + ' ' + object.lastname))
+        </field>
+        <field name="binding_model_id" ref="model_medical_certificate"/>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="base_hospital_management.paperformat_medical_prescription"/>
+
     </record>
-    <template id="report_medical_leave_certificate">
+
+    <template id="report_medical_certificate">
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
                 <t t-foreach="docs" t-as="doc">
@@ -24,21 +31,11 @@
 
                         <!-- Content of the report here -->
                         <div style="position: relative; z-index: 10;">
-                            <t t-if="doc.patient_id">
-                                <t t-set="firstname" t-value="doc.patient_id.firstname"/>
-                                <t t-set="lastname" t-value="doc.patient_id.lastname"/>
-                            </t>
-                            <t t-else="">
-                                <t t-set="firstname" t-value="doc.firstname"/>
-                                <t t-set="lastname" t-value="doc.lastname"/>
-                            </t>
-
-                            <t t-set="age" t-value="doc.patient_id.age"/>
                             <t t-set="date" t-value="doc.date.strftime('%d/%m/%Y')"/>
                             <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
-                                Certificat d'arrêt de travail
+                                Certificat médical
                             </div>
 
                             <br/>
@@ -58,4 +55,5 @@
             </t>
         </t>
     </template>
+
 </odoo>

@@ -101,6 +101,11 @@ access_laboratory_test_group,access.laboratory.test.group,model_laboratory_test_
 access_obstetric_follow_up,access.obstetric.follow.up,model_obstetric_follow_up,base.group_user,1,1,1,1
 access_medical_leave_certificate,access.medical.leave.certificate,model_medical_leave_certificate,base.group_user,1,1,1,1
 access_medical_health_certificate,access.medical.health.certificate,model_medical_health_certificate,base.group_user,1,1,1,1
+access_medical_leave_extension,access.medical.leave.extension,model_medical_leave_extension,base.group_user,1,1,1,1
+access_medical_work_resumption,access.medical.work.resumption,model_medical_work_resumption,base.group_user,1,1,1,1
+access_medical_referral_letter,access.medical.referral.letter,model_medical_referral_letter,base.group_user,1,1,1,1
+access_medical_report_template,access.medical.report.template,model_medical_report_template,base.group_user,1,1,1,1
+access_medical_certificate,access.medical.certificate,model_medical_certificate,base.group_user,1,1,1,1
 
 access_abdominal_ultrasound_report,access.abdominal.ultrasound.report,model_abdominal_ultrasound_report,base.group_user,1,1,1,1
 access_medical_antecedent,access.medical.antecedent,model_medical_antecedent,base.group_user,1,1,1,1
