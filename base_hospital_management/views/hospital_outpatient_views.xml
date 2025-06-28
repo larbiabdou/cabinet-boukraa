@@ -36,9 +36,12 @@
         <field name="name">hospital.outpatient.calendar</field>
         <field name="model">hospital.outpatient</field>
         <field name="arch" type="xml">
-            <calendar string="Outpatients" date_start="op_date" date_stop="op_date">
-                <field name="op_reference" string="Référence"/>
-                <field name="patient_id" string="Patient"/>
+            <calendar string="Outpatients"
+                      date_start="op_date"
+                      date_stop="op_date"
+                      color="patient_id">
+                <field name="op_reference"/>
+                <field name="patient_id"/>
             </calendar>
         </field>
     </record>
