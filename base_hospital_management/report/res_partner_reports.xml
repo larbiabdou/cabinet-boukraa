@@ -49,29 +49,41 @@
                         <br/>
                         <br/>
                         <br/>
-                        <t t-foreach="datas" t-as="line">
-                            <div style="width: 95%; margin-left:10px; margin-bottom:50px;" class="row">
-                                <div class="col-7">
-                                    <span t-esc="line['medicine']"/>
-                                    <span t-esc="line['forme']"/>
-                                    <span t-esc="line['dosage']"/>
-                                    <br/>
-                                    <span t-esc="line['posologie']"/>
+                        <table style="width: 95%; margin-left:10px; border-collapse: collapse; border: transparent;">
+                            <t t-foreach="datas" t-as="line">
+                                <tr style="border: transparent;">
+                                    <!-- Numéro du médicament -->
+                                    <td style="font-weight: bold; width: 1%; white-space: nowrap; vertical-align: top; padding-right: 10px; padding-bottom: 30px; border: transparent;">
+                                        <span t-esc="line_index + 1"/>/
+                                    </td>
 
-                                </div>
-                                <div class="col-2">
-                                </div>
-                                <div class="col-3 text-center">
-                                    <t t-if="line['qsp']">
-                                        qsp
+                                    <!-- Informations du médicament -->
+                                    <td style="width: 1%; white-space: nowrap; vertical-align: top; padding-right: 15px; padding-bottom: 30px; border: transparent;">
+                                        <span t-esc="line['medicine']"/>
+                                        <span t-esc="line['forme']"/>
+                                        <span t-esc="line['dosage']"/>
                                         <br/>
-                                        <span t-esc="line['qsp']"/>
-                                    </t>
-                                </div>
-                            </div>
+                                        <span t-esc="line['posologie']"/>
+                                        <span t-esc="line['note']"/>
+                                    </td>
 
+                                    <!-- Points de liaison (alignés avec le texte) -->
+                                    <td style="width: 98%; padding: 0 10px; vertical-align: top; padding-bottom: 30px; line-height: 1.2; border: transparent;">
+                                        <span style="letter-spacing: 2px; color: #666;">
+                                            ................................................................................................
+                                        </span>
+                                    </td>
 
-                        </t>
+                                    <!-- QSP -->
+                                    <td style="width: 1%; white-space: nowrap; vertical-align: top; text-align: left; padding-bottom: 30px; border: transparent;">
+                                        <t t-if="line['qsp']">
+                                            QSP
+                                            <span t-esc="line['qsp']"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
 
                         <t t-call="base_hospital_management.template_footer_a5"/>
                     </div>

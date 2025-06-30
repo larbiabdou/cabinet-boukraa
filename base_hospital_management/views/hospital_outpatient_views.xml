@@ -139,9 +139,10 @@
                                    string="Prescription">
                                 <tree editable="bottom">
                                     <field name="medicine_id"/>
-                                    <field name="posologie"/>
+                                    <field name="posologie_id"/>
 
-                                    <field name="qsp"/>
+                                    <field name="qsp_id"/>
+                                    <field name="note_1"/>
                                 </tree>
                             </field>
                         </page>
@@ -270,10 +271,116 @@
             </p>
         </field>
     </record>
+    <record id="view_hospital_posologie_form" model="ir.ui.view">
+        <field name="name">hospital.posologie.form</field>
+        <field name="model">hospital.posologie</field>
+        <field name="arch" type="xml">
+            <form string="Posologie">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Ex: 1 comprimé matin et soir"/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-    <!--    Out patients menu
-    <menuitem id="hospital_outpatient_menu" name="Outpatient"
-              sequence="2"
-              parent="appointment_menu_patient"
-              action="hospital_outpatient_action"/>-->
+    <!-- Vue liste posologie -->
+    <record id="view_hospital_posologie_tree" model="ir.ui.view">
+        <field name="name">hospital.posologie.tree</field>
+        <field name="model">hospital.posologie</field>
+        <field name="arch" type="xml">
+            <tree string="Posologies" editable="bottom">
+                <field name="name"/>
+                
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Action posologie -->
+    <record id="action_hospital_posologie" model="ir.actions.act_window">
+        <field name="name">Posologies</field>
+        <field name="res_model">hospital.posologie</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle posologie
+            </p>
+            <p>
+                Définissez les posologies utilisées dans les prescriptions médicales.
+            </p>
+        </field>
+    </record>
+
+    <!-- ========== VUES QSP ========== -->
+    
+    <!-- Vue formulaire QSP -->
+    <record id="view_hospital_qsp_form" model="ir.ui.view">
+        <field name="name">hospital.qsp.form</field>
+        <field name="model">hospital.qsp</field>
+        <field name="arch" type="xml">
+            <form string="QSP">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Ex: 7 jours, 1 mois, etc."/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste QSP -->
+    <record id="view_hospital_qsp_tree" model="ir.ui.view">
+        <field name="name">hospital.qsp.tree</field>
+        <field name="model">hospital.qsp</field>
+        <field name="arch" type="xml">
+            <tree string="QSP" editable="bottom">
+                <field name="name"/>
+                
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action QSP -->
+    <record id="action_hospital_qsp" model="ir.actions.act_window">
+        <field name="name">QSP</field>
+        <field name="res_model">hospital.qsp</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau QSP
+            </p>
+            <p>
+                Définissez les QSP (Quantité Suffisante Pour) utilisés dans les prescriptions.
+            </p>
+        </field>
+    </record>
+    
+    <!-- Sous-menu Prescription -->
+    <menuitem id="menu_hospital_prescription_config" 
+              name="Prescription" 
+              parent="base_hospital_management.hospital_menu_configuration" 
+              sequence="10"/>
+    
+    <!-- Menu Posologies -->
+    <menuitem id="menu_hospital_posologie" 
+              name="Posologies" 
+              parent="menu_hospital_prescription_config" 
+              action="action_hospital_posologie" 
+              sequence="10"/>
+              
+    <!-- Menu QSP -->
+    <menuitem id="menu_hospital_qsp" 
+              name="QSP" 
+              parent="menu_hospital_prescription_config" 
+              action="action_hospital_qsp" 
+              sequence="20"/>
+
 </odoo>

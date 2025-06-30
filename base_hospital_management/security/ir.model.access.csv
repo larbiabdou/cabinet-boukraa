@@ -110,4 +110,5 @@ access_medical_certificate,access.medical.certificate,model_medical_certificate,
 access_abdominal_ultrasound_report,access.abdominal.ultrasound.report,model_abdominal_ultrasound_report,base.group_user,1,1,1,1
 access_medical_antecedent,access.medical.antecedent,model_medical_antecedent,base.group_user,1,1,1,1
 
-
+access_hospital_posologie_user,hospital.posologie.user,model_hospital_posologie,base.group_user,1,1,1,1
+access_hospital_qsp_user,hospital.qsp.user,model_hospital_qsp,base.group_user,1,1,1,1

@@ -621,8 +621,6 @@ class HospitalOutpatient(models.Model):
         data = False
         p_list = []
         for rec in self.prescription_ids:
-            time = dict(rec._fields['time'].selection, lang='fr_FR').get(rec.time)
-            note = dict(rec._fields['note'].selection).get(rec.note)
             datas = {
                 'medicine': rec.medicine_id.name,
                 'forme': rec.medicine_id.forme,
@@ -630,9 +628,9 @@ class HospitalOutpatient(models.Model):
                 #'intake': rec.no_intakes,
                 #'time': time.capitalize(),
                 #'quantity': rec.quantity,
-                'posologie': rec.posologie, 
-                #'note': note.capitalize(),
-                'qsp': rec.qsp,
+                'posologie': rec.posologie_id.name,
+                'note': rec.note_1,
+                'qsp': rec.qsp_id.name,
             }
             p_list.append(datas)
         data = {
