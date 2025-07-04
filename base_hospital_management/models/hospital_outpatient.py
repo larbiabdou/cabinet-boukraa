@@ -72,7 +72,7 @@ class HospitalOutpatient(models.Model):
     #                            string='Tests',
     #                            help='Tests for the patient')
     state = fields.Selection(
-        [('draft', 'Draft'), ('op', 'OP')],
+        [('draft', 'Draft'), ('op', 'OP'), ('done', 'Terminé')],
         default='draft', string='State', help='State of the outpatient')
     prescription_ids = fields.One2many('prescription.line',
                                        'outpatient_id',
@@ -135,6 +135,263 @@ class HospitalOutpatient(models.Model):
     consult_motif = fields.Text(
         string="Motif de consultation",
         required=False)
+
+    leave_certificate_ids = fields.One2many('medical.leave.certificate', 'outpatient_id',
+                                            string='Arrêts de travail')
+    leave_extension_ids = fields.One2many('medical.leave.extension', 'outpatient_id', string='Prolongations')
+    work_resumption_ids = fields.One2many('medical.work.resumption', 'outpatient_id', string='Reprises de travail')
+    referral_letter_ids = fields.One2many('medical.referral.letter', 'outpatient_id',
+                                          string='Lettres d\'orientation')
+    medical_certificate_ids = fields.One2many('medical.certificate', 'outpatient_id', string='Certificats médicaux')
+
+    # Compteurs pour les boutons intelligents
+    leave_certificate_count = fields.Integer(string='Nombre d\'arrêts', compute='_compute_certificate_counts',
+                                             store=True)
+    leave_extension_count = fields.Integer(string='Nombre de prolongations', compute='_compute_certificate_counts',
+                                           store=True)
+    work_resumption_count = fields.Integer(string='Nombre de reprises', compute='_compute_certificate_counts',
+                                           store=True)
+    referral_letter_count = fields.Integer(string='Nombre d\'orientations', compute='_compute_certificate_counts',
+                                           store=True)
+    medical_certificate_count = fields.Integer(string='Nombre de certificats',
+                                               compute='_compute_certificate_counts', store=True)
+
+    @api.depends('leave_certificate_ids', 'leave_extension_ids', 'work_resumption_ids', 'referral_letter_ids',
+                 'medical_certificate_ids')
+    def _compute_certificate_counts(self):
+        for record in self:
+            record.leave_certificate_count = len(record.leave_certificate_ids)
+            record.leave_extension_count = len(record.leave_extension_ids)
+            record.work_resumption_count = len(record.work_resumption_ids)
+            record.referral_letter_count = len(record.referral_letter_ids)
+            record.medical_certificate_count = len(record.medical_certificate_ids)
+
+    # Actions pour créer les certificats (popup avec contexte)
+    def action_create_leave_certificate(self):
+        """Ouvre un popup pour créer un certificat d'arrêt de travail"""
+        return {
+            'name': 'Certificat d\'arrêt de travail',
+            'type': 'ir.actions.act_window',
+            'res_model': 'medical.leave.certificate',
+            'view_mode': 'form',
+            'view_id': self.env.ref('base_hospital_management.view_medical_leave_certificate_form').id,
+            'target': 'new',
+            'context': {
+                'default_patient_id': self.patient_id.id,
+                'default_outpatient_id': self.id,
+                'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+            }
+        }
+
+    def action_done(self):
+        for record in self:
+            record.state = 'done'
+
+    def action_create_leave_extension(self):
+        """Ouvre un popup pour créer une prolongation d'arrêt"""
+        return {
+            'name': 'Prolongation d\'arrêt de travail',
+            'type': 'ir.actions.act_window',
+            'res_model': 'medical.leave.extension',
+            'view_mode': 'form',
+            'view_id': self.env.ref('base_hospital_management.view_medical_leave_extension_form').id,
+            'target': 'new',
+            'context': {
+                'default_patient_id': self.patient_id.id,
+                'default_outpatient_id': self.id,
+                'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+            }
+        }
+
+    def action_create_work_resumption(self):
+        """Ouvre un popup pour créer un certificat de reprise"""
+        return {
+            'name': 'Certificat de reprise de travail',
+            'type': 'ir.actions.act_window',
+            'res_model': 'medical.work.resumption',
+            'view_mode': 'form',
+            'view_id': self.env.ref('base_hospital_management.view_medical_work_resumption_form').id,
+            'target': 'new',
+            'context': {
+                'default_patient_id': self.patient_id.id,
+                'default_outpatient_id': self.id,
+                'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+            }
+        }
+
+    def action_create_referral_letter(self):
+        """Ouvre un popup pour créer une lettre d'orientation"""
+        return {
+            'name': 'Lettre d\'orientation',
+            'type': 'ir.actions.act_window',
+            'res_model': 'medical.referral.letter',
+            'view_mode': 'form',
+            'view_id': self.env.ref('base_hospital_management.view_medical_referral_letter_form').id,
+            'target': 'new',
+            'context': {
+                'default_patient_id': self.patient_id.id,
+                'default_outpatient_id': self.id,
+                'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+                'default_referral_reason': '',  # Champ obligatoire
+            }
+        }
+
+    def action_create_medical_certificate(self):
+        """Ouvre un popup pour créer un certificat médical"""
+        return {
+            'name': 'Certificat médical',
+            'type': 'ir.actions.act_window',
+            'res_model': 'medical.certificate',
+            'view_mode': 'form',
+            'view_id': self.env.ref('base_hospital_management.view_medical_certificate_form').id,
+            'target': 'new',
+            'context': {
+                'default_patient_id': self.patient_id.id,
+                'default_outpatient_id': self.id,
+                'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+                'default_consultation_reason': '',  # Champ obligatoire
+                'default_examination_result': '',  # Champ obligatoire
+            }
+        }
+
+    # Actions pour les boutons intelligents (popup si count=1, liste sinon)
+    def action_view_leave_certificates(self):
+        """Ouvre popup si 1 certificat, liste sinon"""
+        if self.leave_certificate_count == 1:
+            # Un seul certificat : ouvrir en popup
+            certificate = self.leave_certificate_ids[0]
+            return {
+                'name': 'Certificat d\'arrêt de travail',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.leave.certificate',
+                'res_id': certificate.id,
+                'view_mode': 'form',
+                'view_id': self.env.ref('base_hospital_management.view_medical_leave_certificate_form').id,
+                'target': 'new',
+            }
+        else:
+            # Plusieurs certificats : ouvrir la liste
+            return {
+                'name': 'Arrêts de travail',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.leave.certificate',
+                'view_mode': 'tree,form',
+                'domain': [('outpatient_id', '=', self.id)],
+                'context': {
+                    'default_outpatient_id': self.id,
+                    'default_patient_id': self.patient_id.id,
+                    'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+                }
+            }
+
+    def action_view_leave_extensions(self):
+        """Ouvre popup si 1 prolongation, liste sinon"""
+        if self.leave_extension_count == 1:
+            extension = self.leave_extension_ids[0]
+            return {
+                'name': 'Prolongation d\'arrêt de travail',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.leave.extension',
+                'res_id': extension.id,
+                'view_mode': 'form',
+                'view_id': self.env.ref('base_hospital_management.view_medical_leave_extension_form').id,
+                'target': 'new',
+            }
+        else:
+            return {
+                'name': 'Prolongations d\'arrêt',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.leave.extension',
+                'view_mode': 'tree,form',
+                'domain': [('outpatient_id', '=', self.id)],
+                'context': {
+                    'default_outpatient_id': self.id,
+                    'default_patient_id': self.patient_id.id,
+                    'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+                }
+            }
+
+    def action_view_work_resumptions(self):
+        """Ouvre popup si 1 reprise, liste sinon"""
+        if self.work_resumption_count == 1:
+            resumption = self.work_resumption_ids[0]
+            return {
+                'name': 'Certificat de reprise de travail',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.work.resumption',
+                'res_id': resumption.id,
+                'view_mode': 'form',
+                'view_id': self.env.ref('base_hospital_management.view_medical_work_resumption_form').id,
+                'target': 'new',
+            }
+        else:
+            return {
+                'name': 'Reprises de travail',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.work.resumption',
+                'view_mode': 'tree,form',
+                'domain': [('outpatient_id', '=', self.id)],
+                'context': {
+                    'default_outpatient_id': self.id,
+                    'default_patient_id': self.patient_id.id,
+                    'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+                }
+            }
+
+    def action_view_referral_letters(self):
+        """Ouvre popup si 1 lettre, liste sinon"""
+        if self.referral_letter_count == 1:
+            letter = self.referral_letter_ids[0]
+            return {
+                'name': 'Lettre d\'orientation',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.referral.letter',
+                'res_id': letter.id,
+                'view_mode': 'form',
+                'view_id': self.env.ref('base_hospital_management.view_medical_referral_letter_form').id,
+                'target': 'new',
+            }
+        else:
+            return {
+                'name': 'Lettres d\'orientation',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.referral.letter',
+                'view_mode': 'tree,form',
+                'domain': [('outpatient_id', '=', self.id)],
+                'context': {
+                    'default_outpatient_id': self.id,
+                    'default_patient_id': self.patient_id.id,
+                    'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+                }
+            }
+
+    def action_view_medical_certificates(self):
+        """Ouvre popup si 1 certificat, liste sinon"""
+        if self.medical_certificate_count == 1:
+            certificate = self.medical_certificate_ids[0]
+            return {
+                'name': 'Certificat médical',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.certificate',
+                'res_id': certificate.id,
+                'view_mode': 'form',
+                'view_id': self.env.ref('base_hospital_management.view_medical_certificate_form').id,
+                'target': 'new',
+            }
+        else:
+            return {
+                'name': 'Certificats médicaux',
+                'type': 'ir.actions.act_window',
+                'res_model': 'medical.certificate',
+                'view_mode': 'tree,form',
+                'domain': [('outpatient_id', '=', self.id)],
+                'context': {
+                    'default_outpatient_id': self.id,
+                    'default_patient_id': self.patient_id.id,
+                    'default_date': self.op_date.date() if self.op_date else fields.Date.today(),
+                }
+            }
+
     @api.depends('visit_amount', 'care_amount')
     def compute_amount(self):
         for record in self:
@@ -215,6 +472,9 @@ class HospitalOutpatient(models.Model):
     other = fields.Char(
         string='Autres',
         required=False)
+    note_2 = fields.Text(
+        string='Note_2',
+        required=False)
 
     def compute_count_abdominal_report(self):
         for record in self:
@@ -282,15 +542,18 @@ class HospitalOutpatient(models.Model):
             'target': 'new',
             'views': [[False, 'form']],
             'context': {
-                'default_patient_id': self.patient_id.id
+                'default_patient_id': self.patient_id.id,
+                'default_state': 'op'
             }
         }
 
     def compute_button_consume_visible(self):
         for record in self:
-            if all(line.consumed for line in record.medical_care_ids or not record.medical_care_ids):
+            # Si pas de soins ou tous les soins sont consommés, cacher le bouton
+            if not record.medical_care_ids or all(line.consumed for line in record.medical_care_ids):
                 record.button_consume_visible = True
             else:
+                # Si il y a des soins non consommés, afficher le bouton
                 record.button_consume_visible = False
 
     # @api.depends('test_ids')

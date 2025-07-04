@@ -20,6 +20,7 @@ class MedicalWorkResumption(models.Model):
         ('part_time', 'Temps partiel'),
     ], string="Type de reprise", default='full_time', required=True)
     content = fields.Html(string="Contenu du rapport")
+    outpatient_id = fields.Many2one('hospital.outpatient', string='Consultation', ondelete='cascade')
 
     @api.onchange('patient_id', 'firstname', 'lastname', 'resume_work_date', 'work_type', 'date')
     def _compute_content(self):

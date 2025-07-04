@@ -6,7 +6,8 @@
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <search string="Search Tips">
-                <field name="name" string="Name" filter_domain="['|',('patient_seq','ilike',self),('name','ilike',self)]"/>
+                <field name="name" string="Name"
+                       filter_domain="['|',('patient_seq','ilike',self),('name','ilike',self)]"/>
                 <field name="patient_seq" string="Patient Code"/>
                 <field name="gender" string="Gender"/>
                 <!--<filter name="Diabétique" string="Diabétique" domain="[('is_diabetic', '=', True)]"/>
@@ -68,13 +69,13 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                      
-                       <!-- <button name="action_generate_patient_card"
-                                type="object"
-                                class="oe_stat_button"
-                                invisible="is_alive == 'dead'"
-                                icon="fa-download"
-                                string="Patient Card"/>-->
+
+                        <!-- <button name="action_generate_patient_card"
+                                 type="object"
+                                 class="oe_stat_button"
+                                 invisible="is_alive == 'dead'"
+                                 icon="fa-download"
+                                 string="Patient Card"/>-->
                         <!--<button class="oe_stat_button" type="object"
                                 name="alive_status"
                                 invisible = "['|',(is_alive == 'dead'),(name == False)]"
@@ -87,7 +88,8 @@
                                 icon="fa-times-circle">
                             <span class="o_stat_text text-danger">EXPIRED</span>
                         </button>-->
-                        <button invisible="appointment_count == 0" groups="base_hospital_management.base_hospital_management_group_doctor"
+                        <button invisible="appointment_count == 0"
+                                groups="base_hospital_management.base_hospital_management_group_doctor"
                                 name="action_view_appointmen" type="object"
                                 class="oe_stat_button"
                                 icon="fa-tint">
@@ -101,20 +103,25 @@
                                    required="True"/>
                         </h1>
                     </div>
-                    <group>
+                    <group string="Informations personnelles">
                         <group>
                             <field name="name"
                                    context="{'res_partner_search_mode':
-                                    'customer',
-                                    'show_address': 1, 'show_email':1}"
+                                'customer',
+                                'show_address': 1, 'show_email':1}"
                                    invisible="1"
                                    options="{&quot;always_reload&quot;: True}"/>
                             <field name="lastname"/>
                             <field name="firstname"/>
                             <field name="date_of_birth"/>
-                            <field name="age"/>
+                            <label for="age" string="Âge"/>
+                            <div class="d-flex align-items-center">
+                                <field name="age" nolabel="1"
+                                       style="width: 60px; display: inline-block;"/>
+                                <span style="margin-left: 3px;">ans</span>
+                            </div>
                             <field name="phone"/>
-
+                            <field name="address"/>
                             <field name="total_credit"/>
                         </group>
                         <group>
@@ -134,101 +141,71 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="Personal Information"
-                              string="Personal Information">
-                            <group>
-                                <group>
-                                    <span class="o_form_label o_td_label"
-                                          name="address_name">
-                                        <b>Address</b>
-                                    </span>
-                                    <div class="o_address_format">
-                                        <field name="street"
-                                               placeholder="Rue"
-                                               class="o_address_street"/>
-                                        <field name="city" placeholder="City"
-                                               class="o_address_city"/>
-                                        <field name="state_id"
-                                               class="o_address_state"
-                                               placeholder="State"
-                                               options="{'no_open': True, 'no_quick_create': True}"
-                                               context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
-                                        <field name="zip" placeholder="ZIP"
-                                               class="o_address_zip"/>
-                                        <div name="partner_address_country"
-                                             class="d-flex justify-content-between">
-                                            <field name="country_id"
-                                                   placeholder="Country"
-                                                   class="o_address_country"
-                                                   options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
-                                        </div>
-                                    </div>
-                                </group>
-
-                            </group>
-                        </page>
-                        <page string="Visites" groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="outpatient_ids">
-                            <tree readonly="1">
-                                <field name="op_date"/>
-                                <field name="slot"  widget="float_time"/>
-                                <field name="reason"/>
-                                <field name="note"/>
-                            </tree>
-                        </field>
-                        </page>
-                        <page name="medicine" string="Medical"
-                              groups="base_hospital_management.base_hospital_management_group_doctor">
-                                    <field name="prescription_ids">
-                                        <tree editable="bottom" create="0">
-                                            <field name="date"/>
-                                            <field name="medicine_id"/>
-                                            <field name="posologie_id"/>
-                                            <field name="qsp_id"/>
-                                        </tree>
-                                    </field>
-                                <!--
-                                <page string="Vaccine">
-                                    <field name="hospital_vaccination_ids">
-                                        <tree editable="bottom" create="0">
-                                            <field name="patient_id"
-                                                   widget="selection"/>
-                                            <field name="vaccine_product_id"/>
-                                            <field name="vaccine_price"/>
-                                            <field name="vaccine_date"/>
-                                            <field name="dose"/>
-                                        </tree>
-                                    </field>
-                                </page>-->
-                        </page>
                         <page name="antecedents" string="Antécédents"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
                             <group>
                                 <group>
                                     <field name="antecedents_chirurgicaux"
                                            placeholder="Détaillez les antécédents chirurgicaux du patient..."
-                                           />
+                                    />
                                 </group>
                                 <group>
                                     <field name="antecedents_medicaux"
                                            placeholder="Détaillez les antécédents médicaux du patient..."
-                                           />
+                                    />
                                 </group>
                             </group>
                             <group>
                                 <group>
                                     <field name="antecedents_familiaux"
                                            placeholder="Détaillez les antécédents familiaux du patient..."
-                                           />
+                                    />
                                 </group>
                                 <group>
                                     <field name="antecedents_allergiques"
                                            placeholder="Détaillez les antécédents allergiques du patient..."
-                                           />
+                                    />
                                 </group>
                             </group>
                         </page>
-                        <page string="Internal notes" groups="base_hospital_management.base_hospital_management_group_doctor">
+                        <page string="Historique de consultations"
+                              groups="base_hospital_management.base_hospital_management_group_doctor">
+                            <field name="outpatient_ids">
+                                <tree readonly="1">
+                                    <field name="op_date"/>
+                                    <field name="slot" widget="float_time"/>
+                                    <field name="reason"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Historique de médicaments"
+                              groups="base_hospital_management.base_hospital_management_group_doctor">
+                            <field name="prescription_ids">
+                                <tree editable="bottom" create="0">
+                                    <field name="date"/>
+                                    <field name="medicine_id"/>
+                                    <field name="posologie_id"/>
+                                    <field name="qsp_id"/>
+                                </tree>
+                            </field>
+                            <!--
+                            <page string="Vaccine">
+                                <field name="hospital_vaccination_ids">
+                                    <tree editable="bottom" create="0">
+                                        <field name="patient_id"
+                                               widget="selection"/>
+                                        <field name="vaccine_product_id"/>
+                                        <field name="vaccine_price"/>
+                                        <field name="vaccine_date"/>
+                                        <field name="dose"/>
+                                    </tree>
+                                </field>
+                            </page>-->
+                        </page>
+
+                        <page string="Internal notes"
+                              groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="notes"/>
                         </page>
                     </notebook>
@@ -244,7 +221,7 @@
     <record id="res_partner_action" model="ir.actions.act_window">
         <field name="name">Patients</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">kanban,form,tree</field>
+        <field name="view_mode">tree,kanban,form</field>
         <field name="view_ids" eval="[(5, 0, 0),
         (0, 0,{'view_mode': 'kanban', 'view_id': ref('base_hospital_management.res_partner_view_kanban')}),
         (0, 0,{'view_mode': 'tree', 'view_id': ref('base_hospital_management.res_partner_view_tree')}),

@@ -22,6 +22,7 @@ class MedicalLeaveExtension(models.Model):
     extension_end_date = fields.Date(string="Date de fin de prolongation", compute='_compute_extension_end_date',
                                      store=True)
     content = fields.Html(string="Contenu du rapport")
+    outpatient_id = fields.Many2one('hospital.outpatient', string='Consultation', ondelete='cascade')
 
     @api.onchange('patient_id', 'firstname', 'lastname', 'extension_duration', 'extension_start_date',
                  'extension_end_date', 'date')

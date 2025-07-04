@@ -7,31 +7,25 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="op_reference" string="OP Reference"/>
-
                 <field name="patient_id"/>
                 <field name="visit_type_id"/>
-                <!--<field name="doctor_id"/>-->
                 <field name="op_date"/>
-                <!--    <field name="amount"/>
-                    <field name="amount_paid"/>-->
             </tree>
         </field>
     </record>
+
     <record id="hospital_outpatient_view_tree_appointment" model="ir.ui.view">
         <field name="name">hospital.outpatient.view.tree.appointment</field>
         <field name="model">hospital.outpatient</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="op_reference" string="OP Reference"/>
-
                 <field name="patient_id"/>
-                <!--<field name="doctor_id"/>-->
                 <field name="op_date"/>
-
             </tree>
         </field>
     </record>
-    <!--    Hospital outpatient form view-->
+
     <record id="view_hospital_outpatient_calendar" model="ir.ui.view">
         <field name="name">hospital.outpatient.calendar</field>
         <field name="model">hospital.outpatient</field>
@@ -45,51 +39,98 @@
             </calendar>
         </field>
     </record>
+
     <record id="hospital_outpatient_view_form" model="ir.ui.view">
         <field name="name">hospital.outpatient.view.form</field>
         <field name="model">hospital.outpatient</field>
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="action_schedule" string="Créer une consultation"
+                            type="object" class="btn-primary oe_highlight"
+                            icon="fa-plus"
+                            invisible="state not in ('op')"/>
 
-                    <button name="action_schedule" string="Créer Rendez-vous"
-                            type="object" class="oe_highlight" invisible="state not in ('op')"/>
+                    <button name="action_done" string="Terminer"
+                            type="object" class="btn-success oe_highlight"
+                            icon="fa-check-circle"
+                            invisible="state not in ('op')"/>
 
                     <button name="action_confirm" string="Confirm"
                             type="object" class="oe_highlight" invisible="state != 'draft'"/>
 
-                    <button name="action_print_prescription" string="Print"
+                    <button name="action_print_prescription" string="Ordonnance"
                             type="object" class="oe_highlight"
-                            invisible="state not in ('op','inpatient','invoice')"
-                            groups="base_hospital_management.base_hospital_management_group_doctor"
-                    />
-                    <button name="action_print_test_order" string="Demande de bilan"
-                            type="object" class="oe_highlight"
+                            icon="fa-print"
                             invisible="state not in ('op')"
-                            groups="base_hospital_management.base_hospital_management_group_doctor"
-                    />
+                            groups="base_hospital_management.base_hospital_management_group_doctor"/>
+
+                    <button name="action_print_test_order" string="Bilan biologique"
+                            type="object" class="oe_highlight"
+                            icon="fa-print"
+                            invisible="state not in ('op')"
+                            groups="base_hospital_management.base_hospital_management_group_doctor"/>
+
                     <button name="consume_medical_care_ids" type="object" string="Consommer les soins"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
                             invisible="state not in ('op') or button_consume_visible"
-                            class="oe_highlight"/>
+                            class="btn-warning oe_highlight"
+                            icon="fa-stethoscope"/>
+
+
                     <field name="button_consume_visible" invisible="1"/>
                 </header>
                 <sheet>
-
                     <field name="state" invisible="1"/>
+
+                    <!-- Boutons intelligents en haut -->
                     <div class="oe_button_box" name="button_box">
-                        <button
-                                name="action_view_abdominal_report" type="object"
+                        <!-- Arrêts de travail -->
+                        <button name="action_view_leave_certificates"
+                                type="object"
                                 class="oe_stat_button"
-                                icon="fa-list">
-                            <field name="count_abdominal_report" string="Compte rendu abdominal" widget="statinfo"/>
+                                icon="fa-file-text-o"
+                                invisible="leave_certificate_count == 0">
+                            <field name="leave_certificate_count" widget="statinfo" string="Arrêts"/>
                         </button>
-                        <!--<button name="action_view_invoice" type="object"
+
+                        <!-- Prolongations -->
+                        <button name="action_view_leave_extensions"
+                                type="object"
                                 class="oe_stat_button"
-                                invisible="invoiced == False"
-                                icon="fa-pencil-square-o"
-                                string="Invoice"/>-->
+                                icon="fa-plus-square-o"
+                                invisible="leave_extension_count == 0">
+                            <field name="leave_extension_count" widget="statinfo" string="Prolongations"/>
+                        </button>
+
+                        <!-- Reprises de travail -->
+                        <button name="action_view_work_resumptions"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-square-o"
+                                invisible="work_resumption_count == 0">
+                            <field name="work_resumption_count" widget="statinfo" string="Reprises"/>
+                        </button>
+
+                        <!-- Lettres d'orientation -->
+                        <button name="action_view_referral_letters"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-share-square-o"
+                                invisible="referral_letter_count == 0">
+                            <field name="referral_letter_count" widget="statinfo" string="Orientations"/>
+                        </button>
+
+                        <!-- Certificats médicaux -->
+                        <button name="action_view_medical_certificates"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-certificate"
+                                invisible="medical_certificate_count == 0">
+                            <field name="medical_certificate_count" widget="statinfo" string="Certificats"/>
+                        </button>
                     </div>
+
                     <h1>
                         <field name="op_reference"/>
                     </h1>
@@ -110,89 +151,140 @@
                             <field name="payment_state" invisible="1"/>
                         </group>
                         <group groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <!-- <field name="doctor_id"
-                                    options="{'no_create': True, 'no_edit': True}"
-                                    readonly="state in ('invoice','cancel')"/>-->
                             <field name="visit_type_id" invisible="1"/>
                             <field name="visit_type" invisible="1"/>
-
-                            <!--<field name="test_count" invisible="1"/>-->
-                            <field name="test_ids" widget="many2many_tags" domain="[('parent_id', '=', False)]"
-                                   readonly="not has_group_doctor"
-                                   groups="base_hospital_management.base_hospital_management_group_doctor"
-                                   invisible="state not in ('op')"/>
                             <field name="taille" invisible="state not in ('op')"/>
                             <field name="poids" invisible="state not in ('op')"/>
-                            <field name="ta_sys" invisible="state not in ('op')"/>
-                            <field name="ta_dia" invisible="state not in ('op')"/>
 
                             <field name="glycemie" invisible="state not in ('op')"/>
-                            <field name="other" invisible="state not in ('op')"/>
                         </group>
                     </group>
                     <notebook invisible="state not in ('op')"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
-                        <page name="Prescription" string="Prescription"
-                              groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="prescription_ids" readonly="not has_group_doctor"
+                        <page invisible="state not in ('op')" string="Motif de consultation">
+                            <field name="consult_motif"/>
+                        </page>
+                        <page invisible="state not in ('op')" string="Examen clinique">
+                            <field name="clinic_exam"/>
+                        </page>
+                        <page invisible="state not in ('op')" string="Examen complémentaire">
+                            <div class="o_horizontal_separator mt16"></div>
+                            <div class="row mt16">
+                                <div class="col-md-6">
+                                    <button name="action_create_referral_letter"
+                                            string="Examen complémentaire"
+                                            type="object"
+                                            class="btn btn-info w-100 mb8"
+                                            icon="fa-share-square-o"/>
+                                </div>
+                            </div>
+                        </page>
+                        <page string="Bilans biologique">
+                            <group>
+                                <group>
 
+                                    <field name="test_ids" widget="many2many_tags" domain="[('parent_id', '=', False)]"
+                                           readonly="not has_group_doctor"
+                                           groups="base_hospital_management.base_hospital_management_group_doctor"
+                                           invisible="state not in ('op')"/>
+                                </group>
+                            </group>
+                            <field name="test_lab_ids" readonly="not has_group_doctor">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="test_id" domain="[('parent_id', '=', False)]" column_invisible="1"/>
+                                    <field name="is_sub_test" column_invisible="1"/>
+                                    <field name="parent_test_id" column_invisible="1"/>
+                                    <field name="result"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Certificats" name="certificates_tab">
+                            <group string="Créer des certificats">
+                                <div class="o_horizontal_separator"></div>
+                                <div class="row mt16">
+                                    <div class="col-md-4">
+                                        <button name="action_create_leave_certificate"
+                                                string="Arrêt de travail"
+                                                type="object"
+                                                class="btn btn-primary oe_highlight w-100 mb8"
+                                                icon="fa-file-text-o"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button name="action_create_leave_extension"
+                                                string="Prolongation"
+                                                type="object"
+                                                class="btn btn-secondary w-100 mb8"
+                                                icon="fa-plus-square-o"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button name="action_create_work_resumption"
+                                                string="Reprise de travail"
+                                                type="object"
+                                                class="btn btn-success w-100 mb8"
+                                                icon="fa-check-square-o"/>
+                                    </div>
+                                </div>
+
+                                <div class="o_horizontal_separator mt16"></div>
+                                <div class="row mt16">
+                                    <div class="col-md-6">
+                                        <button name="action_create_medical_certificate"
+                                                string="Certificat médical"
+                                                type="object"
+                                                class="btn btn-warning w-100 mb8"
+                                                icon="fa-certificate"/>
+                                    </div>
+                                </div>
+                            </group>
+
+                        </page>
+
+
+                        <page name="Soins" string="Soins">
+                            <notebook>
+                                <page name="Soins">
+                                    <field name="medical_care_ids" readonly="not has_group_doctor">
+                                        <tree editable="bottom">
+                                            <field name="product_id" readonly="consumed"/>
+                                            <field name="cost"/>
+                                            <field name="quantity" readonly="consumed"/>
+                                            <field name="uom_id" readonly="consumed"/>
+                                            <field name="amount_total"/>
+                                            <field name="consumed" readonly="1"/>
+                                            <field name="included_in_payment"/>
+                                            <field name="product_uom_category_id" column_invisible="1"/>
+                                        </tree>
+                                        <form>
+                                            <field name="product_id"/>
+                                            <field name="quantity"/>
+                                            <field name="uom_id"/>
+                                            <field name="product_uom_category_id" invisible="True"/>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page name="Notes" string="Notes">
+                                    <field name="note_2"/>
+                                </page>
+                            </notebook>
+                        </page>
+                        <page name="Prescription" string="Prescription">
+                            <field name="prescription_ids" readonly="not has_group_doctor"
                                    string="Prescription">
                                 <tree editable="bottom">
                                     <field name="medicine_id"/>
                                     <field name="posologie_id"/>
-
                                     <field name="qsp_id"/>
                                     <field name="note_1"/>
                                 </tree>
                             </field>
                         </page>
-                        <page name="Soins" groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="medical_care_ids" readonly="not has_group_doctor">
-                                <tree editable="bottom">
-                                    <field name="product_id" readonly="consumed"/>
-                                    <field name="cost"/>
-                                    <field name="quantity" readonly="consumed"/>
-                                    <field name="uom_id" readonly="consumed"/>
 
-                                    <field name="amount_total"/>
-                                    <field name="consumed" readonly="1"/>
-                                    <field name="included_in_payment"/>
-                                    <field name="product_uom_category_id" column_invisible="1"/>
-                                </tree>
-                                <form>
-                                    <field name="product_id"/>
-                                    <field name="quantity"/>
-                                    <field name="uom_id"/>
-                                    <field name="product_uom_category_id" invisible="True"/>
-                                </form>
-                            </field>
-                        </page>
-                        <page string="Demande de Bilan"
-                              groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="test_lab_ids" readonly="not has_group_doctor">
-                                <tree editable="bottom">
-                                    <field name="name"/>
-                                    <field name="test_id" domain="[('parent_id', '=', False)]" column_invisible="1"/>
-                                    <field name="is_sub_test"
-                                           column_invisible="1"/> <!-- Masquer l'indicateur pour les utilisateurs -->
-                                    <field name="parent_test_id"
-                                           column_invisible="1"/> <!-- Référence invisible au test parent -->
-                                    <field name="result"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Notes" readonly="not has_group_doctor"
-                              groups="base_hospital_management.base_hospital_management_group_doctor">
+                        <page string="Remarques" readonly="not has_group_doctor">
                             <field name="note"/>
                         </page>
-                        <page invisible="state not in ('op')" string="Examen clinique"
-                              groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="clinic_exam"/>
-                        </page>
-                        <page invisible="state not in ('op')" string="Motif de consultation"
-                              groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="consult_motif"/>
-                        </page>
+
+
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
@@ -202,27 +294,23 @@
             </form>
         </field>
     </record>
+
     <!--    Hospital outpatient search view-->
     <record id="hospital_outpatient_view_search" model="ir.ui.view">
         <field name="name">hospital.outpatient.view.search</field>
         <field name="model">hospital.outpatient</field>
         <field name="arch" type="xml">
             <search>
-
                 <filter string="Aujourd'hui" name="today"
                         domain="[('op_date', '&gt;=', datetime.datetime.combine(context_today(),
-                    datetime.time(0,0,0))), ('op_date', '&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                   datetime.time(0,0,0))), ('op_date', '&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
                 <filter name="start_date_filter" string="Cette semaine" domain="[
-                        ('op_date', '>=', (datetime.datetime.combine(context_today() + relativedelta(weeks=-1,days=1,weekday=0), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S')),
-                        ('op_date', '&lt;', (datetime.datetime.combine(context_today() + relativedelta(days=1,weekday=0), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                       ('op_date', '>=', (datetime.datetime.combine(context_today() + relativedelta(weeks=-1,days=1,weekday=0), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S')),
+                       ('op_date', '&lt;', (datetime.datetime.combine(context_today() + relativedelta(days=1,weekday=0), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
 
                 <field name="op_reference"/>
                 <field name="patient_id"/>
 
-                <!--     <filter string="Rendez-vous" name="appointment"
-                             domain="[('state', '=', 'draft')]"/>
-                     <filter string="Visite" name="visite"
-                             domain="[('state', '=', 'op')]"/>-->
                 <separator/>
                 <filter name="not_paid" string="Non payé" domain="[('payment_state', '=', 'not_paid')]"/>
                 <filter name="in_payment" string="En paiement" domain="[('payment_state', '=', 'in_payment')]"/>
@@ -240,17 +328,18 @@
             </search>
         </field>
     </record>
+
     <!--    Out patients menu action-->
     <record id="hospital_outpatient_action" model="ir.actions.act_window">
-        <field name="name">Visites</field>
+        <field name="name">Consultations</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.outpatient</field>
         <field name="view_mode">tree,form,calendar</field>
         <field name="domain">[('state', '=', 'draft')]</field>
         <field name="context">{'search_default_today':1}</field>
         <field name="view_ids" eval="[(5, 0, 0),
-            (0, 0, {'view_mode': 'tree', 'view_id': ref('hospital_outpatient_view_tree_appointment')}),
-            (0, 0, {'view_mode': 'form', 'view_id': ref('hospital_outpatient_view_form')})]"/>
+           (0, 0, {'view_mode': 'tree', 'view_id': ref('hospital_outpatient_view_tree_appointment')}),
+           (0, 0, {'view_mode': 'form', 'view_id': ref('hospital_outpatient_view_form')})]"/>
 
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -258,8 +347,9 @@
             </p>
         </field>
     </record>
+
     <record id="hospital_outpatient_action_visite" model="ir.actions.act_window">
-        <field name="name">Visites</field>
+        <field name="name">Consultations</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.outpatient</field>
         <field name="view_mode">tree,form,calendar</field>
@@ -271,6 +361,8 @@
             </p>
         </field>
     </record>
+
+    <!-- Vues pour Posologie et QSP -->
     <record id="view_hospital_posologie_form" model="ir.ui.view">
         <field name="name">hospital.posologie.form</field>
         <field name="model">hospital.posologie</field>
@@ -288,20 +380,16 @@
         </field>
     </record>
 
-    <!-- Vue liste posologie -->
     <record id="view_hospital_posologie_tree" model="ir.ui.view">
         <field name="name">hospital.posologie.tree</field>
         <field name="model">hospital.posologie</field>
         <field name="arch" type="xml">
             <tree string="Posologies" editable="bottom">
                 <field name="name"/>
-                
             </tree>
         </field>
     </record>
 
-
-    <!-- Action posologie -->
     <record id="action_hospital_posologie" model="ir.actions.act_window">
         <field name="name">Posologies</field>
         <field name="res_model">hospital.posologie</field>
@@ -316,9 +404,6 @@
         </field>
     </record>
 
-    <!-- ========== VUES QSP ========== -->
-    
-    <!-- Vue formulaire QSP -->
     <record id="view_hospital_qsp_form" model="ir.ui.view">
         <field name="name">hospital.qsp.form</field>
         <field name="model">hospital.qsp</field>
@@ -336,19 +421,16 @@
         </field>
     </record>
 
-    <!-- Vue liste QSP -->
     <record id="view_hospital_qsp_tree" model="ir.ui.view">
         <field name="name">hospital.qsp.tree</field>
         <field name="model">hospital.qsp</field>
         <field name="arch" type="xml">
             <tree string="QSP" editable="bottom">
                 <field name="name"/>
-                
             </tree>
         </field>
     </record>
 
-    <!-- Action QSP -->
     <record id="action_hospital_qsp" model="ir.actions.act_window">
         <field name="name">QSP</field>
         <field name="res_model">hospital.qsp</field>
@@ -362,25 +444,23 @@
             </p>
         </field>
     </record>
-    
-    <!-- Sous-menu Prescription -->
-    <menuitem id="menu_hospital_prescription_config" 
-              name="Prescription" 
-              parent="base_hospital_management.hospital_menu_configuration" 
+
+    <!-- Menus -->
+    <menuitem id="menu_hospital_prescription_config"
+              name="Prescription"
+              parent="base_hospital_management.hospital_menu_configuration"
               sequence="10"/>
-    
-    <!-- Menu Posologies -->
-    <menuitem id="menu_hospital_posologie" 
-              name="Posologies" 
-              parent="menu_hospital_prescription_config" 
-              action="action_hospital_posologie" 
+
+    <menuitem id="menu_hospital_posologie"
+              name="Posologies"
+              parent="menu_hospital_prescription_config"
+              action="action_hospital_posologie"
               sequence="10"/>
-              
-    <!-- Menu QSP -->
-    <menuitem id="menu_hospital_qsp" 
-              name="QSP" 
-              parent="menu_hospital_prescription_config" 
-              action="action_hospital_qsp" 
+
+    <menuitem id="menu_hospital_qsp"
+              name="QSP"
+              parent="menu_hospital_prescription_config"
+              action="action_hospital_qsp"
               sequence="20"/>
 
 </odoo>

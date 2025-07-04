@@ -19,6 +19,7 @@ class MedicalCertificate(models.Model):
     consultation_reason = fields.Text(string="Motif de consultation", required=True)
     examination_result = fields.Text(string="Résultat de l'examen radio-clinique", required=True)
     content = fields.Html(string="Contenu du rapport")
+    outpatient_id = fields.Many2one('hospital.outpatient', string='Consultation', ondelete='cascade')
 
     @api.onchange('patient_id', 'firstname', 'lastname', 'consultation_reason', 'examination_result', 'date')
     def _compute_content(self):

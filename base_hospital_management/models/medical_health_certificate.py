@@ -17,6 +17,7 @@ class MedicalHealthCertificate(models.Model):
     patient_age = fields.Integer(string="Âge")
     patient_address = fields.Char(string="Adresse")
     date = fields.Date(string="Date", default=fields.Date.context_today)
+    outpatient_id = fields.Many2one('hospital.outpatient', string='Consultation', ondelete='cascade')
 
     def action_print_health_certificate(self):
         return self.env.ref('base_hospital_management.action_medical_health_certificate_report').report_action(self)

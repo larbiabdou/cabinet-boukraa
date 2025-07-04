@@ -21,6 +21,7 @@ class MedicalLeaveCertificate(models.Model):
     leave_start_date = fields.Date(string="Date de début", required=True)
     leave_end_date = fields.Date(string="Date de fin", compute='_compute_leave_end_date', store=True)
     content = fields.Html(string="Contenu du rapport")
+    outpatient_id = fields.Many2one('hospital.outpatient', string='Consultation', ondelete='cascade')
 
     @api.onchange('patient_id', 'firstname', 'lastname', 'leave_duration', 'leave_start_date', 'leave_end_date', 'date')
     def _compute_content(self):

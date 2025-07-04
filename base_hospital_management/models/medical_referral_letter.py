@@ -23,6 +23,7 @@ class MedicalReferralLetter(models.Model):
     suspected_diagnosis = fields.Text(string="Diagnostic suspecté")
     colleague_name = fields.Char(string="Nom du confrère destinataire")
     content = fields.Html(string="Contenu du rapport")
+    outpatient_id = fields.Many2one('hospital.outpatient', string='Consultation', ondelete='cascade')
 
     @api.onchange('patient_id', 'firstname', 'lastname', 'age', 'referral_reason', 'consultation_reason',
                  'clinical_findings', 'suspected_diagnosis', 'colleague_name', 'date')

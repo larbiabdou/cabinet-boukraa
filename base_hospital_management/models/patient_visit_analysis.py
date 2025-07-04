@@ -8,14 +8,14 @@ from odoo import api, fields, models, tools
 
 
 class PatientVisitAnalysis(models.Model):
-    """Analyse des visites patients avec filtrage par date"""
+    """Analyse des Consultations patients avec filtrage par date"""
     _name = 'patient.visit.analysis'
-    _description = 'Analyse des Visites Patients'
+    _description = 'Analyse des Consultations Patients'
     _auto = False
     _rec_name = 'op_reference'
     _order = 'op_date desc'
 
-    # Champs de base des visites pour filtrage
+    # Champs de base des Consultations pour filtrage
     op_reference = fields.Char(string='Référence OP', readonly=True)
     patient_id = fields.Many2one('res.partner', string='Patient', readonly=True)
     op_date = fields.Datetime(string='Date Visite', readonly=True)
@@ -31,10 +31,10 @@ class PatientVisitAnalysis(models.Model):
     stock_value_visit = fields.Float(string='Valeur Stock (visite)', readonly=True)
     gross_margin_visit = fields.Float(string='Marge Brute (visite)', readonly=True)
     visit_paid = fields.Integer(
-        string='Visites payés',
+        string='Consultations payés',
         required=False)
     visit_unpaid = fields.Integer(
-        string='Visites impayés',
+        string='Consultations impayés',
         required=False)
 
     def _query(self):
@@ -69,7 +69,7 @@ class PatientVisitAnalysis(models.Model):
                     ELSE 0 
                 END), 0)) as gross_margin_visit,
 
-                -- Mesures pour comptage des visites
+                -- Mesures pour comptage des Consultations
                 CASE WHEN ho.payment_state = 'paid' THEN 1 ELSE 0 END as visit_paid,
                 CASE WHEN ho.payment_state = 'not_paid' THEN 1 ELSE 0 END as visit_unpaid
 

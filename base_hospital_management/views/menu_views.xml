@@ -22,7 +22,7 @@
     <menuitem name="Report" id="hospital_report" parent="hospital_menu_root"
               sequence="6"/>
     <menuitem id="certificate_menu" groups="base_hospital_management.base_hospital_management_group_doctor" name="Certificats" parent="base_hospital_management.hospital_menu_root" sequence="90"/>
-    <menuitem id="visite_super_menu" groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor" name="Visites" parent="base_hospital_management.hospital_menu_root"
+    <menuitem id="visite_super_menu" groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor" name="Consultations" parent="base_hospital_management.hospital_menu_root"
               sequence="50"/>
     <!--    Configuration menu-->
     <menuitem id="hospital_menu_configuration" name="Configuration" sequence="100"
@@ -35,7 +35,7 @@
               groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor"
               sequence="2"/>
 
-    <menuitem id="hospital_menu_visite" name="Visites"
+    <menuitem id="hospital_menu_visite" name="Consultations"
               parent="visite_super_menu"
               action="hospital_outpatient_action_visite" groups="base_hospital_management.base_hospital_management_group_doctor"
 

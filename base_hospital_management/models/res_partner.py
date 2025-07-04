@@ -53,7 +53,7 @@ class ResPartner(models.Model):
                                    help='Blood group of the patient',
                                    selection=[('a', 'A'), ('b', 'B'),
                                               ('o', 'O'), ('ab', 'AB')])
-    rh_type = fields.Selection(selection=[('-', '-ve'), ('+', '+ve')],
+    rh_type = fields.Selection(selection=[('-', 'Négatif'), ('+', 'Positif')],
                                string='RH Type',
                                help='Rh type of the blood group')
     gender = fields.Selection(selection=[
@@ -333,7 +333,7 @@ class ResPartner(models.Model):
     occupation = fields.Char(string='Occupation', help='Your occupation')
 
     appointment_count = fields.Integer(
-        string='Visites',
+        string='Consultations',
         compute="compute_appointment_count",
         required=False)
 
@@ -369,7 +369,7 @@ class ResPartner(models.Model):
         required=False)
 
     total_credit = fields.Float(
-        string='Crédit',
+        string='Reste',
         compute="compute_total_credit",
         required=False)
     antecedents_ids = fields.Many2many(
@@ -380,6 +380,9 @@ class ResPartner(models.Model):
         comodel_name='obstetric.follow.up',
         inverse_name='patient_id',
         string='Obstetrics',
+        required=False)
+    address = fields.Char(
+        string='Adresse',
         required=False)
 
     def compute_total_credit(self):
@@ -447,7 +450,7 @@ class ResPartner(models.Model):
         """Returns patient invoice"""
         self.ensure_one()
         return {
-            'name': 'Visites',
+            'name': 'Consultations',
             'view_mode': 'tree,form',
             'res_model': 'hospital.outpatient',
             'type': 'ir.actions.act_window',

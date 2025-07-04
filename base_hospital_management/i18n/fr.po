@@ -58,7 +58,7 @@ msgstr "test pour examiner de plus près votre col de l'utérus"
 #: model:ir.model.fields.selection,name:base_hospital_management.selection__res_partner__rh_type__+
 #, python-format
 msgid "+ve"
-msgstr ""
+msgstr "Positif"
 
 #. module: base_hospital_management
 #. odoo-javascript
@@ -67,7 +67,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:base_hospital_management.selection__res_partner__rh_type__-
 #, python-format
 msgid "-ve"
-msgstr ""
+msgstr "Négatif"
 
 #. module: base_hospital_management
 #: model_terms:ir.ui.view,arch_db:base_hospital_management.patient_card_report
@@ -1270,7 +1270,7 @@ msgstr ""
 #: code:addons/base_hospital_management/static/src/xml/reception_dashboard_templates.xml:0
 #, python-format
 msgid "Create Outpatient"
-msgstr "Créer une visite"
+msgstr "Créer une consultation"
 
 #. module: base_hospital_management
 #. odoo-javascript
@@ -1901,7 +1901,7 @@ msgstr "Divorcé"
 #. module: base_hospital_management
 #: model:ir.model.fields.selection,name:base_hospital_management.selection__res_partner__marital_status__divorcee
 msgid "Divorcee"
-msgstr "Divorcée"
+msgstr "Divorcé(e)"
 
 #. module: base_hospital_management
 #: model:ir.model.fields,help:base_hospital_management.field_res_partner__abuse
@@ -3471,7 +3471,7 @@ msgstr " État civil"
 #: model:ir.model.fields.selection,name:base_hospital_management.selection__res_partner__marital_status__married
 #, python-format
 msgid "Married"
-msgstr "Marié"
+msgstr "Marié(e)"
 
 #. module: base_hospital_management
 #: model:ir.model.fields,help:base_hospital_management.field_doctor_allocation__patient_limit
