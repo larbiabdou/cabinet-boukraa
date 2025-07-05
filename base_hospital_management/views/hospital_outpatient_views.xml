@@ -189,16 +189,15 @@
                                            groups="base_hospital_management.base_hospital_management_group_doctor"
                                            invisible="state == 'draft'"/>
                                 </group>
-                                <group>
-                                    <div class="col-md-6">
-                                        <button name="action_create_referral_letter"
-                                                string="Lettre d'orientation"
-                                                type="object"
-                                                class="btn btn-info w-100 mb8"
-                                                icon="fa-share-square-o"/>
-                                    </div>
-                                </group>
+
                             </group>
+                            <div class="col-md-6">
+                                <button name="action_create_referral_letter"
+                                        string="Lettre d'orientation"
+                                        type="object"
+                                        class="btn btn-info w-100 mb8"
+                                        icon="fa-share-square-o"/>
+                            </div>
                             <field name="test_lab_ids" readonly="not has_group_doctor">
                                 <tree editable="bottom">
                                     <field name="name"/>
