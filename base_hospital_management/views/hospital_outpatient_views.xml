@@ -187,6 +187,13 @@
                                            groups="base_hospital_management.base_hospital_management_group_doctor"
                                            invisible="state == 'draft'"/>
                                 </group>
+                                <group>
+                                    <button name="action_create_referral_letter"
+                                            string="Lettre d'orientation"
+                                            type="object"
+                                            class="btn btn-info w-100 mb8"
+                                            icon="fa-share-square-o"/>
+                                </group>
                             </group>
                             <field name="test_lab_ids" readonly="not has_group_doctor">
                                 <tree editable="bottom">
