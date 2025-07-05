@@ -459,15 +459,22 @@ class HospitalOutpatient(models.Model):
     ta_dia = fields.Char(
         string='TA Diastolique',
         required=False)
-    poids2 = fields.Float(
+    poids = fields.Char(
         string='Poids',
         required=False)
-    glycemie = fields.Char(
-        string='Glycemie',
+
+    taille = fields.Char(
+        string='Taille',
+        required=False)
+    poids2 = fields.Float(
+        string='Poids',
         required=False)
 
     taille2 = fields.Float(
         string='Taille',
+        required=False)
+    glycemie = fields.Char(
+        string='Glycemie',
         required=False)
     bmi = fields.Char(
         string='BMI',
