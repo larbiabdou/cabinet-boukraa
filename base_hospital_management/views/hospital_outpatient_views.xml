@@ -51,12 +51,14 @@
                             icon="fa-plus" groups="base_hospital_management.base_hospital_management_group_doctor"
                             invisible="state == 'draft'"/>
 
-                    <button name="action_done" string="Terminer" groups="base_hospital_management.base_hospital_management_group_doctor"
+                    <button name="action_done" string="Terminer"
+                            groups="base_hospital_management.base_hospital_management_group_doctor"
                             type="object" class="btn-success oe_highlight"
                             icon="fa-check-circle"
                             invisible="state != 'op'"/>
 
-                    <button name="action_confirm" string="Confirm" groups="base_hospital_management.base_hospital_management_group_doctor"
+                    <button name="action_confirm" string="Confirm"
+                            groups="base_hospital_management.base_hospital_management_group_doctor"
                             type="object" class="oe_highlight" invisible="state != 'draft'"/>
 
                     <button name="action_print_prescription" string="Ordonnance"
@@ -188,11 +190,13 @@
                                            invisible="state == 'draft'"/>
                                 </group>
                                 <group>
-                                    <button name="action_create_referral_letter"
-                                            string="Lettre d'orientation"
-                                            type="object"
-                                            class="btn btn-info w-100 mb8"
-                                            icon="fa-share-square-o"/>
+                                    <div class="col-md-6">
+                                        <button name="action_create_referral_letter"
+                                                string="Lettre d'orientation"
+                                                type="object"
+                                                class="btn btn-info w-100 mb8"
+                                                icon="fa-share-square-o"/>
+                                    </div>
                                 </group>
                             </group>
                             <field name="test_lab_ids" readonly="not has_group_doctor">
