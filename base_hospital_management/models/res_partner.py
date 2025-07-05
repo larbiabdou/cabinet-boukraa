@@ -479,6 +479,21 @@ class ResPartner(models.Model):
             'res_model': 'hospital.outpatient',
             'view_type': 'form',
             'view_mode': 'form',
+            'target': 'current',
+            'views': [[False, 'form']],
+            'context': {
+                'default_patient_id': self.id,
+                'default_state': 'op'
+            }
+        }
+
+    def action_appointment(self):
+        """Returns form view of hospital appointment wizard"""
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hospital.outpatient',
+            'view_type': 'form',
+            'view_mode': 'form',
             'target': 'new',
             'views': [[False, 'form']],
             'context': {

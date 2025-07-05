@@ -63,9 +63,14 @@
             <form>
                 <header>
                     <button name="action_schedule" string="Add Appointment"
-                            type="object"
+                            type="object" icon="fa-plus"
                             groups="base_hospital_management.base_hospital_management_group_doctor,base_hospital_management.base_hospital_management_group_receptionist"
                             class="oe_highlight"/>
+                    <button name="action_appointment" string="Rendez-vous"
+                            type="object" icon="fa-plus"
+                            groups="base_hospital_management.base_hospital_management_group_doctor,base_hospital_management.base_hospital_management_group_receptionist"
+                            class="oe_highlight"/>
+
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
