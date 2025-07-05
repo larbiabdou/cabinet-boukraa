@@ -459,14 +459,14 @@ class HospitalOutpatient(models.Model):
     ta_dia = fields.Char(
         string='TA Diastolique',
         required=False)
-    poids = fields.Float(
+    poids2 = fields.Float(
         string='Poids',
         required=False)
     glycemie = fields.Char(
         string='Glycemie',
         required=False)
 
-    taille = fields.Float(
+    taille2 = fields.Float(
         string='Taille',
         required=False)
     bmi = fields.Char(
@@ -482,7 +482,7 @@ class HospitalOutpatient(models.Model):
 
     def compute_bmi(self):
         for record in self:
-            record.bmi = record.poids / record.taille ** 2 if record.taille > 0 else 0
+            record.bmi = record.poids2 / record.taille2 ** 2 if record.taille2 > 0 else 0
 
     def unlink(self):
         for record in self:

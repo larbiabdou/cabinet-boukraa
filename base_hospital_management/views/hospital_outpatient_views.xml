@@ -152,8 +152,8 @@
                         <group groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="visit_type_id" invisible="1"/>
                             <field name="visit_type" invisible="1"/>
-                            <field name="taille" invisible="state == 'draft'"/>
-                            <field name="poids" invisible="state == 'draft'"/>
+                            <field name="taille2" invisible="state == 'draft'"/>
+                            <field name="poids2" invisible="state == 'draft'"/>
                             <field name="bmi"/>
                             <field name="glycemie" invisible="state == 'draft'"/>
                         </group>
