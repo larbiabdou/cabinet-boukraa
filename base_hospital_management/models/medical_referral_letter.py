@@ -17,7 +17,7 @@ class MedicalReferralLetter(models.Model):
     firstname = fields.Char(string="Prénom")
     lastname = fields.Char(string="Nom")
     age = fields.Integer(string="Âge")
-    referral_reason = fields.Text(string="Motif d'orientation", required=True)
+    referral_reason = fields.Text(string="Motif d'orientation")
     consultation_reason = fields.Text(string="Motif de consultation")
     clinical_findings = fields.Text(string="Examen clinique")
     suspected_diagnosis = fields.Text(string="Diagnostic suspecté")

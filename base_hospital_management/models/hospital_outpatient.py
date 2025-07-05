@@ -459,15 +459,19 @@ class HospitalOutpatient(models.Model):
     ta_dia = fields.Char(
         string='TA Diastolique',
         required=False)
-    poids = fields.Char(
+    poids = fields.Float(
         string='Poids',
         required=False)
     glycemie = fields.Char(
         string='Glycemie',
         required=False)
 
-    taille = fields.Char(
+    taille = fields.Float(
         string='Taille',
+        required=False)
+    bmi = fields.Char(
+        string='BMI',
+        compute="compute_bmi",
         required=False)
     other = fields.Char(
         string='Autres',
@@ -475,6 +479,16 @@ class HospitalOutpatient(models.Model):
     note_2 = fields.Text(
         string='Note_2',
         required=False)
+
+    def compute_bmi(self):
+        for record in self:
+            record.bmi = record.poids / record.taille ** 2 if record.taille > 0 else 0
+
+    def unlink(self):
+        for record in self:
+            if record.state == 'done':
+                raise ValidationError('Vous ne pouvez pas supprimer une consultation terminée')
+        return super().unlink()
 
     def compute_count_abdominal_report(self):
         for record in self:

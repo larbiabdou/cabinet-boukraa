@@ -48,40 +48,39 @@
                 <header>
                     <button name="action_schedule" string="Créer une consultation"
                             type="object" class="btn-primary oe_highlight"
-                            icon="fa-plus"
-                            invisible="state not in ('op')"/>
+                            icon="fa-plus" groups="base_hospital_management.base_hospital_management_group_doctor"
+                            invisible="state == 'draft'"/>
 
-                    <button name="action_done" string="Terminer"
+                    <button name="action_done" string="Terminer" groups="base_hospital_management.base_hospital_management_group_doctor"
                             type="object" class="btn-success oe_highlight"
                             icon="fa-check-circle"
-                            invisible="state not in ('op')"/>
+                            invisible="state != 'op'"/>
 
-                    <button name="action_confirm" string="Confirm"
+                    <button name="action_confirm" string="Confirm" groups="base_hospital_management.base_hospital_management_group_doctor"
                             type="object" class="oe_highlight" invisible="state != 'draft'"/>
 
                     <button name="action_print_prescription" string="Ordonnance"
                             type="object" class="oe_highlight"
                             icon="fa-print"
-                            invisible="state not in ('op')"
+                            invisible="state == 'draft'"
                             groups="base_hospital_management.base_hospital_management_group_doctor"/>
 
                     <button name="action_print_test_order" string="Bilan biologique"
                             type="object" class="oe_highlight"
                             icon="fa-print"
-                            invisible="state not in ('op')"
+                            invisible="state == 'draft'"
                             groups="base_hospital_management.base_hospital_management_group_doctor"/>
 
                     <button name="consume_medical_care_ids" type="object" string="Consommer les soins"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
-                            invisible="state not in ('op') or button_consume_visible"
+                            invisible="state != 'op' or button_consume_visible"
                             class="btn-warning oe_highlight"
                             icon="fa-stethoscope"/>
-
-
                     <field name="button_consume_visible" invisible="1"/>
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <field name="state" invisible="1"/>
+
 
                     <!-- Boutons intelligents en haut -->
                     <div class="oe_button_box" name="button_box">
@@ -143,31 +142,31 @@
 
                             <field name="reason" readonly="not has_group_doctor"
                                    groups="base_hospital_management.base_hospital_management_group_doctor"/>
-                            <field name="care_amount" invisible="state not in ('op')"/>
-                            <field name="visit_amount" invisible="state not in ('op')" readonly="not has_group_doctor"/>
+                            <field name="care_amount" invisible="state == 'draft'"/>
+                            <field name="visit_amount" invisible="state == 'draft'" readonly="not has_group_doctor"/>
 
-                            <field name="amount" readonly="not has_group_doctor" invisible="state not in ('op')"/>
-                            <field name="amount_paid" invisible="state not in ('op')"/>
+                            <field name="amount" readonly="not has_group_doctor" invisible="state == 'draft'"/>
+                            <field name="amount_paid" invisible="state == 'draft'"/>
                             <field name="payment_state" invisible="1"/>
                         </group>
                         <group groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="visit_type_id" invisible="1"/>
                             <field name="visit_type" invisible="1"/>
-                            <field name="taille" invisible="state not in ('op')"/>
-                            <field name="poids" invisible="state not in ('op')"/>
-
-                            <field name="glycemie" invisible="state not in ('op')"/>
+                            <field name="taille" invisible="state == 'draft'"/>
+                            <field name="poids" invisible="state == 'draft'"/>
+                            <field name="bmi"/>
+                            <field name="glycemie" invisible="state == 'draft'"/>
                         </group>
                     </group>
-                    <notebook invisible="state not in ('op')"
+                    <notebook invisible="state == 'draft'"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
-                        <page invisible="state not in ('op')" string="Motif de consultation">
+                        <page invisible="state == 'draft'" string="Motif de consultation">
                             <field name="consult_motif"/>
                         </page>
-                        <page invisible="state not in ('op')" string="Examen clinique">
+                        <page invisible="state == 'draft'" string="Examen clinique">
                             <field name="clinic_exam"/>
                         </page>
-                        <page invisible="state not in ('op')" string="Examen complémentaire">
+                        <page invisible="state == 'draft'" string="Examen complémentaire">
                             <div class="o_horizontal_separator mt16"></div>
                             <div class="row mt16">
                                 <div class="col-md-6">
@@ -186,7 +185,7 @@
                                     <field name="test_ids" widget="many2many_tags" domain="[('parent_id', '=', False)]"
                                            readonly="not has_group_doctor"
                                            groups="base_hospital_management.base_hospital_management_group_doctor"
-                                           invisible="state not in ('op')"/>
+                                           invisible="state == 'draft'"/>
                                 </group>
                             </group>
                             <field name="test_lab_ids" readonly="not has_group_doctor">
@@ -353,7 +352,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.outpatient</field>
         <field name="view_mode">tree,form,calendar</field>
-        <field name="domain">[('state', '=', 'op')]</field>
+        <field name="domain">[('state', '!=', 'draft')]</field>
         <field name="context">{'search_default_today':1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

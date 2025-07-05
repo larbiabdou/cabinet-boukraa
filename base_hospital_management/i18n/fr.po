@@ -268,7 +268,7 @@ msgstr ""
 #. module: base_hospital_management
 #: model_terms:ir.ui.view,arch_db:base_hospital_management.res_partner_view_form
 msgid "Add Appointment"
-msgstr "Ajouter un rendez-vous"
+msgstr "Ajouter une consultation"
 
 #. module: base_hospital_management
 #: model_terms:ir.actions.act_window,help:base_hospital_management.hospital_insurance_action

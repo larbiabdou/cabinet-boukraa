@@ -482,7 +482,8 @@ class ResPartner(models.Model):
             'target': 'new',
             'views': [[False, 'form']],
             'context': {
-                'default_patient_id': self.id
+                'default_patient_id': self.id,
+                'default_state': 'op'
             }
         }
 
