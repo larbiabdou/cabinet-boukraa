@@ -340,9 +340,29 @@ class ResPartner(models.Model):
     outpatient_ids = fields.One2many(
         comodel_name='hospital.outpatient',
         inverse_name='patient_id',
-        string='Outpatient_ids',
+        string='Consultations',
         domain=[('state', '!=', 'draft')],
         required=False)
+
+    outpatient_medecine_ids = fields.Many2many(
+        comodel_name='hospital.outpatient',
+        string='Ordonnance',
+        compute="compute_outpatient_medecine_ids",
+        required=False)
+
+    def compute_outpatient_medecine_ids(self):
+        """
+        Calcule outpatient_medecine_ids à partir des outpatient_ids
+        qui ont des prescription_ids non vides
+        """
+        for record in self:
+            # Filtrer les consultations qui ont des prescriptions
+            outpatients_with_prescriptions = record.outpatient_ids.filtered(
+                lambda op: op.prescription_ids
+            )
+
+            # Assigner les consultations filtrées au champ Many2many
+            record.outpatient_medecine_ids = [(6, 0, outpatients_with_prescriptions.ids)]
 
     display_name = fields.Char(string='Display Name', compute='_compute_display_name', store=True)
 

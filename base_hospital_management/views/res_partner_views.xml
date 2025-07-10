@@ -62,7 +62,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_schedule" string="Add Appointment"
+                    <button name="action_schedule" string="Consultation"
                             type="object" icon="fa-plus"
                             groups="base_hospital_management.base_hospital_management_group_doctor,base_hospital_management.base_hospital_management_group_receptionist"
                             class="oe_highlight"/>
@@ -186,14 +186,23 @@
                         </page>
                         <page string="Historique de médicaments"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="prescription_ids">
-                                <tree editable="bottom" create="0">
-                                    <field name="date"/>
-                                    <field name="medicine_id"/>
-                                    <field name="posologie_id"/>
-                                    <field name="qsp_id"/>
+                            <field name="outpatient_medecine_ids" string="Ordonnance">
+                                <tree readonly="1">
+                                    <field name="op_date"/>
+                                    <field name="op_reference"/>
                                 </tree>
+                                <form string="Ordonnance">
+                                    <field name="prescription_ids" readonly="1">
+                                        <tree create="0">
+                                            <field name="date"/>
+                                            <field name="medicine_id"/>
+                                            <field name="posologie_id"/>
+                                            <field name="qsp_id"/>
+                                        </tree>
+                                    </field>
+                                </form>
                             </field>
+
                             <!--
                             <page string="Vaccine">
                                 <field name="hospital_vaccination_ids">
