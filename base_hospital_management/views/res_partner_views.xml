@@ -179,7 +179,7 @@
                                 <tree readonly="1">
                                     <field name="op_date"/>
                                     <field name="slot" widget="float_time"/>
-                                    <field name="reason"/>
+                                    <field name="consult_motif"/>
                                     <field name="note"/>
                                 </tree>
                             </field>

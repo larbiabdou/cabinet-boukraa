@@ -59,7 +59,7 @@ class ResPartner(models.Model):
     gender = fields.Selection(selection=[
         ('male', 'Male'), ('female', 'Female')
     ], string='Gender', help='Gender of the patient')
-    marital_status = fields.Selection(selection=[
+    marital_status = fields.Selection(selection=[('enfant', 'Enfant'),
         ('married', 'Married'), ('unmarried', 'Unmarried'), ('widow', 'Widow'),
         ('widower', 'Widower'), ('divorcee', 'Divorcee')
     ], string='Marital Status', help='Marital status of patient')

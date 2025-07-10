@@ -22,7 +22,7 @@
 import base64
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-
+from odoo.tools import float_compare, float_round
 
 class HospitalOutpatient(models.Model):
     """Class holding Outpatient details"""
@@ -186,6 +186,10 @@ class HospitalOutpatient(models.Model):
     def action_done(self):
         for record in self:
             record.state = 'done'
+
+    def action_reset_to_op(self):
+        for record in self:
+            record.state = 'op'
 
     def action_create_leave_extension(self):
         """Ouvre un popup pour créer une prolongation d'arrêt"""
@@ -479,6 +483,7 @@ class HospitalOutpatient(models.Model):
     bmi = fields.Char(
         string='BMI',
         compute="compute_bmi",
+        digits=(16, 2),
         required=False)
     other = fields.Char(
         string='Autres',
@@ -489,7 +494,7 @@ class HospitalOutpatient(models.Model):
 
     def compute_bmi(self):
         for record in self:
-            record.bmi = record.poids2 / record.taille2 ** 2 if record.taille2 > 0 else 0
+            record.bmi = float_round(record.poids2 / (record.taille2/100) ** 2, 2) if record.taille2 > 0 else 0
 
     def unlink(self):
         for record in self:
@@ -563,8 +568,7 @@ class HospitalOutpatient(models.Model):
             'target': 'new',
             'views': [[False, 'form']],
             'context': {
-                'default_patient_id': self.patient_id.id,
-                'default_state': 'op'
+                'default_patient_id': self.patient_id.id
             }
         }
 

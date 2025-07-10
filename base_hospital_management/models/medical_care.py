@@ -24,7 +24,7 @@ class MedicalCare(models.Model):
 
     uom_id = fields.Many2one(
         comodel_name='uom.uom',
-        string='Udm',
+        string='UdM',
         domain="[('category_id', '=', product_uom_category_id)]",
         required=False)
 

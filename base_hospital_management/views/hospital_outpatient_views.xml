@@ -46,12 +46,10 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-
-                    <button name="action_done" string="Terminer"
+                    <button name="action_schedule" string="Rendez-vous"
+                            type="object" icon="fa-plus"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
-                            type="object" class="btn-success oe_highlight"
-                            icon="fa-check-circle"
-                            invisible="state != 'op'"/>
+                            class="oe_highlight" invisible="state != 'done'"/>
 
                     <button name="action_confirm" string="Confirm"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
@@ -74,6 +72,16 @@
                             invisible="state != 'op' or button_consume_visible"
                             class="btn-warning oe_highlight"
                             icon="fa-stethoscope"/>
+
+                    <button name="action_reset_to_op" string="Rouvrir"
+                            groups="base_hospital_management.base_hospital_management_group_doctor"
+                            type="object" class="btn-success oe_highlight"
+                            invisible="state != 'done'"/>
+                    <button name="action_done" string="Terminer"
+                            groups="base_hospital_management.base_hospital_management_group_doctor"
+                            type="object" class="btn-success oe_highlight"
+                            icon="fa-check-circle"
+                            invisible="state != 'op'"/>
                     <field name="button_consume_visible" invisible="1"/>
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -88,7 +96,7 @@
                                 class="oe_stat_button"
                                 icon="fa-file-text-o"
                                 invisible="leave_certificate_count == 0">
-                            <field name="leave_certificate_count" widget="statinfo" string="Arrêts"/>
+                            <field name="leave_certificate_count" widget="statinfo" string="Arrêt de travail"/>
                         </button>
 
                         <!-- Prolongations -->
@@ -97,7 +105,7 @@
                                 class="oe_stat_button"
                                 icon="fa-plus-square-o"
                                 invisible="leave_extension_count == 0">
-                            <field name="leave_extension_count" widget="statinfo" string="Prolongations"/>
+                            <field name="leave_extension_count" widget="statinfo" string="Prolongation d'arrêt de travail"/>
                         </button>
 
                         <!-- Reprises de travail -->
@@ -106,7 +114,7 @@
                                 class="oe_stat_button"
                                 icon="fa-check-square-o"
                                 invisible="work_resumption_count == 0">
-                            <field name="work_resumption_count" widget="statinfo" string="Reprises"/>
+                            <field name="work_resumption_count" widget="statinfo" string="Reprise après arrêt de travail"/>
                         </button>
 
                         <!-- Lettres d'orientation -->
@@ -133,36 +141,45 @@
                     </h1>
                     <group>
                         <group>
-                            <field name="patient_id" domain="[('is_patient', '=', True)]"
+                            <field name="patient_id" domain="[('is_patient', '=', True)]" readonly="state == 'done'"
                                    context="{'default_is_patient': True,'form_view_ref': 'base_hospital_management.res_partner_view_form'}"/>
-                            <field name="op_date"/>
+                            <field name="op_date" readonly="state == 'done'"/>
                             <field name="has_group_doctor" invisible="1"/>
 
-                            <field name="reason" readonly="not has_group_doctor"
-                                   groups="base_hospital_management.base_hospital_management_group_doctor"/>
-                            <field name="care_amount" invisible="state == 'draft'"/>
-                            <field name="visit_amount" invisible="state == 'draft'" readonly="not has_group_doctor"/>
+                            <field name="reason" readonly="not has_group_doctor or state == 'done'" invisible="1"/>
+                            <field name="care_amount" invisible="state == 'draft'" readonly="state == 'done'"/>
+                            <field name="visit_amount" invisible="state == 'draft'" readonly="not has_group_doctor or state == 'done'"/>
 
-                            <field name="amount" readonly="not has_group_doctor" invisible="state == 'draft'"/>
-                            <field name="amount_paid" invisible="state == 'draft'"/>
+                            <field name="amount" readonly="not has_group_doctor or state == 'done'" invisible="state == 'draft'"/>
+                            <field name="amount_paid" invisible="state == 'draft'" readonly="state == 'done'"/>
                             <field name="payment_state" invisible="1"/>
                         </group>
                         <group groups="base_hospital_management.base_hospital_management_group_doctor">
                             <field name="visit_type_id" invisible="1"/>
                             <field name="visit_type" invisible="1"/>
-                            <field name="taille2" invisible="state == 'draft'"/>
-                            <field name="poids2" invisible="state == 'draft'"/>
+                            <label for="taille2"/>
+                            <div class="d-flex align-items-center">
+                                <field name="taille2" nolabel="1" readonly="state == 'done'"
+                                       style="width: 60px; display: inline-block;"/>
+                                <span style="margin-left: 3px;">Cm</span>
+                            </div>
+                            <label for="poids2"/>
+                            <div class="d-flex align-items-center">
+                                <field name="poids2" nolabel="1" readonly="state == 'done'"
+                                       style="width: 60px; display: inline-block;"/>
+                                <span style="margin-left: 3px;">Kg</span>
+                            </div>
                             <field name="bmi"/>
-                            <field name="glycemie" invisible="state == 'draft'"/>
+                            <field name="glycemie" invisible="state == 'draft'" readonly="state == 'done'"/>
                         </group>
                     </group>
                     <notebook invisible="state == 'draft'"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
                         <page invisible="state == 'draft'" string="Motif de consultation">
-                            <field name="consult_motif"/>
+                            <field name="consult_motif" readonly="state == 'done'"/>
                         </page>
                         <page invisible="state == 'draft'" string="Examen clinique">
-                            <field name="clinic_exam"/>
+                            <field name="clinic_exam" readonly="state == 'done'"/>
                         </page>
                         <page invisible="state == 'draft'" string="Examen complémentaire">
                             <div class="o_horizontal_separator mt16"></div>
@@ -176,12 +193,12 @@
                                 </div>
                             </div>
                         </page>
-                        <page string="Bilans biologique">
+                        <page string="Bilan biologique">
                             <group>
                                 <group>
 
                                     <field name="test_ids" widget="many2many_tags" domain="[('parent_id', '=', False)]"
-                                           readonly="not has_group_doctor"
+                                           readonly="not has_group_doctor or state == 'done'"
                                            groups="base_hospital_management.base_hospital_management_group_doctor"
                                            invisible="state == 'draft'"/>
                                 </group>
@@ -194,7 +211,7 @@
                                         class="btn btn-info w-100 mb8"
                                         icon="fa-share-square-o"/>
                             </div>
-                            <field name="test_lab_ids" readonly="not has_group_doctor">
+                            <field name="test_lab_ids" readonly="not has_group_doctor or state == 'done'">
                                 <tree editable="bottom">
                                     <field name="name"/>
                                     <field name="test_id" domain="[('parent_id', '=', False)]" column_invisible="1"/>
@@ -249,7 +266,7 @@
                         <page name="Soins" string="Soins">
                             <notebook>
                                 <page name="Soins">
-                                    <field name="medical_care_ids" readonly="not has_group_doctor">
+                                    <field name="medical_care_ids" readonly="not has_group_doctor or state == 'done'">
                                         <tree editable="bottom">
                                             <field name="product_id" readonly="consumed"/>
                                             <field name="cost"/>
@@ -269,12 +286,12 @@
                                     </field>
                                 </page>
                                 <page name="Notes" string="Notes">
-                                    <field name="note_2"/>
+                                    <field name="note_2" readonly="state == 'done'"/>
                                 </page>
                             </notebook>
                         </page>
                         <page name="Prescription" string="Prescription">
-                            <field name="prescription_ids" readonly="not has_group_doctor"
+                            <field name="prescription_ids" readonly="not has_group_doctor or state == 'done'"
                                    string="Prescription">
                                 <tree editable="bottom">
                                     <field name="medicine_id"/>
@@ -285,7 +302,7 @@
                             </field>
                         </page>
 
-                        <page string="Remarques" readonly="not has_group_doctor">
+                        <page string="Remarques" readonly="not has_group_doctor or state == 'done'">
                             <field name="note"/>
                         </page>
 
