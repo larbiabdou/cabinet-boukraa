@@ -80,6 +80,9 @@
                                             QSP
                                             <span t-esc="line['qsp']"/>
                                         </t>
+                                        <t t-elif="line['qsp_note']">
+                                            <span t-esc="line['qsp_note']"/>
+                                        </t>
                                     </td>
                                 </tr>
                             </t>

@@ -297,6 +297,7 @@
                                     <field name="medicine_id"/>
                                     <field name="posologie_id"/>
                                     <field name="qsp_id"/>
+                                    <field name="qsp_note"/>
                                     <field name="note_1"/>
                                 </tree>
                             </field>

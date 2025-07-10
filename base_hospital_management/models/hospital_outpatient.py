@@ -919,6 +919,7 @@ class HospitalOutpatient(models.Model):
                 'posologie': rec.posologie_id.name,
                 'note': rec.note_1,
                 'qsp': rec.qsp_id.name,
+                'qsp_note': rec.qsp_note,
             }
             p_list.append(datas)
         data = {

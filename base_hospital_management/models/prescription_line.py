@@ -35,6 +35,9 @@ class PrescriptionLine(models.Model):
                               help="How much medicine want to take")
     qsp_id = fields.Many2one('hospital.qsp', string='QSP', required=False,
                              help='Quantité Suffisante Pour')
+    qsp_note = fields.Char(
+        string='QSP Note',
+        required=False)
     posologie_id = fields.Many2one('hospital.posologie', string='Posologie', required=False,
                                    help='Posologie du médicament')
     date = fields.Datetime(
