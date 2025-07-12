@@ -40,21 +40,7 @@ class HospitalOutpatient(models.Model):
                                           ['New', 'Employee', 'User'])],
                                  string='Patient ID', help='Id of the patient',
                                  required=True)
-    is_diabetic = fields.Boolean(
-        string='Diabétique',
-        related="patient_id.is_diabetic",
-        store="True",
-        required=False)
-    is_hta = fields.Boolean(
-        string='HTA',
-        related="patient_id.is_hta",
-        store="True",
-        required=False)
-    is_divers = fields.Boolean(
-        string='Divers',
-        related="patient_id.is_divers",
-        store="True",
-        required=False)
+
     doctor_id = fields.Many2one('doctor.allocation',
                                 string='Doctor',
                                 help='Select the doctor',

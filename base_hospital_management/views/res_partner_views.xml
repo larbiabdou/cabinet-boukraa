@@ -10,9 +10,6 @@
                        filter_domain="['|',('patient_seq','ilike',self),('name','ilike',self)]"/>
                 <field name="patient_seq" string="Patient Code"/>
                 <field name="gender" string="Gender"/>
-                <!--<filter name="Diabétique" string="Diabétique" domain="[('is_diabetic', '=', True)]"/>
-                <filter name="HTA" string="HTA" domain="[('is_hta', '=', True)]"/>
-                <filter name="Divers" string="Divers" domain="[('is_divers', '=', True)]"/>-->
             </search>
         </field>
     </record>
@@ -140,8 +137,7 @@
                             </div>
                             <field name="gender"/>
                             <field name="marital_status"/>
-                            <field name="is_alive" widget="radio" invisible="1"
-                                   options="{'horizontal': true}"/>
+
                             <field name="profession"/>
                         </group>
                     </group>
