@@ -8,7 +8,6 @@
             <tree>
                 <field name="op_reference" string="OP Reference"/>
                 <field name="patient_id"/>
-                <field name="visit_type_id"/>
                 <field name="op_date"/>
             </tree>
         </field>
