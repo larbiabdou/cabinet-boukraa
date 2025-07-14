@@ -49,17 +49,11 @@
                     <button name="action_schedule" string="Rendez-vous"
                             type="object" icon="fa-plus"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
-                            class="oe_highlight" invisible="state != 'done'"/>
+                            class="oe_highlight"/>
 
                     <button name="action_confirm" string="Confirm"
                             groups="base_hospital_management.base_hospital_management_group_doctor"
                             type="object" class="oe_highlight" invisible="state != 'draft'"/>
-
-                    <button name="action_print_prescription" string="Ordonnance"
-                            type="object" class="oe_highlight"
-                            icon="fa-print"
-                            invisible="state == 'draft'"
-                            groups="base_hospital_management.base_hospital_management_group_doctor"/>
 
                     <button name="action_print_test_order" string="Bilan biologique"
                             type="object" class="oe_highlight"
@@ -290,16 +284,58 @@
                                 </page>
                             </notebook>
                         </page>
-                        <page name="Prescription" string="Prescription">
-                            <field name="prescription_ids" readonly="not has_group_doctor or state == 'done'"
-                                   string="Prescription">
-                                <tree editable="bottom">
-                                    <field name="medicine_id"/>
-                                    <field name="posologie_id"/>
-                                    <field name="qsp_id"/>
-                                    <field name="qsp_note"/>
-                                    <field name="note_1"/>
+                        <page name="prescription_normale" string="Ordonnances">
+                            <field name="prescription_normale_ids" context="{'default_prescription_type': 'normal'}" readonly="not has_group_doctor or state == 'done'">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="prescription_type"/>
+                                    <button name="action_print" type="object" string="Imprimer"/>
                                 </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="date"/>
+                                        <field name="prescription_type"/>
+                                    </group>
+                                    <field name="prescription_line_ids">
+                                        <tree editable="bottom">
+                                            <field name="medicine_id"/>
+                                            <field name="posologie_id"/>
+                                            <field name="qsp_id"/>
+                                            <field name="qsp_note"/>
+                                            <field name="note_1"/>
+                                        </tree>
+                                    </field>
+                                </form>
+                            </field>
+                        </page>
+
+                        <!-- Onglet Ordonnances Souches -->
+                        <page name="prescription_souche" string="Ordonnances Souches">
+                            <field name="prescription_souche_ids" context="{'default_prescription_type': 'souche'}" readonly="not has_group_doctor or state == 'done'">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="prescription_type"/>
+                                    <button name="action_print" type="object" string="Imprimer"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="date"/>
+                                        <field name="prescription_type"/>
+                                    </group>
+                                    <field name="prescription_line_ids">
+                                        <tree editable="bottom">
+                                            <field name="medicine_id"/>
+                                            <field name="posologie_id"/>
+                                            <field name="qsp_id"/>
+                                            <field name="qsp_note"/>
+                                            <field name="note_1"/>
+                                        </tree>
+                                    </field>
+                                </form>
                             </field>
                         </page>
 

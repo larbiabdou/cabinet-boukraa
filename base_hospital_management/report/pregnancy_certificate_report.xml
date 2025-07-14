@@ -27,7 +27,7 @@
                         <div style="position: relative; z-index: 10;">
                             <t t-set="firstname" t-value="doc.patient_id.firstname"/>
                             <t t-set="lastname" t-value="doc.patient_id.lastname"/>
-                            <t t-set="age" t-value="doc.patient_id.age"/>
+                            <t t-set="age" t-value="doc.patient_id.age_str"/>
                             <t t-set="date" t-value="datetime.datetime.now().strftime('%d/%m/%Y')"/>
                             <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>

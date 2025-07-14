@@ -27,174 +27,232 @@
         <field name="dpi">90</field>
     </record>
     <template id="template_header_a5">
-        <div class="text-center" style="font-weight:900;font-size: 30px">
-            Cabinet Médical Dirah
-        </div>
-        <br/>
-        <table style="width: 100%;border: transparent !important;">
-            <tr style="border: none;">
-                <td style="border: none;height: 10px;width: 37%;"></td>
-                <td rowspan="6" style="border: none;height: 35px;width: 26%;">
-                    <img src="/base_hospital_management/static/img/logo.png" style="width: 100%;" alt=""/>
+        <t t-set="company" t-value="env.company"/>
+        <table style="width: 100%; border: none; border-collapse: collapse; margin-bottom: 20px;">
+            <tr style="border: none; vertical-align: top;">
+                <!-- Partie gauche - Informations du médecin en français -->
+                <td style="border: none; width: 35%; padding: 10px; vertical-align: top;">
+                    <div style="line-height: 1.4;">
+                        <div style="font-size: 18px; font-weight: bold; color: #2c3e50; margin-bottom: 5px;">
+                            <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
+                        </div>
+                        <div style="font-size: 14px; color: #34495e; margin-bottom: 3px;">
+                            <span t-esc="company.doctor_speciality or 'Spécialité'"/>
+                        </div>
+                        <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 15px;">
+                            N° d'ordre :
+                            <span t-esc="company.doctor_order_number or '000000'"/>
+                        </div>
+
+                        <div style="font-size: 12px; color: #2c3e50; line-height: 1.6;">
+                            <div style="margin-bottom: 3px;">
+                                <strong>Nom et prénom :</strong>
+                                <span t-esc="(lastname or '') + ' ' + (firstname or '')"/>
+                            </div>
+                            <div style="margin-bottom: 3px;">
+                                <strong>Âge :</strong>
+                                <span t-esc="age or ''"/>
+                            </div>
+                            <!-- Affichage conditionnel pour ordonnance souche -->
+                            <t t-if="prescription and prescription.prescription_type == 'souche'">
+                                <div style="margin-bottom: 3px;">
+                                    <strong>Sexe :</strong>
+                                    <span t-esc="gender or ''"/>
+                                </div>
+                                <div style="margin-bottom: 3px;">
+                                    <strong>Adresse :</strong>
+                                    <span t-esc="age or ''"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
                 </td>
-                <td style="border: none;height: 30px;width: 37%;"></td>
-            </tr>
-            <tr>
-                <td style="font-size: 20px !important;font-weight: 800 !important;height: 25px;">
-                    Dr. Chibane A
+
+                <!-- Partie centrale - Logo -->
+                <td style="border: none; width: 30%; text-align: center; padding: 10px;">
+                    <img src="/base_hospital_management/static/img/logo.png"
+                         style="max-width: 120px; max-height: 120px; object-fit: contain;"
+                         alt="Logo Cabinet"/>
                 </td>
-                <td style="font-size: 16px !important;font-weight: 400 !important;padding-left: 20px">
-                    Nom: &#160;&#160;&#160;
-                    <span t-esc="lastname"/>
+
+                <!-- Partie droite - Informations en arabe -->
+                <td style="border: none; width: 35%; padding: 10px; vertical-align: top; text-align: right;" dir="rtl">
+                    <div style="line-height: 1.4;">
+                        <div style="font-size: 18px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; font-family: Arial, sans-serif;">
+                            دكتور بونجار رضا
+                        </div>
+                        <div style="font-size: 14px; color: #34495e; margin-bottom: 3px; font-family: Arial, sans-serif;">
+                            أخصائي في جراحة
+                        </div>
+                        <div style="font-size: 14px; color: #34495e; margin-bottom: 15px; font-family: Arial, sans-serif;">
+                            العظام والمفاصل والكسور
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="font-size: 12px; color: #7f8c8d; margin-top: 20px;" dir="ltr">
+                            <span style="font-family: Arial, sans-serif;">Kolea, le</span>
+                            <span t-esc="date or ''"/>
+                        </div>
+                    </div>
                 </td>
-            </tr>
-            <tr>
-                <td style="font-size: 18px !important;height: 25px;">
-                    Ep. Benakezouh
-                </td>
-                <td style="font-size: 16px !important;font-weight: 400 !important;padding-left: 20px">
-                    Prénom: &#160;&#160;&#160;
-                    <span t-esc="firstname"/>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size: 20px!important;height: 25px;">
-                    Médecin Généraliste
-                </td>
-                <td style="font-size: 14px !important;font-weight: 400 !important;padding-left: 20px">
-                    Age: &#160;&#160;&#160;
-                    <span t-esc="age"/>
-                    Ans
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size: 20px !important;font-weight: 800 !important;height: 25px;">
-                    N°: 2384TZO
-                </td>
-                <td style="font-size: 16px !important;font-weight: 400 !important;padding-left: 20px">
-                    Date :
-                    <span t-esc="date"/>
-                </td>
-            </tr>
-            <tr>
-                <td style="height: 10px"></td>
-                <td style="height: 10px"></td>
             </tr>
         </table>
+
+        <!-- Ligne de séparation décorative -->
+        <div style="border-bottom: 2px solid #3498db; margin: 20px 0;"></div>
     </template>
+
     <template id="template_header_a4">
-        <div class="text-center" style="font-weight:900;font-size: 30px">
-            Cabinet Médical Dirah
-        </div>
-        <br/>
-        <table style="width: 100%;border: transparent !important;">
-            <tr style="border: none;">
-                <td style="border: none;height: 10px;width: 37%;"></td>
-                <td rowspan="6" style="border: none;height: 35px;width: 26%;">
-                    <img src="/base_hospital_management/static/img/logo.png" style="width: 150px;" alt=""/>
+        <t t-set="company" t-value="env.company"/>
+
+        <table style="width: 100%; border: none; border-collapse: collapse; margin-bottom: 25px;">
+            <tr style="border: none; vertical-align: top;">
+                <!-- Partie gauche - Informations du médecin en français -->
+                <td style="border: none; width: 35%; padding: 15px; vertical-align: top;">
+                    <div style="line-height: 1.5;">
+                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50; margin-bottom: 8px;">
+                            <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
+                        </div>
+                        <div style="font-size: 16px; color: #34495e; margin-bottom: 5px;">
+                            <span t-esc="company.doctor_speciality or 'Spécialité'"/>
+                        </div>
+                        <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 20px;">
+                            N° d'ordre :
+                            <span t-esc="company.doctor_order_number or '000000'"/>
+                        </div>
+
+                        <!-- Informations patient -->
+                        <div style="font-size: 14px; color: #2c3e50; line-height: 1.7;">
+                            <div style="margin-bottom: 5px;">
+                                <strong>Nom et prénom :</strong>
+                                <span t-esc="(lastname or '') + ' ' + (firstname or '')"/>
+                            </div>
+                            <div style="margin-bottom: 5px;">
+                                <strong>Âge :</strong>
+                                <span t-esc="age or ''"/>
+                            </div>
+                            <!-- Affichage conditionnel pour ordonnance souche -->
+                            <t t-if="prescription and prescription.prescription_type == 'souche'">
+                                <div style="margin-bottom: 5px;">
+                                    <strong>Sexe :</strong>
+                                    <span t-esc="prescription.patient_id.gender or ''"/>
+                                </div>
+                                <div style="margin-bottom: 5px;">
+                                    <strong>Adresse :</strong>
+                                    <span t-esc="prescription.patient_id.address or ''"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
                 </td>
-                <td style="border: none;height: 30px;width: 37%;"></td>
-            </tr>
-            <tr>
-                <td style="font-size: 20px !important;font-weight: 800 !important;height: 25px;">
-                    Dr. Chibane A
+
+                <!-- Partie centrale - Logo -->
+                <td style="border: none; width: 30%; text-align: center; padding: 15px;">
+                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <img src="/base_hospital_management/static/img/logo.png"
+                             style="max-width: 150px; max-height: 150px; object-fit: contain;"
+                             alt="Logo Cabinet"/>
+                    </div>
                 </td>
-                <td style="font-size: 16px !important;font-weight: 400 !important;padding-left: 20px">
-                    Nom: &#160;&#160;&#160;
-                    <span t-esc="lastname"/>
+
+                <!-- Partie droite - Informations en arabe -->
+                <td style="border: none; width: 35%; padding: 15px; vertical-align: top; text-align: right;" dir="rtl">
+                    <div style="line-height: 1.5;">
+                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50; margin-bottom: 8px; font-family: Arial, sans-serif;">
+                            دكتور بونجار رضا
+                        </div>
+                        <div style="font-size: 16px; color: #34495e; margin-bottom: 5px; font-family: Arial, sans-serif;">
+                            أخصائي في جراحة
+                        </div>
+                        <div style="font-size: 16px; color: #34495e; margin-bottom: 20px; font-family: Arial, sans-serif;">
+                            العظام والمفاصل والكسور
+                        </div>
+
+                        <div style="font-size: 14px; color: #7f8c8d; margin-top: 25px; padding: 8px; background-color: #f8f9fa; border-radius: 5px;">
+                            <span style="font-family: Arial, sans-serif;">كوليا، في</span>
+                            <span t-esc="date or ''"/>
+                        </div>
+                    </div>
                 </td>
-            </tr>
-            <tr>
-                <td style="font-size: 18px !important;height: 25px;">
-                    Ep. Benakezouh
-                </td>
-                <td style="font-size: 16px !important;font-weight: 400 !important;padding-left: 20px">
-                    Prénom: &#160;&#160;&#160;
-                    <span t-esc="firstname"/>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size: 20px!important;height: 25px;">
-                    Médecin Généraliste
-                </td>
-                <td style="font-size: 14px !important;font-weight: 400 !important;padding-left: 20px">
-                    Age: &#160;&#160;&#160;
-                    <span t-esc="age"/>
-                    Ans
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size: 20px !important;font-weight: 800 !important;height: 25px;">
-                    N°: 2384TZO
-                </td>
-                <td style="font-size: 16px !important;font-weight: 400 !important;padding-left: 20px">
-                    Date :
-                    <span t-esc="date"/>
-                </td>
-            </tr>
-            <tr>
-                <td style="height: 10px"></td>
-                <td style="height: 10px"></td>
             </tr>
         </table>
+
+        <!-- Ligne de séparation décorative avec dégradé -->
+        <div style="height: 3px; background: linear-gradient(90deg, #3498db 0%, #2ecc71 50%, #3498db 100%); margin: 25px 0; border-radius: 2px;"></div>
     </template>
     <template id="template_footer_a5">
-        <div t-attf-class="footer" style="border-top: 1px solid #000; padding-top: 10px;">
-            <table style="border: transparent !important; width:100%;">
+        <t t-set="company" t-value="env.company"/>
+        <div t-attf-class="footer"
+             style="border-top: 2px solid #3498db; padding-top: 15px; margin-top: 30px; background-color: #f8f9fa;">
+            <table style="border: transparent !important; width:100%; border-collapse: collapse;">
                 <tr>
-                    <td style="border: transparent !important; font-size:13px;">
-                        <i class="fa fa-phone"></i>
-                        0779 31 03 21 / 026 75 91 65
+                    <td style="border: transparent !important; font-size:12px; padding: 5px; vertical-align: top;width:65%;">
+                        <div style="margin-bottom: 8px;">
+                            <i class="fa fa-phone" style="color: #3498db; margin-right: 8px;"></i>
+                            <span t-esc="company.phone"/>
+                        </div>
+                        <div>
+                            <i class="fa fa-map-marker" style="color: #e74c3c; margin-right: 8px;"></i>
+                            <span t-esc="company.street"/>
+                        </div>
                     </td>
 
-                    <td style="border: transparent !important;font-size:13px;">
-                        <i class="fa fa-facebook"></i>
-                        عيادة ديرة
-                    </td>
-                </tr>
-                <tr >
-                    <td style="border: transparent !important;font-size:13px;">
-                        <i class="fa fa-map-marker"></i>
-                        Cité 18 Logement - Bâtiment A n°2 - Dirah
-                    </td>
-
-                    <td style="border: transparent !important; font-size:13px;">
-                        <i class="fa fa-envelope"></i>
-                        cabinet.dirah@gmail.com
+                    <td style="border: transparent !important; font-size:12px; padding: 5px; vertical-align: top; text-align: left;"
+                        >
+                        <div style="margin-bottom: 8px; font-family: Arial, sans-serif;">
+                            <i class="fa fa-facebook" style="color: #3b5998; margin-left: 8px;"></i>
+                            <span t-esc="company.facebook_page"/>
+                        </div>
+                        <div style="font-family: Arial, sans-serif;">
+                            <i class="fa fa-envelope" style="color: #34495e; margin-left: 8px;"></i>
+                            <span t-esc="company.email"/>
+                        </div>
                     </td>
                 </tr>
             </table>
 
+            <!-- Ligne décorative -->
+            <div style="height: 1px; background: linear-gradient(90deg, #3498db 0%, #2ecc71 50%, #3498db 100%); margin-top: 10px;"></div>
         </div>
     </template>
 
     <template id="template_footer_a4">
-        <div t-attf-class="footer" style="border-top: 1px solid #000; padding-top: 10px;">
-            <table style="border: transparent !important; width:100%;">
+        <t t-set="company" t-value="env.company"/>
+        <div t-attf-class="footer"
+             style="border-top: 3px solid #3498db; padding-top: 20px; margin-top: 40px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+            <table style="border: transparent !important; width:100%; border-collapse: collapse;">
                 <tr>
-                    <td style="border: transparent !important; font-size:13px;">
-                        <i class="fa fa-phone"></i>
-                        0779 31 03 21 / 026 75 91 65
+                    <td style="border: transparent !important; font-size:14px; padding: 10px; vertical-align: top;">
+                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+                            <i class="fa fa-phone" style="color: #3498db; margin-right: 12px; font-size: 16px;"></i>
+                            <span style="font-weight: 500;" t-esc="company.phone"/>
+                        </div>
+                        <div style="display: flex; align-items: flex-start;">
+                            <i class="fa fa-map-marker"
+                               style="color: #e74c3c; margin-right: 12px; font-size: 16px; margin-top: 2px;"></i>
+                            <div>
+                                <span t-esc="company.street"/>
+                            </div>
+                        </div>
                     </td>
 
-                    <td style="border: transparent !important;font-size:13px;">
-                        <i class="fa fa-facebook"></i>
-                        عيادة ديرة
-                    </td>
-                </tr>
-                <tr >
-                    <td style="border: transparent !important;font-size:13px;">
-                        <i class="fa fa-map-marker"></i>
-                        Cité 18 Logement - Bâtiment A n°2 - Dirah
-                    </td>
-
-                    <td style="border: transparent !important; font-size:13px;">
-                        <i class="fa fa-envelope"></i>
-                        cabinet.dirah@gmail.com
+                    <td style="border: transparent !important; font-size:14px; padding: 10px; vertical-align: top; text-align: right;"
+                        dir="rtl">
+                        <div style="margin-bottom: 12px; font-family: Arial, sans-serif;">
+                            <i class="fa fa-facebook" style="color: #3b5998; margin-left: 12px; font-size: 16px;"></i>
+                            <span style="font-weight: 500;" t-esc="company.facebook_page"/>
+                        </div>
+                        <div style="font-family: Arial, sans-serif;">
+                            <i class="fa fa-envelope" style="color: #34495e; margin-left: 12px; font-size: 16px;"></i>
+                            <span style="font-weight: 500;" t-esc="company.email"/>
+                        </div>
                     </td>
                 </tr>
             </table>
 
+            <!-- Ligne décorative finale -->
+            <div style="height: 2px; background: linear-gradient(90deg, #3498db 0%, #2ecc71 50%, #3498db 100%); margin-top: 10px; border-radius: 1px;"></div>
         </div>
     </template>
 </odoo>

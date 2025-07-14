@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 from odoo import api, fields, models
+from dateutil.relativedelta import relativedelta
+from datetime import date
 
 
 class ResPartner(models.Model):
@@ -81,6 +83,9 @@ class ResPartner(models.Model):
         store=True)
 
     age = fields.Integer(
+        string='Age')
+
+    age_str = fields.Char(
         string='Age',
         compute="compute_age")
 
@@ -159,11 +164,22 @@ class ResPartner(models.Model):
             if record.date_of_birth:
                 today = date.today()
                 birth_date = fields.Date.from_string(record.date_of_birth)
-                record.age = today.year - birth_date.year - (
-                        (today.month, today.day) < (birth_date.month, birth_date.day)
-                )
+
+                # Utilisation de relativedelta pour un calcul précis
+                delta = relativedelta(today, birth_date)
+
+                # Formatage selon l'âge
+                if delta.years >= 1:
+                    # Plus d'un an : afficher en années
+                    record.age_str = f"{delta.years} an{'s' if delta.years > 1 else ''}"
+                elif delta.months >= 1:
+                    # Moins d'un an mais plus d'un mois : afficher en mois
+                    record.age_str = f"{delta.months} mois"
+                else:
+                    # Moins d'un mois : afficher "1 mois"
+                    record.age_str = "1 mois"
             else:
-                record.age = 0
+                record.age_str = "0"
 
     @api.depends('patient_seq', 'name')
     def _compute_display_name(self):

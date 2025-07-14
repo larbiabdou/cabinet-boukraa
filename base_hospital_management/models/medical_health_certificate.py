@@ -14,7 +14,7 @@ class MedicalHealthCertificate(models.Model):
     lastname = fields.Char(
         string='Nom',
         required=False)
-    patient_age = fields.Integer(string="Âge")
+    patient_age = fields.Char(string="Âge")
     patient_address = fields.Char(string="Adresse")
     date = fields.Date(string="Date", default=fields.Date.context_today)
     outpatient_id = fields.Many2one('hospital.outpatient', string='Consultation', ondelete='cascade')

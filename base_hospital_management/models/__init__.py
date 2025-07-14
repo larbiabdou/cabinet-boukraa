@@ -34,7 +34,7 @@ from . import hospital_bed
 from . import hospital_building
 from . import hospital_degree
 from . import hospital_family
-from . import hospital_inpatient
+#from . import hospital_inpatient
 from . import hospital_insurance
 from . import hospital_laboratory
 from . import hospital_outpatient
@@ -54,7 +54,6 @@ from . import nursing_plan
 from . import patient_lab_test
 from . import patient_room
 from . import pharmacy_medicine
-from . import prescription_line
 from . import product_template
 from . import res_partner
 from . import res_users
@@ -72,3 +71,5 @@ from . import medical_work_resumption
 from . import medical_referral_letter
 from . import medical_report_template
 from . import medical_certificate
+from . import hospital_prescription
+from . import res_company

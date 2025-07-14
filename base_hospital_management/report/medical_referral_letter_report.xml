@@ -40,7 +40,7 @@
                                 <t t-set="lastname" t-value="doc.lastname"/>
                             </t>
 
-                            <t t-set="age" t-value="doc.patient_id.age"/>
+                            <t t-set="age" t-value="doc.patient_id.age_str"/>
                             <t t-set="date" t-value="doc.date.strftime('%d/%m/%Y')"/>
                             <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>

@@ -116,12 +116,7 @@
                             <field name="lastname"/>
                             <field name="firstname"/>
                             <field name="date_of_birth"/>
-                            <label for="age" string="Âge"/>
-                            <div class="d-flex align-items-center">
-                                <field name="age" nolabel="1"
-                                       style="width: 60px; display: inline-block;"/>
-                                <span style="margin-left: 3px;">ans</span>
-                            </div>
+                            <field name="age_str"/>
                             <field name="phone"/>
                             <field name="address"/>
                             <field name="total_credit"/>
@@ -182,7 +177,7 @@
                         </page>
                         <page string="Historique de médicaments"
                               groups="base_hospital_management.base_hospital_management_group_doctor">
-                            <field name="outpatient_medecine_ids" string="Ordonnance">
+                            <!--<field name="outpatient_medecine_ids" string="Ordonnance">
                                 <tree readonly="1">
                                     <field name="op_date"/>
                                     <field name="op_reference"/>
@@ -197,7 +192,7 @@
                                         </tree>
                                     </field>
                                 </form>
-                            </field>
+                            </field>-->
 
                             <!--
                             <page string="Vaccine">

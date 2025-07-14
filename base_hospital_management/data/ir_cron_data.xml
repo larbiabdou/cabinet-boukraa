@@ -11,5 +11,6 @@
             <field name="interval_type">months</field>
             <field name="numbercall">-1</field>
         </record>
+
     </data>
 </odoo>

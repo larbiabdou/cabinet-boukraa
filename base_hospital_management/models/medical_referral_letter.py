@@ -16,7 +16,7 @@ class MedicalReferralLetter(models.Model):
     patient_id = fields.Many2one('res.partner', string="Patient", required=False)
     firstname = fields.Char(string="Prénom")
     lastname = fields.Char(string="Nom")
-    age = fields.Integer(string="Âge")
+    age = fields.Char(string="Âge")
     referral_reason = fields.Text(string="Motif d'orientation")
     consultation_reason = fields.Text(string="Motif de consultation")
     clinical_findings = fields.Text(string="Examen clinique")

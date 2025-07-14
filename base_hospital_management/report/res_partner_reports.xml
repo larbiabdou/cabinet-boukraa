@@ -1,16 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--Patient prescription report -->
-    <record id="action_report_patient_prescription" model="ir.actions.report">
-        <field name="name">Patient Prescription</field>
-        <field name="model">res.partner</field>
+    <record id="action_report_prescription" model="ir.actions.report">
+        <field name="name">Ordonnance</field>
+        <field name="model">hospital.prescription</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">base_hospital_management.patient_prescription_report</field>
-        <field name="report_file">base_hospital_management.patient_prescription_report</field>
-        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="report_name">base_hospital_management.prescription_report_template</field>
+        <field name="report_file">base_hospital_management.prescription_report_template</field>
+        <field name="binding_model_id" ref="model_hospital_prescription"/>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="paperformat_medical_prescription"/>
     </record>
+
+    <!-- Template du rapport -->
+    <template id="prescription_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="prescription">
+                <t t-call="web.basic_layout">
+                    <div class="page" style="position: relative; width: 100%; height: 100%;">
+
+                        <!-- Image de fond -->
+                        <div style="position: absolute; top: 250px; left: 0; width: 100%; height: 400px;
+                            background-image: url('/base_hospital_management/static/img/new-img-removebg-preview.png');
+                            background-size: cover; background-repeat: no-repeat; opacity: 0.2;">
+                        </div>
+
+                        <!-- Contenu du rapport -->
+                        <div style="position: relative; z-index: 10;">
+                            <t t-if="prescription.patient_id">
+                                <t t-set="firstname" t-value="prescription.patient_id.firstname"/>
+                                <t t-set="lastname" t-value="prescription.patient_id.lastname"/>
+                            </t>
+
+                            <t t-set="age" t-value="prescription.patient_id.age_str"/>
+                            <t t-set="gender" t-value="prescription.patient_id.gender"/>
+                            <t t-set="address" t-value="prescription.patient_id.address"/>
+                            <t t-set="prescription" t-value="prescription"/>
+                            <t t-set="date"
+                               t-value="prescription.date.strftime('%d/%m/%Y') if prescription.date else ''"/>
+                            <t t-call="base_hospital_management.template_header_a5"/>
+
+                            <br/>
+                            <div class="text-center" style="font-weight:900;font-size: 24px">
+                                <t t-if="prescription.prescription_type == 'souche'">
+                                    ORDONNANCE N°: <span t-esc="prescription.name"/>
+                                </t>
+                                <t t-else="">
+                                    ORDONNANCE
+                                </t>
+                            </div>
+
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <!-- Tableau des médicaments -->
+                            <table style="width: 95%; margin-left:10px; border-collapse: collapse; border: transparent;">
+                                <t t-foreach="prescription.prescription_line_ids" t-as="line">
+                                    <tr style="border: transparent;">
+                                        <!-- Numéro du médicament -->
+                                        <td style="font-weight: bold; width: 1%; white-space: nowrap; vertical-align: top; padding-right: 10px; padding-bottom: 30px; border: transparent;">
+                                            <span t-esc="line_index + 1"/>/
+                                        </td>
+
+                                        <!-- Informations du médicament -->
+                                        <td style="width: 1%; white-space: nowrap; vertical-align: top; padding-right: 15px; padding-bottom: 30px; border: transparent;">
+                                            <span t-esc="line.medicine_id.name or ''"/>
+                                            <span t-esc="line.medicine_id.forme or ''"/>
+                                            <span t-esc="line.medicine_id.dosage or ''"/>
+                                            <br/>
+                                            <span t-esc="line.posologie_id.name or ''"/>
+                                            <span t-esc="line.note_1 or ''"/>
+                                        </td>
+
+                                        <!-- Points de liaison -->
+                                        <td style="width: 98%; padding: 0 10px; vertical-align: top; padding-bottom: 30px; line-height: 1.2; border: transparent;">
+                                            <span style="letter-spacing: 2px; color: #666;">
+                                                ................................................................................................
+                                            </span>
+                                        </td>
+
+                                        <!-- QSP -->
+                                        <td style="width: 1%; white-space: nowrap; vertical-align: top; text-align: left; padding-bottom: 30px; border: transparent;">
+                                            <t t-if="line.qsp_id.name">
+                                                QSP
+                                                <span t-esc="line.qsp_id.name"/>
+                                            </t>
+                                            <t t-elif="line.qsp_note">
+                                                <span t-esc="line.qsp_note"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+
+                            <!-- Notes additionnelles -->
+                            <t t-if="prescription.notes">
+                                <div style="margin-top: 30px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;">
+                                    <strong>Notes:</strong>
+                                    <br/>
+                                    <span t-esc="prescription.notes"/>
+                                </div>
+                            </t>
+
+                            <t t-call="base_hospital_management.template_footer_a5"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
     <record id="action_report_test_order" model="ir.actions.report">
         <field name="name">Demande de bilan</field>
         <field name="model">res.partner</field>
@@ -23,77 +124,6 @@
     </record>
 
     <!--    Patient prescription report template-->
-    <template id="patient_prescription_report">
-        <t t-call="web.html_container">
-            <t t-call="web.basic_layout">
-                <div class="page" style="position: relative; width: 100%; height: 100%;">
-
-                    <!-- Adding background image -->
-                    <div style="position: absolute; top: 250px; left: 0; width: 100%; height: 400px;
-                        background-image: url('/base_hospital_management/static/img/new-img-removebg-preview.png');
-                        background-size: cover; background-repeat: no-repeat; opacity: 0.2;">
-                    </div>
-
-                    <!-- Content of the report here -->
-                    <div style="position: relative; z-index: 10;">
-                        <t t-set="date" t-value="date"/>
-                        <t t-call="base_hospital_management.template_header_a5"/>
-                        <br/>
-                        <div class="text-center" style="font-weight:900;font-size: 24px">
-                            ORDONNANCE
-                        </div>
-
-
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <table style="width: 95%; margin-left:10px; border-collapse: collapse; border: transparent;">
-                            <t t-foreach="datas" t-as="line">
-                                <tr style="border: transparent;">
-                                    <!-- Numéro du médicament -->
-                                    <td style="font-weight: bold; width: 1%; white-space: nowrap; vertical-align: top; padding-right: 10px; padding-bottom: 30px; border: transparent;">
-                                        <span t-esc="line_index + 1"/>/
-                                    </td>
-
-                                    <!-- Informations du médicament -->
-                                    <td style="width: 1%; white-space: nowrap; vertical-align: top; padding-right: 15px; padding-bottom: 30px; border: transparent;">
-                                        <span t-esc="line['medicine']"/>
-                                        <span t-esc="line['forme']"/>
-                                        <span t-esc="line['dosage']"/>
-                                        <br/>
-                                        <span t-esc="line['posologie']"/>
-                                        <span t-esc="line['note']"/>
-                                    </td>
-
-                                    <!-- Points de liaison (alignés avec le texte) -->
-                                    <td style="width: 98%; padding: 0 10px; vertical-align: top; padding-bottom: 30px; line-height: 1.2; border: transparent;">
-                                        <span style="letter-spacing: 2px; color: #666;">
-                                            ................................................................................................
-                                        </span>
-                                    </td>
-
-                                    <!-- QSP -->
-                                    <td style="width: 1%; white-space: nowrap; vertical-align: top; text-align: left; padding-bottom: 30px; border: transparent;">
-                                        <t t-if="line['qsp']">
-                                            QSP
-                                            <span t-esc="line['qsp']"/>
-                                        </t>
-                                        <t t-elif="line['qsp_note']">
-                                            <span t-esc="line['qsp_note']"/>
-                                        </t>
-                                    </td>
-                                </tr>
-                            </t>
-                        </table>
-
-                        <t t-call="base_hospital_management.template_footer_a5"/>
-                    </div>
-                </div>
-            </t>
-        </t>
-    </template>
     <template id="patient_test_order">
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
