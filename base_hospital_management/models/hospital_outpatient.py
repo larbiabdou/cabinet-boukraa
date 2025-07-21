@@ -676,11 +676,11 @@ class HospitalOutpatient(models.Model):
                             'parent_test_id': lab_test.id
                         })]
 
-    def unlink(self):
-        for record in self:
-            if record.state == 'done':
-                raise ValidationError('Vous ne pouvez pas supprimer une consultation terminée')
-        return super().unlink()
+    # def unlink(self):
+    #     for record in self:
+    #         if record.state == 'done':
+    #             raise ValidationError('Vous ne pouvez pas supprimer une consultation terminée')
+    #     return super().unlink()
 
 
 class VisiteType(models.Model):
