@@ -9,6 +9,8 @@ class ResPartner(models.Model):
     """Inherited to add more fields and functions"""
     _inherit = 'res.partner'
     _description = 'Hospital Patients'
+    _order = 'lastname asc, firstname asc, name asc'  # Tri alphabétique
+
 
     # Champs utilisés dans les vues
     is_patient = fields.Boolean(
@@ -257,3 +259,12 @@ class MedicalAntecedent(models.Model):
     _description = 'medical Antecedent'
 
     name = fields.Char()
+
+class StockWarehouse(models.Model):
+    _inherit = 'stock.warehouse'
+
+    # Remplacer les contraintes existantes par des nouvelles (ou vides)
+    _sql_constraints = [
+        # Vous pouvez ajouter de nouvelles contraintes ici si besoin
+        # ('new_constraint', 'CHECK(condition)', 'Message d\'erreur'),
+    ]
