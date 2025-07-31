@@ -61,7 +61,7 @@
                                 </div>
                                 <div style="margin-bottom: 3px;">
                                     <strong>Adresse :</strong>
-                                    <span t-esc="age or ''"/>
+                                    <span t-esc="address or ''"/>
                                 </div>
                             </t>
                         </div>
