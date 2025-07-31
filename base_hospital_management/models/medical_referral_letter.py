@@ -37,7 +37,7 @@ class MedicalReferralLetter(models.Model):
     def _get_template_context(self):
         """Prépare le contexte pour le template"""
         patient_name = self.patient_id.name if self.patient_id else f"{self.firstname} {self.lastname}"
-        age = self.patient_id.age if self.patient_id and hasattr(self.patient_id, 'age') else self.age
+        age = self.patient_id.age_str if self.patient_id and hasattr(self.patient_id, 'age_str') else self.age
         return {
             'user': {'name': 'BOUNEDJAR Reda'},
             'patient': {'name': patient_name},
@@ -55,7 +55,7 @@ class MedicalReferralLetter(models.Model):
         if self.patient_id:
             self.firstname = self.patient_id.firstname if hasattr(self.patient_id, 'firstname') else ''
             self.lastname = self.patient_id.lastname if hasattr(self.patient_id, 'lastname') else ''
-            self.age = self.patient_id.age if hasattr(self.patient_id, 'age') else 0
+            self.age = self.patient_id.age_str if hasattr(self.patient_id, 'age_str') else 0
         else:
             self.firstname = ''
             self.lastname = ''

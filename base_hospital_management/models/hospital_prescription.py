@@ -106,7 +106,7 @@ class HospitalPrescription(models.Model):
             'datas': p_list,
             'date': self.date.strftime('%d/%m/%Y') if self.date else '',
             'patient_name': self.patient_id.name or '',
-            'age': self.patient_id.age or '',
+            'age': self.patient_id.age_str or '',
             'lastname': self.patient_id.lastname or '',
             'firstname': self.patient_id.firstname or '',
             'prescription_ref': self.name or '',

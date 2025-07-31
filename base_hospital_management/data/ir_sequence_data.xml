@@ -74,15 +74,15 @@
                 model="ir.sequence">
             <field name="name">Ordonnance</field>
             <field name="code">hospital.prescription.normal</field>
-            <field name="prefix">ORD/</field>
-            <field name="padding">3</field>
+            <field name="prefix">%(y)s/</field>
+            <field name="padding">2</field>
         </record>
          <record id="hospital_prescription_souche"
                 model="ir.sequence">
             <field name="name">Ordonnance souche</field>
             <field name="code">hospital.prescription.souche</field>
-            <field name="prefix">ORDS/</field>
-            <field name="padding">3</field>
+            <field name="prefix">%(y)s/</field>
+            <field name="padding">2</field>
         </record>
     </data>
 </odoo>

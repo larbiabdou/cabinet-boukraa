@@ -9,7 +9,7 @@ class ResPartner(models.Model):
     """Inherited to add more fields and functions"""
     _inherit = 'res.partner'
     _description = 'Hospital Patients'
-    _order = 'lastname asc, firstname asc, name asc'  # Tri alphabétique
+    _order = 'patient_seq asc'  # Tri alphabétique
 
 
     # Champs utilisés dans les vues

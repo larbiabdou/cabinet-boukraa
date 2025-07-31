@@ -14,7 +14,11 @@ class MedicalLeaveCertificate(models.Model):
         string='Date',
         default=fields.Date.today(),
         required=True)
-    patient_id = fields.Many2one('res.partner', string="Patient", required=False)
+    patient_id = fields.Many2one('res.partner', string="Patient", required=False,
+        context = {
+            'form_view_ref': 'base_hospital_management.res_partner_view_form'
+        }
+    )
     firstname = fields.Char(string="Prénom")
     lastname = fields.Char(string="Nom")
     leave_duration = fields.Integer(string="Durée (jours)", required=True)

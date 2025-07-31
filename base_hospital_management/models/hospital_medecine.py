@@ -11,7 +11,10 @@ class HospitalMedecin(models.Model):
     dosage = fields.Char(string='Dosage')
     laboratoire = fields.Char(string='Laboratoire')
     paye_id = fields.Many2one('res.country', string='Pays')
-
+    active = fields.Boolean(
+        string='Active',
+        default=True,
+        required=False)
     display_name = fields.Char(string='Display Name', compute='_compute_display_name', store=True)
 
     @api.depends('denomination_commune_internationale', 'name', 'forme', 'dosage')

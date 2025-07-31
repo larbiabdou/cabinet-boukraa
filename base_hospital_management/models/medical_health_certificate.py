@@ -28,6 +28,6 @@ class MedicalHealthCertificate(models.Model):
         for record in self:
             if record.patient_id:
                 record.patient_address = record.patient_id.street
-                record.patient_age = record.patient_id.age
+                record.patient_age = record.patient_id.age_str
                 record.firstname = record.patient_id.firstname
                 record.lastname = record.patient_id.lastname

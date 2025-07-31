@@ -89,7 +89,6 @@
                         </div>
                         <br/>
                         <br/>
-                        <br/>
                         <div style="font-size: 12px; color: #7f8c8d; margin-top: 20px;" dir="ltr">
                             <span style="font-family: Arial, sans-serif;">Kolea, le</span>
                             <span t-esc="date or ''"/>

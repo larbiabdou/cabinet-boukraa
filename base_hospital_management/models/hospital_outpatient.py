@@ -604,7 +604,7 @@ class HospitalOutpatient(models.Model):
             'datas': p_list,
             'date': self.op_date.strftime('%d/%m/%Y'),
             'patient_name': self.patient_id.name,
-            'age': self.patient_id.age,
+            'age': self.patient_id.age_str,
             'lastname': self.patient_id.lastname,
             'firstname': self.patient_id.firstname,
         }
