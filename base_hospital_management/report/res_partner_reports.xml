@@ -19,12 +19,6 @@
                 <t t-call="web.basic_layout">
                     <div class="page" style="position: relative; width: 100%; height: 100%;">
 
-                        <!-- Image de fond -->
-                        <div style="position: absolute; top: 250px; left: 0; width: 100%; height: 400px;
-                            background-image: url('/base_hospital_management/static/img/new-img-removebg-preview.png');
-                            background-size: cover; background-repeat: no-repeat; opacity: 0.2;">
-                        </div>
-
                         <!-- Contenu du rapport -->
                         <div style="position: relative; z-index: 10;">
                             <t t-if="prescription.patient_id">
@@ -88,7 +82,7 @@
                                                 QSP
                                                 <span t-esc="line.qsp_id.name"/>
                                             </t>
-                                            <t t-elif="line.qsp_note">
+                                            <t t-if="line.qsp_note">
                                                 <span t-esc="line.qsp_note"/>
                                             </t>
                                         </td>

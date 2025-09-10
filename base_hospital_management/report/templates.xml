@@ -28,67 +28,54 @@
     </record>
     <template id="template_header_a5">
         <t t-set="company" t-value="env.company"/>
-        <table style="width: 100%; border: none; border-collapse: collapse; margin-bottom: 20px;">
-            <tr style="border: none; vertical-align: top;">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;border: transparent;">
+            <tr style="vertical-align: top;border: transparent;">
                 <!-- Partie gauche - Informations du médecin en français -->
-                <td style="border: none; width: 35%; padding: 10px; vertical-align: top;">
+                <td style="width: 35%; padding: 10px; vertical-align: top; border: none;">
                     <div style="line-height: 1.4;">
-                        <div style="font-size: 18px; font-weight: bold; color: #2c3e50; margin-bottom: 5px;">
-                            <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
-                        </div>
                         <div style="font-size: 14px; color: #34495e; margin-bottom: 3px;">
+                            <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
+                            <br/>
                             <span t-esc="company.doctor_speciality or 'Spécialité'"/>
-                        </div>
-                        <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 15px;">
-                            N° d'ordre :
+                            <br/>
+                            CROM No° :
                             <span t-esc="company.doctor_order_number or '000000'"/>
-                        </div>
-
-                        <div style="font-size: 12px; color: #2c3e50; line-height: 1.6;">
-                            <div style="margin-bottom: 3px;">
-                                <strong>Nom et prénom :</strong>
-                                <span t-esc="(lastname or '') + ' ' + (firstname or '')"/>
-                            </div>
-                            <div style="margin-bottom: 3px;">
-                                <strong>Âge :</strong>
-                                <span t-esc="age or ''"/>
-                            </div>
-                            <!-- Affichage conditionnel pour ordonnance souche -->
-                            <t t-if="prescription and prescription.prescription_type == 'souche'">
-                                <div style="margin-bottom: 3px;">
-                                    <strong>Sexe :</strong>
-                                    <span t-esc="gender or ''"/>
-                                </div>
-                                <div style="margin-bottom: 3px;">
-                                    <strong>Adresse :</strong>
-                                    <span t-esc="address or ''"/>
-                                </div>
-                            </t>
+                            <br/>
+                            Téléphone :
+                            <span t-esc="company.phone"/>
+                            <br/>
+                            Adresse :
+                            <span t-esc="company.street"/>
                         </div>
                     </div>
                 </td>
 
-                <!-- Partie centrale - Logo -->
-                <td style="border: none; width: 30%; text-align: center; padding: 10px;">
-                    <img src="/base_hospital_management/static/img/logo.png"
+                <!-- Partie centrale - Logo de la société -->
+                <td style="width: 30%; text-align: center; padding: 10px; border: none;">
+                    <img t-if="company.logo"
+                         t-att-src="image_data_uri(company.logo)"
                          style="max-width: 120px; max-height: 120px; object-fit: contain;"
-                         alt="Logo Cabinet"/>
+                         alt="Logo Société"/>
                 </td>
 
                 <!-- Partie droite - Informations en arabe -->
-                <td style="border: none; width: 35%; padding: 10px; vertical-align: top; text-align: right;" dir="rtl">
+                <td style="width: 35%; padding: 10px; vertical-align: top; text-align: right; border: none;" dir="rtl">
                     <div style="line-height: 1.4;">
-                        <div style="font-size: 18px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; font-family: Arial, sans-serif;">
-                            دكتور بونجار رضا
-                        </div>
-                        <div style="font-size: 14px; color: #34495e; margin-bottom: 3px; font-family: Arial, sans-serif;">
-                            أخصائي في جراحة
-                        </div>
                         <div style="font-size: 14px; color: #34495e; margin-bottom: 15px; font-family: Arial, sans-serif;">
-                            العظام والمفاصل والكسور
+                            دكتور بونجار رضا
+                            <br/>
+                            طبيب مختص في جراحة العظام
+                            <br/>
+                            الـمــفــاصـــــــــل و الـكـســـــور
+                            <br/>
+                            ر.ت.م.أ.ط: 422334
+                            <br/>
+                            رقم الهاتف: 0559.12.08.47
+                            <br/>
+                            العنوان: حي CNEP, عمارة C20, رقم 01,
+                            <br/>
+                            القـلـيـعــــــة، ولايــة تـيـبـــــــازة
                         </div>
-                        <br/>
-                        <br/>
                         <div style="font-size: 12px; color: #7f8c8d; margin-top: 20px;" dir="ltr">
                             <span style="font-family: Arial, sans-serif;">Kolea, le</span>
                             <span t-esc="date or ''"/>
@@ -100,6 +87,40 @@
 
         <!-- Ligne de séparation décorative -->
         <div style="border-bottom: 2px solid #3498db; margin: 20px 0;"></div>
+        <div style="font-size: 12px; color: #2c3e50; line-height: 1.6;">
+            <!-- Colonne gauche -->
+            <div style="float: left; width: 48%; margin-right: 4%;">
+                <div style="margin-bottom: 3px;">
+                    <strong>Nom :</strong>
+                    <span t-esc="lastname or ''"/>
+                </div>
+                <div style="margin-bottom: 3px;">
+                    <strong>Prénom :</strong>
+                    <span t-esc="firstname or ''"/>
+                </div>
+                <div style="margin-bottom: 3px;">
+                    <strong>Âge :</strong>
+                    <span t-esc="age or ''"/>
+                </div>
+            </div>
+
+            <!-- Colonne droite -->
+            <div style="float: right; width: 48%;">
+                <t t-if="prescription and prescription.prescription_type == 'souche'">
+                    <div style="margin-bottom: 3px;">
+                        <strong>Sexe :</strong>
+                        <span t-esc="gender or ''"/>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                        <strong>Adresse :</strong>
+                        <span t-esc="address or ''"/>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Clear float -->
+            <div style="clear: both;"></div>
+        </div>
     </template>
 
     <template id="template_header_a4">
@@ -198,7 +219,7 @@
                     </td>
 
                     <td style="border: transparent !important; font-size:12px; padding: 5px; vertical-align: top; text-align: left;"
-                        >
+                    >
                         <div style="margin-bottom: 8px; font-family: Arial, sans-serif;">
                             <i class="fa fa-facebook" style="color: #3b5998; margin-left: 8px;"></i>
                             <span t-esc="company.facebook_page"/>

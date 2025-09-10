@@ -567,9 +567,12 @@ class HospitalOutpatient(models.Model):
     def consume_medical_care_ids(self):
         for record in self:
             location_production = self.env['stock.location'].search([('usage', '=', 'production')])
-            data = []
+            moves_data = []
+            move_lines_data = []
+
             for line in record.medical_care_ids.filtered(lambda l: not l.consumed):
-                data.append([0, 0, {
+                # Créer le move
+                move_data = {
                     'name': 'Soins médicaux visite ' + record.op_reference,
                     'product_id': line.product_id.id,
                     'product_uom': line.uom_id.id,
@@ -577,15 +580,29 @@ class HospitalOutpatient(models.Model):
                     'location_dest_id': location_production.id,
                     'product_uom_qty': line.quantity,
                     'quantity': line.quantity,
-                }])
+                }
+
+                # Si le produit a un lot, créer les move_lines
+                if line.lot_id:
+                    move_data['move_line_ids'] = [(0, 0, {
+                        'product_id': line.product_id.id,
+                        'product_uom_id': line.uom_id.id,
+                        'location_id': self.env.ref('stock.stock_location_stock').id,
+                        'location_dest_id': location_production.id,
+                        'quantity': line.quantity,
+                        'lot_id': line.lot_id.id,
+                    })]
+
+                moves_data.append([0, 0, move_data])
 
             pick_output = self.env['stock.picking'].create({
                 'picking_type_id': self.env.ref('stock.picking_type_out').id,
                 'location_id': self.env.ref('stock.stock_location_stock').id,
                 'location_dest_id': location_production.id,
                 'origin': self.op_reference,
-                'move_ids': data,
+                'move_ids': moves_data,
             })
+
             pick_output.button_validate()
 
             for line in record.medical_care_ids.filtered(lambda l: not l.consumed):

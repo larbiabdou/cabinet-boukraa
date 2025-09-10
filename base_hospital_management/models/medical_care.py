@@ -43,16 +43,28 @@ class MedicalCare(models.Model):
         required=False)
 
     amount_total = fields.Float(
-        string='Amount_total',
+        string='Amount total',
         compute="compute_total_amount",
         store=True,
         required=False)
+
+    lot_id = fields.Many2one(
+        comodel_name='stock.lot',
+        string='Numéro de lot',
+        domain="[('product_id', '=', product_id)]",
+        required=False)
+
+    tracking_required = fields.Selection(
+        related='product_id.tracking',
+        string='Suivi requis',
+        readonly=True)
 
     @api.onchange('product_id')
     def _compute_uom_id(self):
         for record in self:
             record.uom_id = record.product_id.uom_id.id
             record.cost = record.product_id.standard_price
+            record.lot_id = False
 
     @api.depends('cost', 'quantity')
     def compute_total_amount(self):
