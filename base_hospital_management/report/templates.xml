@@ -33,7 +33,7 @@
                 <!-- Partie gauche - Informations du médecin en français -->
                 <td style="width: 35%; padding: 10px; vertical-align: top; border: none;">
                     <div style="line-height: 1.5;">
-                        <div style="font-size: 12px; margin-bottom: 3px;">
+                        <div style="font-size: 12px; font-weight: 800; margin-bottom: 3px;">
                             <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
                             <br/>
                             <span t-esc="company.doctor_speciality or 'Spécialité'"/>
@@ -61,7 +61,7 @@
                 <!-- Partie droite - Informations en arabe -->
                 <td style="width: 35%; padding: 10px; vertical-align: top; text-align: right; border: none;" dir="rtl">
                     <div style="line-height: 1.5;">
-                        <div style="font-size: 12px; margin-bottom: 5px; font-family: Arial, sans-serif;">
+                        <div style="font-size: 12px; font-weight: bold; margin-bottom: 5px; font-family: Arial, sans-serif;">
                             د. رضـــــــــــا بونــجـــــــــــــــار
                             <br/>
                             طبيب مختص في جراحة العظام
@@ -76,8 +76,8 @@
                             <br/>
                             القـلـيـعــــــة، ولايــة تـيـبـــــــازة
                         </div>
-                        <div style="font-size: 12px; margin-top: 0px;" dir="ltr">
-                            <span style="font-family: Arial, sans-serif;">Kolea, le :</span>
+                        <div style="font-size: 12px; font-weight: bold; margin-top: 0px;" dir="ltr">
+                            <span style="font-family: Arial, sans-serif;">Kolea, le : </span>
                             <span t-esc="date or ''"/>
                         </div>
                     </div>
@@ -86,8 +86,8 @@
         </table>
 
         <!-- Ligne de séparation décorative -->
-        <div style="border-bottom: 2px solid #3498db; margin: 0px;"></div>
-        <div style="font-size: 12px; line-height: 1.6;">
+        <div style="border-bottom: 2px solid #3498db; margin-bottom: 10px;"></div>
+        <div style="font-size: 12px; font-weight: bold; line-height: 1.6;">
             <!-- Colonne gauche -->
             <div style="float: left; width: 48%; margin-right: 4%;">
                 <div style="margin-bottom: 3px;">

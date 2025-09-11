@@ -36,7 +36,7 @@
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
                                 <t t-if="prescription.prescription_type == 'souche'">
-                                    ORDONNANCE  Séq : N° :<span t-esc="prescription.name"/>
+                                    ORDONNANCE N° :<span t-esc="prescription.name"/>
                                 </t>
                                 <t t-else="">
                                     ORDONNANCE
