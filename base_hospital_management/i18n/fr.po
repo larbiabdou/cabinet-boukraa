@@ -806,7 +806,7 @@ msgstr ""
 #. module: base_hospital_management
 #: model:ir.ui.menu,name:base_hospital_management.menu_analysis
 msgid "Analyses"
-msgstr ""
+msgstr "Analyse"
 
 #. module: base_hospital_management
 #: model:ir.model.fields,field_description:base_hospital_management.field_abdominal_ultrasound_report__annexes
@@ -1056,19 +1056,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_hospital_management.field_res_users__blood_group
 #: model_terms:ir.ui.view,arch_db:base_hospital_management.res_partner_view_form
 msgid "Blood Group"
-msgstr "Groupe sangin"
+msgstr "Groupe sanguin"
 
 #. module: base_hospital_management
 #. odoo-javascript
 #: code:addons/base_hospital_management/static/src/xml/reception_dashboard_templates.xml:0
 #, python-format
 msgid "Blood Group :"
-msgstr "Groupe sangin:"
+msgstr "Groupe sanguin :"
 
 #. module: base_hospital_management
 #: model_terms:ir.ui.view,arch_db:base_hospital_management.blood_bank_view_search
 msgid "Blood Type"
-msgstr "Groupe sanguin."
+msgstr "Groupe sanguin"
 
 #. module: base_hospital_management
 #: model:ir.actions.act_window,name:base_hospital_management.blood_bank_action
@@ -1089,7 +1089,7 @@ msgstr ""
 #: model:ir.model.fields,help:base_hospital_management.field_res_partner__blood_group
 #: model:ir.model.fields,help:base_hospital_management.field_res_users__blood_group
 msgid "Blood group of the patient"
-msgstr "Groupe sangin de patient"
+msgstr "Groupe sanguin de patient"
 
 #. module: base_hospital_management
 #: model:ir.model.fields,field_description:base_hospital_management.field_abdominal_ultrasound_report__left_kidney_cortico_sinus_differentiation
@@ -1548,7 +1548,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base_hospital_management.menu_patient_visit_analysis
 #: model:ir.ui.menu,name:base_hospital_management.visite_super_menu
 msgid "Consultations"
-msgstr "Rendez-vous"
+msgstr "Consultations"
 
 #. module: base_hospital_management
 #: model:ir.model.fields,field_description:base_hospital_management.field_patient_visit_analysis__visit_unpaid
@@ -3844,7 +3844,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_hospital_management.field_res_users__lastname
 #: model:ir.model.fields,field_description:base_hospital_management.field_visit_type__name
 msgid "Nom"
-msgstr "Nom commerciale"
+msgstr "Nom"
 
 #. module: base_hospital_management
 #. odoo-javascript
