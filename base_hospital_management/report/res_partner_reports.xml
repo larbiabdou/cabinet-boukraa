@@ -19,8 +19,7 @@
                 <t t-call="web.basic_layout">
                     <div class="page" style="position: relative; width: 100%; height: 100%;">
 
-                        <!-- Contenu du rapport -->
-                        <div style="position: relative; z-index: 10;">
+                        <div style="position: relative">
                             <t t-if="prescription.patient_id">
                                 <t t-set="firstname" t-value="prescription.patient_id.firstname"/>
                                 <t t-set="lastname" t-value="prescription.patient_id.lastname"/>
@@ -37,7 +36,7 @@
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
                                 <t t-if="prescription.prescription_type == 'souche'">
-                                    ORDONNANCE N°: <span t-esc="prescription.name"/>
+                                    ORDONNANCE  Séq : N° :<span t-esc="prescription.name"/>
                                 </t>
                                 <t t-else="">
                                     ORDONNANCE
@@ -82,6 +81,7 @@
                                                 QSP
                                                 <span t-esc="line.qsp_id.name"/>
                                             </t>
+                                            <br/>
                                             <t t-if="line.qsp_note">
                                                 <span t-esc="line.qsp_note"/>
                                             </t>

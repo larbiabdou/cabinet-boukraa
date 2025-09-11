@@ -28,7 +28,7 @@
                             <t t-call="base_hospital_management.template_header_a5"/>
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
-                                Certificat Médical de Bonne Santé
+                                Certificat médical
                             </div>
                             <br/>
                             <br/>
@@ -51,7 +51,7 @@
 
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
-                                Certificat médicale de PNEUMO-PHTYSIO
+                               Certificat médical
                             </div>
                             <br/>
                             <br/>
