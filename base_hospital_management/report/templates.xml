@@ -31,7 +31,7 @@
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 0px;border: transparent;">
             <tr style="vertical-align: top;border: transparent;">
                 <!-- Partie gauche - Informations du médecin en français -->
-                <td style="width: 35%; padding: 10px; vertical-align: top; border: none;">
+                <td style="width: 37%; padding: 10px; vertical-align: top; border: none;">
                     <div style="line-height: 1.5;">
                         <div style="font-size: 12px; font-weight: 800; margin-bottom: 3px;">
                             <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
@@ -51,7 +51,7 @@
                     </div>
                 </td>
 
-                <td style="width: 30%; padding: 10px; display: flex; align-items: center; justify-content: center;">
+                <td style="width: 26%; padding: 0px; display: flex; align-items: center; justify-content: center;">
                     <img t-if="company.logo"
                          t-att-src="image_data_uri(company.logo)"
                          style="width: 100%; object-fit: contain;"
@@ -59,7 +59,7 @@
                 </td>
 
                 <!-- Partie droite - Informations en arabe -->
-                <td style="width: 35%; padding: 10px; vertical-align: top; text-align: right; border: none;" dir="rtl">
+                <td style="width: 37%; padding: 10px; vertical-align: top; text-align: right; border: none;" dir="rtl">
                     <div style="line-height: 1.5;">
                         <div style="font-size: 12px; font-weight: bold; margin-bottom: 5px; font-family: Arial, sans-serif;">
                             د. رضـــــــــــا بونــجـــــــــــــــار
