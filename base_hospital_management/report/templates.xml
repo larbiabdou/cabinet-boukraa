@@ -36,7 +36,9 @@
                         <div style="font-size: 12px; font-weight: 800; margin-bottom: 3px;">
                             <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
                             <br/>
-                            <span t-esc="company.doctor_speciality or 'Spécialité'"/>
+                            Médecin spécialiste en chirurgie
+<br/>
+Orthopédique et traumatologique
                             <br/>
                             CROM No° :
                             <span t-esc="company.doctor_order_number or '000000'"/>
