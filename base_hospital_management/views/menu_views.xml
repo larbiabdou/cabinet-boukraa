@@ -29,17 +29,8 @@
               groups="base_hospital_management.base_hospital_management_group_doctor"
               parent="hospital_menu_root"/>
     <!--Reception dashboard action-->
-    <menuitem id="hospital_menu_appointment" name="Appointment"
-              parent="visite_super_menu"
-              action="hospital_outpatient_action"
-              groups="base_hospital_management.base_hospital_management_group_receptionist,base_hospital_management.base_hospital_management_group_doctor"
-              sequence="2"/>
 
-    <menuitem id="hospital_menu_visite" name="Consultations"
-              parent="visite_super_menu"
-              action="hospital_outpatient_action_visite" groups="base_hospital_management.base_hospital_management_group_doctor"
 
-              sequence="2"/>
     <!--    Doctor dashboard action
     <record id="doctor_dashboard_action" model="ir.actions.client">
         <field name="name">Doctor Dashboard</field>
