@@ -118,6 +118,7 @@
                             <field name="date_of_birth"/>
                             <field name="age_str"/>
                             <field name="phone"/>
+                            <field name="cin"/>
                             <field name="address"/>
                             <field name="total_credit"/>
                         </group>

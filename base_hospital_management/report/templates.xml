@@ -37,8 +37,8 @@
                             <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
                             <br/>
                             Médecin spécialiste en chirurgie
-<br/>
-Orthopédique et traumatologique
+                            <br/>
+                            Orthopédique et traumatologique
                             <br/>
                             CROM No° :
                             <span t-esc="company.doctor_order_number or '000000'"/>
@@ -79,7 +79,7 @@ Orthopédique et traumatologique
                             القـلـيـعــــــة، ولايــة تـيـبـــــــازة
                         </div>
                         <div style="font-size: 12px; font-weight: bold; margin-top: 0px;" dir="ltr">
-                            <span style="font-family: Arial, sans-serif;">Kolea, le : </span>
+                            <span style="font-family: Arial, sans-serif;">Kolea, le :</span>
                             <span t-esc="date or ''"/>
                         </div>
                     </div>
@@ -90,35 +90,73 @@ Orthopédique et traumatologique
         <!-- Ligne de séparation décorative -->
         <div style="border-bottom: 2px solid #3498db; margin-bottom: 10px;"></div>
         <div style="font-size: 12px; font-weight: bold; line-height: 1.6;">
-            <!-- Colonne gauche -->
-            <div style="float: left; width: 48%; margin-right: 4%;">
-                <div style="margin-bottom: 3px;">
-                    <strong>Nom :</strong>
-                    <span t-esc="lastname or ''"/>
-                </div>
-                <div style="margin-bottom: 3px;">
-                    <strong>Prénom :</strong>
-                    <span t-esc="firstname or ''"/>
-                </div>
-                <div style="margin-bottom: 3px;">
-                    <strong>Âge :</strong>
-                    <span t-esc="age or ''"/>
-                </div>
-            </div>
+            <t t-if="prescription and prescription.prescription_type == 'souche'">
+                <!-- Trois colonnes pour ordonnance souche -->
 
-            <!-- Colonne droite -->
-            <div style="float: right; width: 48%;">
-                <t t-if="prescription and prescription.prescription_type == 'souche'">
+                <!-- Colonne 1 : Nom, Prénom, Âge -->
+                <div style="float: left; width: 30%; margin-right: 3%;">
+                    <div style="margin-bottom: 3px;">
+                        <strong>Nom :</strong>
+                        <span t-esc="lastname or ''"/>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                        <strong>Prénom :</strong>
+                        <span t-esc="firstname or ''"/>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                        <strong>Âge :</strong>
+                        <span t-esc="age or ''"/>
+                    </div>
+                </div>
+
+                <!-- Colonne 2 : Poids, Taille, Sexe -->
+                <div style="float: left; width: 30%; margin-right: 3%;">
+                    <div style="margin-bottom: 3px;">
+                        <strong>Poids :</strong>
+                        <span t-esc="poids or ''"/>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                        <strong>Taille :</strong>
+                        <span t-esc="taille or ''"/>
+                    </div>
                     <div style="margin-bottom: 3px;">
                         <strong>Sexe :</strong>
                         <span t-esc="gender or ''"/>
                     </div>
+                </div>
+
+                <!-- Colonne 3 : Adresse, CIN -->
+                <div style="float: left; width: 34%;">
                     <div style="margin-bottom: 3px;">
                         <strong>Adresse :</strong>
                         <span t-esc="address or ''"/>
                     </div>
-                </t>
-            </div>
+                    <div style="margin-bottom: 3px;">
+                        <strong>CIN :</strong>
+                        <span t-esc="cin or ''"/>
+                    </div>
+                </div>
+
+            </t>
+            <t t-else="">
+                <!-- Deux colonnes pour les autres types d'ordonnance -->
+
+                <!-- Colonne gauche -->
+                <div style="float: left; width: 48%; margin-right: 4%;">
+                    <div style="margin-bottom: 3px;">
+                        <strong>Nom :</strong>
+                        <span t-esc="lastname or ''"/>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                        <strong>Prénom :</strong>
+                        <span t-esc="firstname or ''"/>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                        <strong>Âge :</strong>
+                        <span t-esc="age or ''"/>
+                    </div>
+                </div>
+            </t>
 
             <!-- Clear float -->
             <div style="clear: both;"></div>

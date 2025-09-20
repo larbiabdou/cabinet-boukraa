@@ -29,6 +29,9 @@
                             <t t-set="gender" t-value="prescription.patient_id.gender"/>
                             <t t-set="address" t-value="prescription.patient_id.address"/>
                             <t t-set="prescription" t-value="prescription"/>
+                            <t t-set="cin" t-value="prescription.patient_id.cin"/>
+                            <t t-set="poids" t-value="prescription.outpatient_id.poids2"/>
+                            <t t-set="taille" t-value="prescription.outpatient_id.taille2"/>
                             <t t-set="date"
                                t-value="prescription.date.strftime('%d/%m/%Y') if prescription.date else ''"/>
                             <t t-call="base_hospital_management.template_header_a5"/>

@@ -16,6 +16,9 @@ class ResPartner(models.Model):
     is_patient = fields.Boolean(
         string='Is_patient',
         required=False)
+    cin = fields.Char(
+        string='CIN',
+        required=False)
 
     date_of_birth = fields.Date(
         string='Date of Birth',
