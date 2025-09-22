@@ -39,7 +39,8 @@
                             <br/>
                             <div class="text-center" style="font-weight:900;font-size: 24px">
                                 <t t-if="prescription.prescription_type == 'souche'">
-                                    ORDONNANCE N° :<span t-esc="prescription.name"/>
+                                    ORDONNANCE N° :
+                                    <span t-esc="prescription.name"/>
                                 </t>
                                 <t t-else="">
                                     ORDONNANCE
@@ -57,35 +58,54 @@
                                 <t t-foreach="prescription.prescription_line_ids" t-as="line">
                                     <tr style="border: transparent;">
                                         <!-- Numéro du médicament -->
-                                        <td style="font-weight: bold; width: 1%; white-space: nowrap; vertical-align: top; padding-right: 10px; padding-bottom: 30px; border: transparent;">
+                                        <td style="font-weight: bold; width: 1%; white-space: nowrap; vertical-align: top; padding-right: 10px; padding-bottom: 10px; border: transparent;">
                                             <span t-esc="line_index + 1"/>/
                                         </td>
 
                                         <!-- Informations du médicament -->
-                                        <td style="width: 1%; white-space: nowrap; vertical-align: top; padding-right: 15px; padding-bottom: 30px; border: transparent;">
+                                        <td style="max: 1%; white-space: nowrap; vertical-align: top; padding-right: 15px; padding-bottom: 10px; border: transparent;">
                                             <span t-esc="line.medicine_id.name or ''"/>
                                             <span t-esc="line.medicine_id.forme or ''"/>
                                             <span t-esc="line.medicine_id.dosage or ''"/>
-                                            <br/>
-                                            <span t-esc="line.posologie_id.name or ''"/>
-                                            <span t-esc="line.note_1 or ''"/>
+
                                         </td>
 
                                         <!-- Points de liaison -->
-                                        <td style="width: 98%; padding: 0 10px; vertical-align: top; padding-bottom: 30px; line-height: 1.2; border: transparent;">
+                                        <td style="width: 98%; padding: 0 10px; vertical-align: top; padding-bottom: 10px; line-height: 1.2; border: transparent;">
                                             <span style="letter-spacing: 2px; color: #666;">
                                                 ................................................................................................
                                             </span>
                                         </td>
 
                                         <!-- QSP -->
-                                        <td style="width: 1%; white-space: nowrap; vertical-align: top; text-align: left; padding-bottom: 30px; border: transparent;">
+                                        <td style="width: 1%; white-space: nowrap; vertical-align: top; text-align: left; padding-bottom: 10px; border: transparent;">
 
                                             <t t-if="line.qsp_id.name">
                                                 <t t-set="qsp" t-value="'QSP' + line.qsp_id.name"/>
                                                 <span t-esc="qsp"/>
                                             </t>
-                                            <br/>
+
+                                        </td>
+                                    </tr>
+                                    <tr style="border: transparent;">
+                                        <!-- Numéro du médicament -->
+                                        <td style="font-weight: bold; width: 1%; white-space: nowrap; vertical-align: top; padding-right: 10px; padding-bottom: 30px; border: transparent;">
+                                        </td>
+
+                                        <!-- Informations du médicament -->
+                                        <td style="width: 10%; vertical-align: top; padding-right: 15px; padding-bottom: 30px; border: transparent; position: relative;">
+                                            <div style="position: absolute; left: 0; top: 0; white-space: nowrap; z-index: 999; background: white;">
+                                                <span t-esc="line.posologie_id.name or ''"/>
+                                                <span t-esc="line.note_1 or ''"/>
+                                            </div>
+                                        </td>
+
+                                        <!-- Points de liaison -->
+                                        <td style="width: 98%; padding: 0 10px; vertical-align: top; padding-bottom: 30px; line-height: 1.2; border: transparent;">
+                                        </td>
+
+                                        <!-- QSP -->
+                                        <td style="width: 1%; white-space: nowrap; vertical-align: top; text-align: left; padding-bottom: 30px; border: transparent;">
                                             <t t-if="line.qsp_note">
                                                 <span t-esc="line.qsp_note"/>
                                             </t>
