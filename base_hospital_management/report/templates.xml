@@ -31,9 +31,9 @@
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 0px;border: transparent;">
             <tr style="vertical-align: top;border: transparent;">
                 <!-- Partie gauche - Informations du médecin en français -->
-                <td style="width: 37%; padding: 10px; vertical-align: top; border: none;">
+                <td style="width: 37%; padding: 10px; padding-left: 1mm; vertical-align: top; border: none;">
                     <div style="line-height: 1.5;">
-                        <div style="font-size: 12px; font-weight: 800; margin-bottom: 3px;">
+                        <div style="font-size: 12px; font-weight: bold; margin-bottom: 3px; font-family: Adobe Devanagari;">
                             <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
                             <br/>
                             Médecin spécialiste en chirurgie
@@ -53,17 +53,17 @@
                     </div>
                 </td>
 
-                <td style="width: 26%; padding: 0px; display: flex; align-items: center; justify-content: center;">
+                <td style="width: 30%; text-align: center; vertical-align: top; padding-top: -30px;">
                     <img t-if="company.logo"
-                         t-att-src="image_data_uri(company.logo)"
-                         style="width: 100%; object-fit: contain;"
-                         alt="Logo Société"/>
+                        t-att-src="image_data_uri(company.logo)"
+                        style="height: 4cm; width: auto; object-fit: contain; display: inline-block;"
+                        alt="Logo Société"/>
                 </td>
 
                 <!-- Partie droite - Informations en arabe -->
-                <td style="width: 37%; padding: 10px; vertical-align: top; text-align: right; border: none;" dir="rtl">
+                <td style="width: 37%; padding: 10px; padding-right: 1mm; vertical-align: top; text-align: right; border: none;" dir="rtl">
                     <div style="line-height: 1.5;">
-                        <div style="font-size: 12px; font-weight: bold; margin-bottom: 5px; font-family: Arial, sans-serif;">
+                        <div style="font-size: 12px; font-weight: bold; margin-bottom: 3px; font-family: Arabic Typesetting;">
                             د. رضـــــــــــا بونــجـــــــــــــــار
                             <br/>
                             طبيب مختص في جراحة العظام
@@ -78,39 +78,40 @@
                             <br/>
                             القـلـيـعــــــة، ولايــة تـيـبـــــــازة
                         </div>
-                        <div style="font-size: 12px; font-weight: bold; margin-top: 0px;" dir="ltr">
-                            <span style="font-family: Arial, sans-serif;">Kolea, le :</span>
-                            <span t-esc="date or ''"/>
-                        </div>
                     </div>
                 </td>
+
             </tr>
         </table>
 
         <!-- Ligne de séparation décorative -->
-        <div style="border-bottom: 2px solid #3498db; margin-bottom: 10px;"></div>
+        <div style="width: 80%; margin: 0 auto; border-bottom: 2px solid #3498db; margin-bottom: 10px;"></div>
+        <div style="font-size: 13px; font-weight: bold; margin-top: 5px; font-family: Adobe Devanagari; text-align: right; margin-right: 10mm;" dir="ltr">
+            Kolea, le : <span t-esc="date or ''"/>
+        </div>
+
         <div style="font-size: 12px; font-weight: bold; line-height: 1.6;">
             <t t-if="prescription and prescription.prescription_type == 'souche'">
                 <!-- Trois colonnes pour ordonnance souche -->
 
                 <!-- Colonne 1 : Nom, Prénom, Âge -->
-                <div style="float: left; width: 30%; margin-right: 3%;">
+                <div style="float: left; width: 30%; margin-right: 3%; font-size: 13px;">
                     <div style="margin-bottom: 3px;">
-                        <strong>Nom :</strong>
-                        <span t-esc="lastname or ''"/>
+                        <span style="font-weight: bold;">Nom :</span>
+                        <span style="font-weight: normal;" t-esc="lastname or ''"/>
                     </div>
                     <div style="margin-bottom: 3px;">
-                        <strong>Prénom :</strong>
-                        <span t-esc="firstname or ''"/>
+                        <span style="font-weight: bold;">Prénom :</span>
+                        <span style="font-weight: normal;" t-esc="firstname or ''"/>
                     </div>
                     <div style="margin-bottom: 3px;">
-                        <strong>Âge :</strong>
-                        <span t-esc="age or ''"/>
+                        <span style="font-weight: bold;">Âge :</span>
+                        <span style="font-weight: normal;" t-esc="age or ''"/>
                     </div>
                 </div>
 
                 <!-- Colonne 2 : Poids, Taille, Sexe -->
-                <div style="float: left; width: 30%; margin-right: 3%;">
+                <div style="float: left; width: 30%; margin-right: 3%; font-size: 13px;">
                     <div style="margin-bottom: 3px;">
                         <strong>Poids :</strong>
                         <span t-esc="poids or ''"/>
@@ -126,7 +127,7 @@
                 </div>
 
                 <!-- Colonne 3 : Adresse, CIN -->
-                <div style="float: left; width: 34%;">
+                <div style="float: left; width: 34%; font-size: 13px;">
                     <div style="margin-bottom: 3px;">
                         <strong>Adresse :</strong>
                         <span t-esc="address or ''"/>
@@ -142,7 +143,7 @@
                 <!-- Deux colonnes pour les autres types d'ordonnance -->
 
                 <!-- Colonne gauche -->
-                <div style="float: left; width: 48%; margin-right: 4%;">
+                <div style="float: left; width: 48%; margin-right: 4%; font-size: 13px;">
                     <div style="margin-bottom: 3px;">
                         <strong>Nom :</strong>
                         <span t-esc="lastname or ''"/>
@@ -156,6 +157,7 @@
                         <span t-esc="age or ''"/>
                     </div>
                 </div>
+
             </t>
 
             <!-- Clear float -->
@@ -163,156 +165,21 @@
         </div>
     </template>
 
-    <template id="template_header_a4">
-        <t t-set="company" t-value="env.company"/>
-
-        <table style="width: 100%; border: none; border-collapse: collapse; margin-bottom: 25px;">
-            <tr style="border: none; vertical-align: top;">
-                <!-- Partie gauche - Informations du médecin en français -->
-                <td style="border: none; width: 35%; padding: 15px; vertical-align: top;">
-                    <div style="line-height: 1.5;">
-                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50; margin-bottom: 8px;">
-                            <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
-                        </div>
-                        <div style="font-size: 16px; color: #34495e; margin-bottom: 5px;">
-                            <span t-esc="company.doctor_speciality or 'Spécialité'"/>
-                        </div>
-                        <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 20px;">
-                            N° d'ordre :
-                            <span t-esc="company.doctor_order_number or '000000'"/>
-                        </div>
-
-                        <!-- Informations patient -->
-                        <div style="font-size: 14px; color: #2c3e50; line-height: 1.7;">
-                            <div style="margin-bottom: 5px;">
-                                <strong>Nom et prénom :</strong>
-                                <span t-esc="(lastname or '') + ' ' + (firstname or '')"/>
-                            </div>
-                            <div style="margin-bottom: 5px;">
-                                <strong>Âge :</strong>
-                                <span t-esc="age or ''"/>
-                            </div>
-                            <!-- Affichage conditionnel pour ordonnance souche -->
-                            <t t-if="prescription and prescription.prescription_type == 'souche'">
-                                <div style="margin-bottom: 5px;">
-                                    <strong>Sexe :</strong>
-                                    <span t-esc="prescription.patient_id.gender or ''"/>
-                                </div>
-                                <div style="margin-bottom: 5px;">
-                                    <strong>Adresse :</strong>
-                                    <span t-esc="prescription.patient_id.address or ''"/>
-                                </div>
-                            </t>
-                        </div>
-                    </div>
-                </td>
-
-                <!-- Partie centrale - Logo -->
-                <td style="border: none; width: 30%; text-align: center; padding: 15px;">
-                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                        <img src="/base_hospital_management/static/img/logo.png"
-                             style="max-width: 150px; max-height: 150px; object-fit: contain;"
-                             alt="Logo Cabinet"/>
-                    </div>
-                </td>
-
-                <!-- Partie droite - Informations en arabe -->
-                <td style="border: none; width: 35%; padding: 15px; vertical-align: top; text-align: right;" dir="rtl">
-                    <div style="line-height: 1.5;">
-                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50; margin-bottom: 8px; font-family: Arial, sans-serif;">
-                            دكتور بونجار رضا
-                        </div>
-                        <div style="font-size: 16px; color: #34495e; margin-bottom: 5px; font-family: Arial, sans-serif;">
-                            أخصائي في جراحة
-                        </div>
-                        <div style="font-size: 16px; color: #34495e; margin-bottom: 20px; font-family: Arial, sans-serif;">
-                            العظام والمفاصل والكسور
-                        </div>
-
-                        <div style="font-size: 14px; color: #7f8c8d; margin-top: 25px; padding: 8px; background-color: #f8f9fa; border-radius: 5px;">
-                            <span style="font-family: Arial, sans-serif;">كوليا، في</span>
-                            <span t-esc="date or ''"/>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-
-        <!-- Ligne de séparation décorative avec dégradé -->
-        <div style="height: 3px; background: linear-gradient(90deg, #3498db 0%, #2ecc71 50%, #3498db 100%); margin: 25px 0; border-radius: 2px;"></div>
-    </template>
     <template id="template_footer_a5">
         <t t-set="company" t-value="env.company"/>
-        <div t-attf-class="footer"
-             style="border-top: 2px solid #3498db; padding-top: 15px; margin-top: 30px; background-color: #f8f9fa;">
-            <table style="border: transparent !important; width:100%; border-collapse: collapse;">
-                <tr>
-                    <td style="border: transparent !important; font-size:12px; padding: 5px; vertical-align: top;width:65%;">
-                        <div style="margin-bottom: 8px;">
-                            <i class="fa fa-phone" style="color: #3498db; margin-right: 8px;"></i>
-                            <span t-esc="company.phone"/>
-                        </div>
-                        <div>
-                            <i class="fa fa-map-marker" style="color: #e74c3c; margin-right: 8px;"></i>
-                            <span t-esc="company.street"/>
-                        </div>
-                    </td>
-
-                    <td style="border: transparent !important; font-size:12px; padding: 5px; vertical-align: top; text-align: left;"
-                    >
-                        <div style="margin-bottom: 8px; font-family: Arial, sans-serif;">
-                            <i class="fa fa-facebook" style="color: #3b5998; margin-left: 8px;"></i>
-                            <span t-esc="company.facebook_page"/>
-                        </div>
-                        <div style="font-family: Arial, sans-serif;">
-                            <i class="fa fa-envelope" style="color: #34495e; margin-left: 8px;"></i>
-                            <span t-esc="company.email"/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
+        <div t-attf-class="footer">
             <!-- Ligne décorative -->
-            <div style="height: 1px; background: linear-gradient(90deg, #3498db 0%, #2ecc71 50%, #3498db 100%); margin-top: 10px;"></div>
+            <div style="width: 80%; margin: 0 auto; border-bottom: 2px solid #3498db; margin-bottom: 10px;"></div>
+            <div style="width: 80%; margin: 10px auto; font-size: 12px; font-weight: bold; color: #3208cdff; font-family: Arial, sans-serif;">
+                <span style="display: block; text-align: justify;">
+                    Pour votre santé, suivez rigoureusement les prescriptions et respectez les
+                    <span style="display:inline-block; width:100%;"></span>
+                </span>
+                <span style="display: block; text-align: center; font-weight: bold; color: #2f05c9ff;">
+                    consignes pour une récupération optimale
+                </span>
+            </div>
         </div>
-    </template>
 
-    <template id="template_footer_a4">
-        <t t-set="company" t-value="env.company"/>
-        <div t-attf-class="footer"
-             style="border-top: 3px solid #3498db; padding-top: 20px; margin-top: 40px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-            <table style="border: transparent !important; width:100%; border-collapse: collapse;">
-                <tr>
-                    <td style="border: transparent !important; font-size:14px; padding: 10px; vertical-align: top;">
-                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
-                            <i class="fa fa-phone" style="color: #3498db; margin-right: 12px; font-size: 16px;"></i>
-                            <span style="font-weight: 500;" t-esc="company.phone"/>
-                        </div>
-                        <div style="display: flex; align-items: flex-start;">
-                            <i class="fa fa-map-marker"
-                               style="color: #e74c3c; margin-right: 12px; font-size: 16px; margin-top: 2px;"></i>
-                            <div>
-                                <span t-esc="company.street"/>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td style="border: transparent !important; font-size:14px; padding: 10px; vertical-align: top; text-align: right;"
-                        dir="rtl">
-                        <div style="margin-bottom: 12px; font-family: Arial, sans-serif;">
-                            <i class="fa fa-facebook" style="color: #3b5998; margin-left: 12px; font-size: 16px;"></i>
-                            <span style="font-weight: 500;" t-esc="company.facebook_page"/>
-                        </div>
-                        <div style="font-family: Arial, sans-serif;">
-                            <i class="fa fa-envelope" style="color: #34495e; margin-left: 12px; font-size: 16px;"></i>
-                            <span style="font-weight: 500;" t-esc="company.email"/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-            <!-- Ligne décorative finale -->
-            <div style="height: 2px; background: linear-gradient(90deg, #3498db 0%, #2ecc71 50%, #3498db 100%); margin-top: 10px; border-radius: 1px;"></div>
-        </div>
     </template>
 </odoo>

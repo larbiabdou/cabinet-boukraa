@@ -80,9 +80,10 @@
 
                                         <!-- QSP -->
                                         <td style="width: 1%; white-space: nowrap; vertical-align: top; text-align: left; padding-bottom: 30px; border: transparent;">
+
                                             <t t-if="line.qsp_id.name">
-                                                QSP
-                                                <span t-esc="line.qsp_id.name"/>
+                                                <t t-set="qsp" t-value="'QSP' + line.qsp_id.name"/>
+                                                <span t-esc="qsp"/>
                                             </t>
                                             <br/>
                                             <t t-if="line.qsp_note">
