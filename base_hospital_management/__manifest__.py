@@ -127,7 +127,11 @@
             # "base_hospital_management/static/src/xml/reception_dashboard_templates.xml",
             # "base_hospital_management/static/src/js/reception_dashboard.js",
         ],
+        "web.report_assets_common": [
+            "base_hospital_management/static/src/css/report_fonts.css",
+        ],
     },
+
     # "external_dependencies": {"python": ["python-barcode"]},
     "images": ["static/description/banner.jpg"],
     "license": "AGPL-3",
