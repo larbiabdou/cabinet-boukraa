@@ -68,7 +68,7 @@ class HospitalPrescription(models.Model):
             else:  # normal
                 vals['name'] = self.env['ir.sequence'].next_by_code(
                     'hospital.prescription.normal')
-        return super().create(vals)
+        return super(HospitalPrescription, self).create(vals)
 
     def action_confirm(self):
         """Confirmer l'ordonnance"""
