@@ -28,11 +28,11 @@
     </record>
     <template id="template_header_a5">
         <t t-set="company" t-value="env.company"/>
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 0; border: none;">
-            <tr style="vertical-align: top; border: none;">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 0; border: transparent !important;">
+            <tr style="vertical-align: top; border: transparent !important;">
                 
                 <!-- Partie gauche - Informations du médecin en français -->
-                <td style="width: 35%; padding: 5px 10px 5px 2mm; vertical-align: top; border: none;">
+                <td style="width: 35%; padding: 5px 10px 5px 2mm; vertical-align: top; border: transparent !important;">
                     <div style="line-height: 1.7;">
                         <div style="font-size: 13px; line-height: 2; font-family: Garamond; font-weight: bold;">
                             <span t-esc="company.doctor_name or 'Dr. Nom du Médecin'"/>
@@ -55,7 +55,7 @@
                 </td>
 
                 <!-- Logo centré -->
-                <td style="width: 30%; text-align: center; vertical-align: middle; border: none;">
+                <td style="width: 30%; text-align: center; vertical-align: middle; border: transparent !important;">
                     <img t-if="company.logo"
                         t-att-src="image_data_uri(company.logo)"
                         style="height: 4cm; width: auto; object-fit: contain; display: block; margin: 0 auto;"
@@ -63,7 +63,7 @@
                 </td>
 
                 <!-- Partie droite - Informations en arabe -->
-                <td style="width: 35%; padding: 5px 2mm 5px 10px; vertical-align: top; text-align: right; border: none;" dir="rtl">
+                <td style="width: 35%; padding: 5px 2mm 5px 10px; vertical-align: top; text-align: right; border: transparent !important;" dir="rtl">
                     <div style="line-height: 1.5;">
                         <div style="font-size: 16px; font-weight: bold; line-height: 1.65; font-family: 'Arabic Typesetting';">
                             د. رضـــــــــــا بونــجـــــــــــــــار
@@ -97,24 +97,24 @@
         <div style="font-size: 12px; font-weight: bold; margin-top: 10px;">
             <t t-if="prescription and prescription.prescription_type == 'souche'">
                 <!-- Cas 1 : Ordonnance souche (3 colonnes) -->
-                <table style="width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 13px;">
-                    <tr>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 13px;border: transparent !important">
+                    <tr style="border: transparent !important;">
                         <!-- Colonne 1 -->
-                        <td style="width: 33%; padding: 3px;">
+                        <td style="width: 33%; padding: 3px;border: transparent !important">
                             <div><strong>Nom :</strong> <span t-esc="lastname or ''"/></div>
                             <div><strong>Prénom :</strong> <span t-esc="firstname or ''"/></div>
                             <div><strong>Âge :</strong> <span t-esc="age or ''"/></div>
                         </td>
 
                         <!-- Colonne 2 -->
-                        <td style="width: 30%; padding: 3px;">
+                        <td style="width: 30%; padding: 3px;border: transparent !important">
                             <div><strong>Poids :</strong> <span t-esc="poids or ''"/> kg</div>
                             <div><strong>Taille :</strong> <span t-esc="taille or ''"/> cm</div>
                             <div><strong>Sexe :</strong> <span t-esc="gender or ''"/></div>
                         </td>
 
                         <!-- Colonne 3 -->
-                        <td style="width: 37%; padding: 3px;">
+                        <td style="width: 37%; padding: 3px;border: transparent !important">
                             <div><strong>Adresse :</strong> <span t-esc="address or ''"/></div>
                             <div><strong>N° CIN :</strong> <span t-esc="cin or ''"/></div>
                         </td>
@@ -124,17 +124,17 @@
 
             <t t-else="">
                 <!-- Cas 2 : Autres types d’ordonnance (2 colonnes) -->
-                <table style="width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 12px;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 12px;border: transparent !important;">
                     <tr>
                         <!-- Colonne gauche -->
-                        <td style="width: 50%; padding: 3px;">
+                        <td style="width: 50%; padding: 3px;border: transparent !important;">
                             <div><strong>Nom :</strong> <span t-esc="lastname or ''"/></div>
                             <div><strong>Prénom :</strong> <span t-esc="firstname or ''"/></div>
                             <div><strong>Âge :</strong> <span t-esc="age or ''"/></div>
                         </td>
 
                         <!-- Colonne droite -->
-                        <td style="width: 50%; padding: 3px;">
+                        <td style="width: 50%; padding: 3px;border: transparent !important;">
                             <div><strong>Adresse :</strong> <span t-esc="address or ''"/></div>
                             <div><strong>CIN :</strong> <span t-esc="cin or ''"/></div>
                         </td>
