@@ -57,18 +57,20 @@ class HospitalPrescription(models.Model):
         string='Notes',
         help='Notes additionnelles sur l\'ordonnance')
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         """Génération automatique de la référence selon le type"""
-        if vals.get('name', 'New') == 'New':
-            prescription_type = vals.get('prescription_type', 'normal')
-            if prescription_type == 'souche':
-                vals['name'] = self.env['ir.sequence'].next_by_code(
-                    'hospital.prescription.souche')
-            else:  # normal
-                vals['name'] = self.env['ir.sequence'].next_by_code(
-                    'hospital.prescription.normal')
-        return super(HospitalPrescription, self).create(vals)
+        for vals in vals_list:
+            if vals.get('name', 'New') == 'New':
+                prescription_type = vals.get('prescription_type', 'normal')
+                if prescription_type == 'souche':
+                    vals['name'] = self.env['ir.sequence'].next_by_code(
+                        'hospital.prescription.souche')
+                else:  # normal
+                    vals['name'] = self.env['ir.sequence'].next_by_code(
+                        'hospital.prescription.normal')
+
+        return super(HospitalPrescription, self).create(vals_list)
 
     def action_confirm(self):
         """Confirmer l'ordonnance"""

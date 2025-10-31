@@ -664,17 +664,17 @@ class HospitalOutpatient(models.Model):
             }
         }
 
-    # Méthodes CRUD
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         """Op number generator"""
-        if vals.get('op_reference', 'New') == 'New':
-            vals['op_reference'] = self.env['ir.sequence'].next_by_code(
-                'hospital.outpatient') or 'New'
-        return super().create(vals)
+        for vals in vals_list:
+            if vals.get('op_reference', 'New') == 'New':
+                vals['op_reference'] = self.env['ir.sequence'].next_by_code(
+                    'hospital.outpatient') or 'New'
+        return super().create(vals_list)
 
     def write(self, values):
-        super().write(values)
+        result = super().write(values)
         if 'test_ids' in values and values['test_ids']:
             for test in self.test_ids:
                 if test.id not in self.test_lab_ids.mapped('test_id').ids:
@@ -692,6 +692,7 @@ class HospitalOutpatient(models.Model):
                             'is_sub_test': True,
                             'parent_test_id': lab_test.id
                         })]
+        return result
 
     # def unlink(self):
     #     for record in self:
