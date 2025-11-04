@@ -45,13 +45,13 @@ class HospitalPrescription(models.Model):
         string='Lignes de prescription',
         help='Détails des médicaments prescrits')
 
-    state = fields.Selection([
-        ('draft', 'Brouillon'),
-        ('confirmed', 'Confirmée'),
-        ('delivered', 'Délivrée')
-    ], string='État',
-        default='draft',
-        help='État de l\'ordonnance')
+    # state = fields.Selection([
+    #     ('draft', 'Brouillon'),
+    #     ('confirmed', 'Confirmée'),
+    #     ('delivered', 'Délivrée')
+    # ], string='État',
+    #     default='draft',
+    #     help='État de l\'ordonnance')
 
     notes = fields.Text(
         string='Notes',
@@ -72,17 +72,17 @@ class HospitalPrescription(models.Model):
 
         return super(HospitalPrescription, self).create(vals_list)
 
-    def action_confirm(self):
-        """Confirmer l'ordonnance"""
-        self.state = 'confirmed'
-
-    def action_deliver(self):
-        """Marquer comme délivrée"""
-        self.state = 'delivered'
-
-    def action_reset_to_draft(self):
-        """Remettre en brouillon"""
-        self.state = 'draft'
+    # def action_confirm(self):
+    #     """Confirmer l'ordonnance"""
+    #     self.state = 'confirmed'
+    #
+    # def action_deliver(self):
+    #     """Marquer comme délivrée"""
+    #     self.state = 'delivered'
+    #
+    # def action_reset_to_draft(self):
+    #     """Remettre en brouillon"""
+    #     self.state = 'draft'
 
     def action_print(self):
         """Imprimer l'ordonnance"""
